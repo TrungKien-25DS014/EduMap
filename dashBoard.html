@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMap - Tìm Bạn Đồng Hành</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        :root {
+            --primary-blue: #0A2647;
+            --accent-blue: #2C74B3;
+            --sky-blue: #BBE1FA;
+            --white-glass: rgba(255, 255, 255, 0.8);
+        }
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #000;
+        }
+        .video-background {
+            position: fixed;
+            right: 0; bottom: 0;
+            min-width: 100%; min-height: 100%;
+            z-index: -1000;
+            overflow: hidden;
+        }
+        #myVideo {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%; min-height: 100%;
+            object-fit: cover;
+        }
+        .video-background::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(10, 38, 71, 0.5); 
+            z-index: -999;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            height: 70px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 3px solid var(--accent-blue);
+        }
+        .logo { 
+            color: var(--primary-blue); 
+            font-weight: 800; 
+            font-size: 28px; 
+            letter-spacing: 1px;
+        }
+        .menu-links a {
+            text-decoration: none;
+            color: #144272;
+            margin: 0 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+        .menu-links a:hover { color: var(--accent-blue); }
+        .btn-login {
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .btn-login:hover { 
+            background: var(--accent-blue);
+            transform: scale(1.05); 
+        }
+        #map {
+            width: 50%;
+            height: 65vh; 
+            margin: 50px auto;
+            border-radius: 25px;
+            border: 4px solid white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            opacity: 0.6;
+            transition: 0.4s ease;
+        }
+        #map:hover { opacity: 1; }
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="myVideo">
+            <source src="/BestWeb/Yêu_Cầu_Video_Màu_Xanh.mp4" type="video/mp4">
+        </video>
+    </div>
+    <nav>
+        <div class="logo">EDUMAP</div>
+        <div class="menu-links">
+            <a href="#">Trang Chủ</a> 
+            <a href="#">Tìm Bạn Đồng Hành</a> 
+            <a href="#">Cộng Đồng</a> 
+            <a href="#">Bảng Xếp Hạng</a> 
+        </div>
+        <a href="#" class="btn-login">ĐĂNG NHẬP</a> 
+    </nav>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([16.047, 108.206], 6);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        const locations = [
+            { name: "Trung tâm IELTS Hà Nội", lat: 21.0285, lng: 105.8542, info: "Chuyên luyện SAT/IELTS cấp tốc" },
+            { name: "Gia sư Đà Nẵng", lat: 16.047, lng: 108.206, info: "Đối tác hạng Vàng" },
+            { name: "Lò luyện thi HCM", lat: 10.8231, lng: 106.6297, info: "Cam kết đầu ra 7.5+" }
+        ];
+        locations.forEach(loc => {
+            var marker = L.circleMarker([loc.lat, loc.lng], {
+                radius: 10,
+                fillColor: "#2C74B3",
+                color: "#FFFFFF",
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.9
+            }).addTo(map);
+            marker.bindPopup(`
+                <div style="color: #0A2647; font-family: sans-serif;">
+                    <strong style="font-size: 16px;">${loc.name}</strong><br>
+                    <p style="color: #444; margin: 8px 0;">${loc.info}</p>
+                    <button style="background: #2C74B3; border: none; padding: 6px 12px; color: white; cursor: pointer; border-radius: 5px; width: 100%;">Xem chi tiết</button>
+                </div>
+            `);
+        });
+    </script>
+</body>
+</html>
