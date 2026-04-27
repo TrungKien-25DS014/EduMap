@@ -1,0 +1,89 @@
+/* RESET */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fb; /* nền trắng nhẹ */
+}
+
+/* CENTER */
+.login-page,
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* BOX */
+.login-content,
+.auth-box {
+    width: 380px;
+    padding: 35px;
+    border-radius: 20px;
+    text-align: center;
+
+    background: #ffffff;
+    color: #0A2647;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+.login-content h2,
+.auth-box h2 {
+    margin-bottom: 10px;
+}
+
+/* INPUT */
+.login-content input,
+.auth-box input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-size: 14px;
+}
+
+/* FOCUS */
+.login-content input:focus,
+.auth-box input:focus {
+    border-color: #2C74B3;
+    box-shadow: 0 0 5px rgba(44,116,179,0.3);
+}
+
+/* BUTTON */
+.login-content button,
+.auth-box button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 25px;
+    border: none;
+    background: #0A2647;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-content button:hover,
+.auth-box button:hover {
+    background: #2C74B3;
+}
+
+/* LINK */
+.login-content a,
+.auth-box a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #2C74B3;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.login-content a:hover,
+.auth-box a:hover {
+    text-decoration: underline;
+}
