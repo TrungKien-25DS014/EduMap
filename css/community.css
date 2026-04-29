@@ -10,8 +10,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #0A2647, #144272);
-    color: #333;
+    background: #f5f7fb; /* nền trắng nhẹ */
 }
 
 /* ===== NAV ===== */
@@ -210,4 +209,16 @@ nav div:last-child a {
 
 .btn-login:active {
     transform: scale(0.95);
+}
+/* USER INFO */
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* TIME */
+.time {
+    font-size: 12px;
+    color: #777;
+    margin-top: 2px;
 }
