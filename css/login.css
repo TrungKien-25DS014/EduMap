@@ -70,7 +70,11 @@ body {
 
 .login-content button:hover,
 .auth-box button:hover {
-    background: #2C74B3;
+    opacity: 0.8;
+}
+.login-content button:active,
+.auth-box button:active {
+    opacity: 0.4;
 }
 
 /* LINK */
@@ -86,4 +90,53 @@ body {
 .login-content a:hover,
 .auth-box a:hover {
     text-decoration: underline;
+}
+/* ===== ROLE SELECT ===== */
+.role-select {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Ẩn radio */
+.role-option input {
+    display: none;
+}
+
+/* BOX */
+.role-option span {
+    display: block;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 2px solid #ddd;
+    cursor: pointer;
+    font-weight: 600;
+    color: #555;
+    transition: 0.3s;
+}
+
+/* HOVER */
+.role-option span:hover {
+    border-color: #2C74B3;
+}
+
+/* SELECTED */
+.role-option input:checked + span {
+    background: linear-gradient(135deg, #5f9cff, #7b4dff);
+    color: white;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+/* thanh trắng bên trái */
+.role-option input:checked + span::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 20%;
+    width: 4px;
+    height: 60%;
+    background: white;
+    border-radius: 10px;
 }

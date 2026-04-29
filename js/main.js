@@ -25,12 +25,3 @@
                 </div>
             `);
         });
-        // mở login
-        document.querySelector(".btn-login").onclick = function () {
-            document.getElementById("loginBox").style.display = "flex";
-        };
-
-        // đóng login
-        function closeLogin() {
-            document.getElementById("loginBox").style.display = "none";
-        }
