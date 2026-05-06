@@ -1,0 +1,317 @@
+.find-container {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.filter-panel {
+    width: 220px;
+    background: var(--white-glass);
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.filter-panel h4 {
+    margin: 0 0 10px 0;
+    color: var(--primary-blue);
+}
+
+.filter-row {
+    margin-bottom: 12px;
+}
+
+.filter-row label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: white;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.btn-apply {
+    flex: 1;
+    background: #2563EB;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.btn-clear {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* make container use most of page width so grid can spread to edges */
+.container {
+    width: calc(100% - 80px);
+    margin: 20px 40px;
+}
+
+.tutor-list {
+    width: calc(100% - 340px);
+}
+
+/* wider cards: each column has a larger minimum width so cards appear wider */
+.tutor-grid {
+    display: grid;
+    /* slightly narrower columns so more cards fit and names have room */
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
+    gap: 14px;
+}
+
+.tutor-card {
+    background: white;
+    border-radius: 9px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: 0.12s;
+    /* shorter cards so more content fits above the fold */
+    min-height: 180px;
+}
+
+/* Remove any default focus/active highlight that may show as a purple overlay */
+.tutor-card,
+.tutor-card:focus,
+.tutor-card:active,
+.tutor-card:focus-visible {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+    background: white !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
+}
+
+.tutor-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.10);
+}
+
+/* reserve less space for avatar so name can use more width */
+.card-top {
+    /* reserve a bit less horizontal space for the avatar */
+    padding: 14px 120px 10px 12px;
+    position: relative;
+    min-height: 110px;
+}
+
+.role {
+    color: #9aa7b3;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.name {
+    color: #2c74b3;
+    font-weight: 800;
+    /* smaller type so names fit beside the avatar */
+    font-size: 15px;
+    margin-top: 6px;
+    line-height: 1.08;
+    max-width: calc(100% - 0px);
+    white-space: normal;
+    /* allow breaking very long unbroken strings when needed */
+    overflow-wrap: anywhere;
+}
+
+/* oval avatar placed on right with white oval frame (bigger) */
+/* oval avatar: taller than wide */
+/* smaller oval avatar so it doesn't overlap the name */
+.card-avatar {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    /* smaller oval so it doesn't overlap the text as much */
+    width: 72px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ffffff;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+    background: white;
+}
+
+/* footer style: centered contact and buttons under it */
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 12px;
+    background: #eef3f7;
+    gap: 6px;
+}
+
+.contact {
+    font-size: 12px;
+    color: #556;
+    text-align: center;
+}
+
+/* Make filter panel sticky so it stays visible when scrolling */
+.filter-panel {
+    position: sticky;
+    top: 90px;
+    /* below navbar */
+    align-self: flex-start;
+    z-index: 50;
+}
+
+/* When the panel becomes fixed while scrolling we switch to position:fixed
+   and preserve its width/left so it stays aligned with the layout. Disabled
+   on small screens via JS (media query keeps it static). */
+.filter-panel.fixed {
+    position: fixed !important;
+    top: 14px !important; /* small offset from top of viewport */
+    z-index: 1200 !important;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* Modal overlay */
+.modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-card {
+    width: 720px;
+    max-width: calc(100% - 40px);
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.modal-body {
+    display: flex;
+    gap: 18px;
+    padding: 20px;
+}
+
+.modal-body img {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: var(--primary-blue);
+}
+
+.modal-footer {
+    padding: 12px 20px;
+    background: #fafafa;
+    text-align: right;
+}
+
+.modal-close {
+    background: #e5e7eb;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.tutor-detail {
+    flex: 1;
+    background: var(--white-glass);
+    padding: 18px;
+    border-radius: 12px;
+}
+
+.tutor-detail h3 {
+    margin-top: 0;
+}
+
+.tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.tag {
+    background: #e6f0fb;
+    padding: 6px 10px;
+    border-radius: 8px;
+    color: #145;
+    font-weight: 700;
+}
+
+@media (max-width:1400px) {
+    .tutor-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width:1200px) {
+    .tutor-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width:900px) {
+    .find-container {
+        flex-direction: column;
+    }
+
+    .filter-panel,
+    .tutor-list {
+        width: 100%;
+    }
+
+    .tutor-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    /* On small screens place avatar inline above content to avoid overlap */
+    .card-top {
+        padding: 18px;
+    }
+
+    .card-avatar {
+        position: static;
+        width: 72px;
+        height: 72px;
+        margin: 8px 0 0 auto;
+        border-width: 4px;
+    }
+
+    .name {
+        max-width: 100%;
+    }
+}

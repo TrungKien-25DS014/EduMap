@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm gia sư - EduMap</title>
+    <link rel="stylesheet" href="../css/community.css">
+    <link rel="stylesheet" href="../css/find_tutor.css">
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo">EDUMAP</div>
+
+        <div class="menu-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="find_tutor.html">Tìm bạn đồng hành</a>
+            <a href="community.html">Cộng đồng</a>
+            <a href="leaderboard.html">Bảng xếp hạng</a>
+        </div>
+
+        <div>
+            <a href="login.html" class="btn-login">Đăng nhập</a>
+        </div>
+    </nav>
+    <hr>
+
+    <div class="container">
+        <h2>Tìm gia sư</h2>
+        <p style="color:#666;">Tìm gia sư theo môn, khu vực và hình thức dạy</p>
+
+        <div class="find-container">
+            <aside class="filter-panel" aria-label="Bộ lọc">
+                <h4>🔎 Bộ lọc</h4>
+                <div class="filter-row">
+                    <label for="filterSubject">Môn học</label>
+                    <select id="filterSubject" class="filter-select">
+                        <option value="all">Tất cả</option>
+                        <option>Toán</option>
+                        <option>Vật Lý</option>
+                        <option>Tiếng Anh</option>
+                    </select>
+                </div>
+                <div class="filter-row">
+                    <label for="filterGrade">Khối lớp</label>
+                    <select id="filterGrade" class="filter-select">
+                        <option value="all">Tất cả</option>
+                        <option>Lớp 1-5</option>
+                        <option>Lớp 6-9</option>
+                        <option>Lớp 10-12</option>
+                        <option>Sinh viên</option>
+                    </select>
+                </div>
+                <div class="filter-row">
+                    <label for="filterMode">Hình thức</label>
+                    <select id="filterMode" class="filter-select">
+                        <option value="all">Tất cả</option>
+                        <option>Online</option>
+                        <option>Tại nhà</option>
+                    </select>
+                </div>
+                <div class="filter-row">
+                    <label for="filterArea">Khu vực</label>
+                    <select id="filterArea" class="filter-select">
+                        <option value="all">Tất cả</option>
+                        <option>Hà Nội</option>
+                        <option>Đà Nẵng</option>
+                        <option>TP HCM</option>
+                    </select>
+                </div>
+                <div class="filter-actions">
+                    <button id="applyFilter" class="btn-apply">Áp dụng bộ lọc</button>
+                    <button id="clearFilter" class="btn-clear">Xóa bộ lọc</button>
+                </div>
+            </aside>
+
+            <div class="tutor-list">
+                <div class="tutor-grid">
+                    <div class="tutor-card" data-name="Nguyễn Văn A" data-subjects="Toán, Lý" data-area="Hà Nội" data-price="200k/buổi" data-phone="0909xxxx" data-grade="Lớp 10-12" data-format="Tại nhà">
+                        <div class="card-top">
+                            <div class="role">Giảng viên</div>
+                            <div class="name">Nguyễn Văn A</div>
+                            <img class="card-avatar" src="https://i.pravatar.cc/120?img=1" alt="avt">
+                        </div>
+                        <div class="card-footer">
+                            <div class="contact">
+                                <div class="email">hcap@example.com</div>
+                                <div class="phone">Phone #: 0909xxxx</div>
+                            </div>
+                            <!-- actions removed -->
+                        </div>
+                    </div>
+
+                    <div class="tutor-card" data-name="Trần Thị B" data-subjects="Tiếng Anh" data-area="Đà Nẵng" data-price="180k/buổi" data-phone="0912xxxx" data-grade="Lớp 6-9" data-format="Online">
+                        <div class="card-top">
+                            <div class="role">Giảng viên</div>
+                            <div class="name">Trần Thị B</div>
+                            <img class="card-avatar" src="https://i.pravatar.cc/120?img=5" alt="avt">
+                        </div>
+                        <div class="card-footer">
+                            <div class="contact">
+                                <div class="email">ttb@example.com</div>
+                                <div class="phone">Phone #: 0912xxxx</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tutor-card" data-name="Lê Hương" data-subjects="Vật Lý" data-area="TP HCM" data-price="220k/buổi" data-phone="0987xxxx" data-grade="Sinh viên" data-format="Tại nhà">
+                        <div class="card-top">
+                            <div class="role">Giảng viên</div>
+                            <div class="name">Lê Hương</div>
+                            <img class="card-avatar" src="https://i.pravatar.cc/120?img=11" alt="avt">
+                        </div>
+                        <div class="card-footer">
+                            <div class="contact">
+                                <div class="email">lh@example.com</div>
+                                <div class="phone">Phone #: 0987xxxx</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tutor-card" data-name="PGS.TS.Huỳnh Công Pháp" data-subjects="Hóa" data-area="Hà Nội" data-price="—" data-phone="0905114500" data-grade="Sinh viên" data-format="Tại nhà">
+                        <div class="card-top">
+                            <div class="role">Giảng viên</div>
+                            <div class="name">PGS.TS.Huỳnh Công Pháp</div>
+                            <img class="card-avatar" src="https://i.pravatar.cc/120?img=12" alt="avt">
+                        </div>
+                        <div class="card-footer">
+                            <div class="contact">
+                                <div class="email">hcphap@vku.udn.vn</div>
+                                <div class="phone">Phone #: 0905114500</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tutor-card" data-name="PGS.TS.Tăng Tấn Chiến" data-subjects="Toán" data-area="Hà Nội" data-price="—" data-phone="0914083222" data-grade="Lớp 10-12" data-format="Tại nhà">
+                        <div class="card-top">
+                            <div class="role">Giảng viên</div>
+                            <div class="name">PGS.TS.Tăng Tấn Chiến</div>
+                            <img class="card-avatar" src="https://i.pravatar.cc/120?img=15" alt="avt">
+                        </div>
+                        <div class="card-footer">
+                            <div class="contact">
+                                <div class="email">ttchien@vku.udn.vn</div>
+                                <div class="phone">Phone #: 0914083222</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- detail panel removed; modal will show tutor details -->
+        </div>
+    </div>
+
+<script src="../js/find_tutor.js"></script>
+
+</body>
+
+</html>
