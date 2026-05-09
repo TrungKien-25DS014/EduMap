@@ -1,13 +1,11 @@
-        // Insert <wbr> into long unbroken words inside .name elements so they can wrap
+
         (function insertSoftBreaks() {
-            const MIN_LEN = 18; // minimum length to consider inserting breaks
-            const BREAK_EVERY = 12; // insert a <wbr> every N chars
+            const MIN_LEN = 18;
+            const BREAK_EVERY = 12;
             document.querySelectorAll('.name').forEach(el => {
                 const txt = el.textContent.trim();
-                // If contains any whitespace, leave it (normal wrap will handle).
                 if (/\s/.test(txt)) return;
                 if (txt.length <= MIN_LEN) return;
-                // build with <wbr> every BREAK_EVERY characters
                 let out = '';
                 for (let i = 0; i < txt.length; i += BREAK_EVERY) {
                     out += txt.slice(i, i + BREAK_EVERY) + (i + BREAK_EVERY < txt.length ? '<wbr>' : '');
@@ -15,9 +13,6 @@
                 el.innerHTML = out;
             });
         })();
-
-        // Small JS to show detail when clicking a tutor card
-        // Modal elements
         const modal = document.createElement('div');
         modal.className = 'modal';
         modal.innerHTML = `
@@ -68,7 +63,6 @@
         modalClose.addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-        // Filter logic
         const applyBtn = document.getElementById('applyFilter');
         const clearBtn = document.getElementById('clearFilter');
 
@@ -105,17 +99,14 @@
         applyBtn.addEventListener('click', applyFilter);
         clearBtn.addEventListener('click', clearFilter);
 
-        // --- sticky/fixed behavior for filter panel ---
         (function enableStickyFilter() {
             const panel = document.querySelector('.filter-panel');
             if (!panel) return;
 
-            // threshold: when page Y offset passes panel's original top
             let origRect = panel.getBoundingClientRect();
             let origTop = origRect.top + window.scrollY;
 
             function update() {
-                // disable on small screens
                 if (window.innerWidth <= 900) {
                     if (panel.classList.contains('fixed')) {
                         panel.classList.remove('fixed');
@@ -129,7 +120,6 @@
                 if (scrollY + 16 >= origTop) {
                     if (!panel.classList.contains('fixed')) {
                         const rect = panel.getBoundingClientRect();
-                        // preserve width and left offset so it doesn't jump
                         panel.style.width = rect.width + 'px';
                         panel.style.left = rect.left + 'px';
                         panel.classList.add('fixed');
@@ -145,10 +135,8 @@
 
             window.addEventListener('scroll', update);
             window.addEventListener('resize', () => {
-                // recalc original top and update layout
                 origRect = panel.getBoundingClientRect();
                 origTop = origRect.top + window.scrollY;
-                // force update so fixed width/left recalculated if needed
                 if (panel.classList.contains('fixed')) {
                     panel.classList.remove('fixed');
                     panel.style.width = '';
@@ -156,7 +144,5 @@
                 }
                 update();
             });
-
-            // initial call
             update();
         })();

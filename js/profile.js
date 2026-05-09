@@ -1,4 +1,3 @@
-// Simple client-side profile editor with localStorage persistence
 const STORAGE_KEY = 'edumap_tutor_profile_v1';
 
 const defaultProfile = {
@@ -44,7 +43,6 @@ function renderProfile(p) {
         list.appendChild(row);
     });
 
-    // wire remove buttons
     Array.from(document.querySelectorAll('.subjects-list .remove')).forEach(btn => {
         btn.addEventListener('click', () => {
             const i = Number(btn.dataset.i);
@@ -57,24 +55,17 @@ function renderProfile(p) {
 
 function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-// Edit UI
 let profile = loadProfile();
 renderProfile(profile);
 
-// Tutor-only access: this profile page is personal and should be editable only by the tutor.
-// We gate the UI client-side (for now) using a localStorage flag 'edumap_tutor_logged_in'.
-// If not set, replace the main content with a private message and hide edit controls.
 const isTutor = localStorage.getItem('edumap_tutor_logged_in') === '1';
 if (!isTutor) {
-    // hide the left-box for adding subjects
     const leftBox = document.querySelector('.profile-left .box');
     if (leftBox) leftBox.style.display = 'none';
 
-    // hide edit button
     const edt = document.getElementById('editToggle');
     if (edt) edt.style.display = 'none';
 
-    // replace main area with private note
     const main = document.querySelector('.profile-main');
     if (main) {
         main.innerHTML = `
@@ -87,7 +78,6 @@ if (!isTutor) {
                 </div>
             </div>`;
 
-        // wire mock login for local testing
         const mock = document.getElementById('mockLogin');
         if (mock) mock.addEventListener('click', () => {
             localStorage.setItem('edumap_tutor_logged_in', '1');
@@ -95,10 +85,6 @@ if (!isTutor) {
         });
     }
 
-    // stop further wiring of edit UI
-    // (script continues to exist, but event listeners for edit controls are not needed when not tutor)
-    // We return early from this script to avoid exposing edit handlers.
-    // Note: this is a client-side gate for demo/testing only; replace with server-side auth in production.
     throw new Error('tutor-only mode: UI restricted (client-side)');
 }
 
@@ -115,7 +101,6 @@ function enterEdit() {
     editing = true;
     editToggle.textContent = 'Đang chỉnh sửa...';
     editToggle.disabled = true;
-    // swap to editable fields
     const fields = ['name','subtitle','bio','education','experience','languages','formats','price'];
     fields.forEach(id => {
         const el = document.getElementById(id);
@@ -132,7 +117,6 @@ function enterEdit() {
 }
 
 function exitEdit(cancel=false) {
-    // read values from inputs if not cancel
     const fields = ['name','subtitle','bio','education','experience','languages','formats','price'];
     if (!cancel) {
         fields.forEach(id => {
@@ -143,7 +127,6 @@ function exitEdit(cancel=false) {
         saveProfile(profile);
     }
 
-    // replace inputs with static elements
     fields.forEach(id => {
         const input = document.querySelector(`[data-field="${id}"]`);
         if (!input) return;
@@ -177,5 +160,4 @@ addBtn.addEventListener('click', () => {
 saveBtn.addEventListener('click', () => exitEdit(false));
 cancelBtn.addEventListener('click', () => exitEdit(true));
 
-// allow pressing Enter in the newSubject field to add quickly
 newSubject.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addBtn.click(); } });

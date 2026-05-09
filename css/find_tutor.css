@@ -1,317 +1,336 @@
-.find-container {
-    display: flex;
-    gap: 24px;
-    margin-top: 24px;
-    align-items: flex-start;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-body: #F4F7FB;         
+    --bg-card: #FFFFFF;      
+    --primary-blue: #0056b3; 
+    --accent-blue: #0A66C2;
+    --sky-blue: #E1EFFF;
+    --text-dark: #0F172A;
+    --text-gray: #475569;
+    --border-color: #D3E3FD;
+    --shadow-soft: 0 8px 24px rgba(10, 102, 194, 0.08);
+    --shadow-hover: 0 12px 32px rgba(10, 102, 194, 0.15);
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--text-dark);
+    background-color: var(--bg-body);
+}
+
+.background-glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(225, 239, 255, 1) 0%, rgba(244, 247, 251, 0) 70%);
+    top: -150px;
+    right: -100px;
+    z-index: -1;
+}
+
+nav {
     width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 60px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
-.filter-panel {
-    width: 220px;
-    background: var(--white-glass);
-    padding: 18px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-}
-
-.filter-panel h4 {
-    margin: 0 0 10px 0;
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1px;
     color: var(--primary-blue);
 }
 
-.filter-row {
-    margin-bottom: 12px;
-}
-
-.filter-row label {
-    display: block;
-    font-weight: 700;
-    margin-bottom: 6px;
-    color: #333;
-}
-
-.filter-select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    background: white;
-}
-
-.filter-actions {
+.menu-links {
     display: flex;
-    gap: 12px;
-    margin-top: 14px;
+    gap: 35px;
 }
 
-.btn-apply {
-    flex: 1;
-    background: #2563EB;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-.btn-clear {
-    flex: 1;
-    background: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* make container use most of page width so grid can spread to edges */
-.container {
-    width: calc(100% - 80px);
-    margin: 20px 40px;
-}
-
-.tutor-list {
-    width: calc(100% - 340px);
-}
-
-/* wider cards: each column has a larger minimum width so cards appear wider */
-.tutor-grid {
-    display: grid;
-    /* slightly narrower columns so more cards fit and names have room */
-    grid-template-columns: repeat(3, minmax(320px, 1fr));
-    gap: 14px;
-}
-
-.tutor-card {
-    background: white;
-    border-radius: 9px;
-    overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-    transition: 0.12s;
-    /* shorter cards so more content fits above the fold */
-    min-height: 180px;
-}
-
-/* Remove any default focus/active highlight that may show as a purple overlay */
-.tutor-card,
-.tutor-card:focus,
-.tutor-card:active,
-.tutor-card:focus-visible {
-    outline: none !important;
-    -webkit-tap-highlight-color: transparent;
-    background: white !important;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
-}
-
-.tutor-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.10);
-}
-
-/* reserve less space for avatar so name can use more width */
-.card-top {
-    /* reserve a bit less horizontal space for the avatar */
-    padding: 14px 120px 10px 12px;
-    position: relative;
-    min-height: 110px;
-}
-
-.role {
-    color: #9aa7b3;
-    font-size: 12px;
-    font-style: italic;
-}
-
-.name {
-    color: #2c74b3;
-    font-weight: 800;
-    /* smaller type so names fit beside the avatar */
+.menu-links a {
+    text-decoration: none;
+    color: var(--text-gray);
     font-size: 15px;
-    margin-top: 6px;
-    line-height: 1.08;
-    max-width: calc(100% - 0px);
-    white-space: normal;
-    /* allow breaking very long unbroken strings when needed */
-    overflow-wrap: anywhere;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s;
 }
 
-/* oval avatar placed on right with white oval frame (bigger) */
-/* oval avatar: taller than wide */
-/* smaller oval avatar so it doesn't overlap the name */
-.card-avatar {
+.menu-links a::after {
+    content: "";
     position: absolute;
-    right: 14px;
-    top: 14px;
-    /* smaller oval so it doesn't overlap the text as much */
-    width: 72px;
-    height: 96px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #ffffff;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
-    background: white;
+    width: 0%;
+    height: 3px;
+    left: 0;
+    bottom: -6px;
+    background: var(--primary-blue);
+    border-radius: 2px;
+    transition: 0.3s ease;
 }
 
-/* footer style: centered contact and buttons under it */
-.card-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 12px;
-    background: #eef3f7;
-    gap: 6px;
+.menu-links a:hover {
+    color: var(--primary-blue);
 }
 
-.contact {
-    font-size: 12px;
-    color: #556;
+.menu-links a:hover::after {
+    width: 100%;
+}
+
+.btn-login {
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 50px;
+    color: #FFFFFF;
+    font-weight: 700;
+    background: var(--accent-blue);
+    box-shadow: 0 4px 14px rgba(10, 102, 194, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background: var(--primary-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(10, 102, 194, 0.4);
+}
+
+.container {
+    width: 90%;
+    max-width: 1350px;
+    margin: 50px auto;
+}
+
+.page-header {
+    margin-bottom: 40px;
     text-align: center;
 }
 
-/* Make filter panel sticky so it stays visible when scrolling */
-.filter-panel {
-    position: sticky;
-    top: 90px;
-    /* below navbar */
-    align-self: flex-start;
-    z-index: 50;
+.page-header h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--primary-blue);
+    margin-bottom: 12px;
 }
 
-/* When the panel becomes fixed while scrolling we switch to position:fixed
-   and preserve its width/left so it stays aligned with the layout. Disabled
-   on small screens via JS (media query keeps it static). */
-.filter-panel.fixed {
-    position: fixed !important;
-    top: 14px !important; /* small offset from top of viewport */
-    z-index: 1200 !important;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+.page-header p {
+    color: var(--text-gray);
+    font-size: 18px;
 }
 
-/* Modal overlay */
-.modal {
-    position: fixed;
-    inset: 0;
-    display: none;
+.layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+}
+
+.sidebar {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 30px;
+    height: fit-content;
+    box-shadow: var(--shadow-soft);
+}
+
+.sidebar h2 {
+    font-size: 24px;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 2000;
+    gap: 10px;
 }
 
-.modal.show {
+.sidebar h2 i {
+    color: var(--accent-blue);
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-body);
+    color: var(--text-dark);
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+}
+
+.filter-group select:focus,
+.filter-group select:hover {
+    border-color: var(--accent-blue);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.1);
+}
+
+.filter-buttons {
     display: flex;
+    gap: 12px;
+    margin-top: 25px;
 }
 
-.modal-card {
-    width: 720px;
-    max-width: calc(100% - 40px);
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
+.btn-primary, .btn-secondary {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
 }
 
-.modal-body {
-    display: flex;
-    gap: 18px;
-    padding: 20px;
+.btn-primary {
+    background: var(--accent-blue);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(10, 102, 194, 0.2);
 }
 
-.modal-body img {
-    width: 120px;
-    height: 120px;
-    border-radius: 8px;
-    object-fit: cover;
+.btn-primary:hover {
+    background: var(--primary-blue);
+    transform: translateY(-2px);
 }
 
-.modal-content h3 {
-    margin-top: 0;
+.btn-secondary {
+    background: var(--sky-blue);
     color: var(--primary-blue);
 }
 
-.modal-footer {
-    padding: 12px 20px;
-    background: #fafafa;
-    text-align: right;
+.btn-secondary:hover {
+    background: #D0E5FF;
 }
 
-.modal-close {
-    background: #e5e7eb;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
+.tutor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
 }
 
-.tutor-detail {
-    flex: 1;
-    background: var(--white-glass);
-    padding: 18px;
-    border-radius: 12px;
+.tutor-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-soft);
 }
 
-.tutor-detail h3 {
-    margin-top: 0;
+.tutor-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-blue);
+    box-shadow: var(--shadow-hover);
 }
 
-.tags {
+.card-top {
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 6px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    background: linear-gradient(135deg, var(--sky-blue) 0%, rgba(255,255,255,0) 100%);
+    border-bottom: 1px solid var(--border-color);
 }
 
-.tag {
-    background: #e6f0fb;
-    padding: 6px 10px;
-    border-radius: 8px;
-    color: #145;
+.card-info span {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    color: var(--accent-blue);
+    font-size: 12px;
     font-weight: 700;
+    margin-bottom: 8px;
+    border: 1px solid var(--border-color);
 }
 
-@media (max-width:1400px) {
-    .tutor-grid {
-        grid-template-columns: repeat(3, 1fr);
+.card-info h3 {
+    font-size: 22px;
+    color: var(--text-dark);
+    margin-top: 5px;
+}
+
+.tutor-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card-bottom {
+    padding: 20px 25px;
+    background: #FFFFFF;
+}
+
+.card-bottom p {
+    margin: 8px 0;
+    color: var(--text-gray);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-bottom p i {
+    color: var(--accent-blue);
+    width: 16px;
+    text-align: center;
+}
+
+@media(max-width: 1024px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+    .sidebar {
+        margin-bottom: 20px;
     }
 }
 
-@media (max-width:1200px) {
-    .tutor-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width:900px) {
-    .find-container {
+@media(max-width: 768px) {
+    nav {
         flex-direction: column;
+        height: auto;
+        padding: 20px;
     }
-
-    .filter-panel,
-    .tutor-list {
-        width: 100%;
+    .menu-links {
+        margin: 20px 0;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-
+    .page-header h1 {
+        font-size: 32px;
+    }
     .tutor-grid {
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    /* On small screens place avatar inline above content to avoid overlap */
-    .card-top {
-        padding: 18px;
-    }
-
-    .card-avatar {
-        position: static;
-        width: 72px;
-        height: 72px;
-        margin: 8px 0 0 auto;
-        border-width: 4px;
-    }
-
-    .name {
-        max-width: 100%;
+        grid-template-columns: 1fr;
     }
 }
