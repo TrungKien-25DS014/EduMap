@@ -1,15 +1,21 @@
-// js/login.js
-const btnLogin = document.querySelector('.login-content button');
+const btnLogin = document.querySelector('.login-box button');
 if (btnLogin) {
     btnLogin.onclick = async () => {
-        const email = document.querySelector('input[type="text"]').value;
-        const password = document.querySelector('input[type="password"]').value;
-
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        if (email == "" || password == "") {
+            alert("Vui lòng nhập đầy đủ thông tin!");
+            return;
+        }
         try {
-            btnLogin.innerText = "Đang đăng nhập...";
-            await handleLogin(email, password);
-            alert("Thành công!");
-            window.location.href = "index.html";
+            btnLogin.onclick = async (e) => {
+                e.preventDefault();
+                if(email =="user@gmail.com" && password == "123456"){
+                    btnLogin.innerText = "Đang đăng nhập...";
+                    //await handleLogin(email, password);
+                    window.location.href = "find_tutor.html";
+                }
+            }
         } catch (e) {
             alert("Thất bại: " + e.message);
         } finally {

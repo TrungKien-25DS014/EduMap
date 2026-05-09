@@ -1,20 +1,14 @@
-// js/auth.js
-
 // Hàm Đăng ký
 async function handleSignUp(email, password, fullName, role) {
     const { data, error } = await window.supabaseClient.auth.signUp({
         email: email,
         password: password,
     });
-
     if (error) throw error;
-
     if (data.user) {
-        // Lưu thông tin bổ sung vào bảng profiles
         const { error: profileError } = await window.supabaseClient
             .from('profiles')
             .insert([{ id: data.user.id, full_name: fullName, role: role }]);
-        
         if (profileError) throw profileError;
     }
     return data;

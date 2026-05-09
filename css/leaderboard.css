@@ -76,7 +76,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
-            background: var(--white-glass);
+            background: transparent !important;
             border-radius: 12px;
             overflow: hidden;
         }
@@ -89,7 +89,7 @@
         }
 
         .leaderboard-table th {
-            background: rgba(255,255,255,0.6);
+            background: transparent !important;
             color: var(--primary-blue);
             font-weight: 700;
         }

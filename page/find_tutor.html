@@ -3,122 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDUMAP - Tìm gia sư</title>
+    <title>EduMap — Discovery Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/find_tutor.css">
 </head>
 <body>
-    <div class="background-glow"></div>
-    <nav>
-        <div class="logo">
-            EDUMAP
-        </div>
-        <div class="menu-links">
-            <a href="index.html">Trang chủ</a>
-            <a href="find_buddy.html">Tìm bạn đồng hành</a>
-            <a href="community.html">Cộng đồng</a>
-            <a href="leaderboard.html">Bảng xếp hạng</a>
-        </div>
-        <div>
-            <a href="login.html" class="btn-login">Đăng nhập</a>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="page-header">
-            <h1>Tìm gia sư</h1>
-            <p>Khám phá những người đồng hành học tập phù hợp với bạn nhất</p>
-        </div>
-        <div class="layout">
-            <aside class="sidebar">
-                <h2>
-                    <i class="fa-solid fa-sliders"></i> Bộ lọc
-                </h2>
-                <div class="filter-group">
-                    <label>Môn học</label>
-                    <select>
-                        <option>Tất cả</option>
-                        <option>Toán</option>
-                        <option>Văn</option>
-                        <option>Tiếng Anh</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Khối lớp</label>
-                    <select>
-                        <option>Tất cả</option>
-                        <option>Lớp 6</option>
-                        <option>Lớp 7</option>
-                        <option>Lớp 8</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Hình thức</label>
-                    <select>
-                        <option>Tất cả</option>
-                        <option>Online</option>
-                        <option>Offline</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Khu vực</label>
-                    <select>
-                        <option>Tất cả</option>
-                        <option>Đà Nẵng</option>
-                        <option>Hà Nội</option>
-                    </select>
-                </div>
-                <div class="filter-buttons">
-                    <button class="btn-primary">Áp dụng</button>
-                    <button class="btn-secondary">Xóa</button>
-                </div>
-            </aside>
-            <div class="tutor-grid">
-                <!-- CARD 1 -->
-                <div class="tutor-card">
-                    <div class="card-top">
-                        <div class="card-info">
-                            <span>Giảng viên</span>
-                            <h3>Nguyễn Văn A</h3>
-                        </div>
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="tutor-avatar" alt="Avatar">
-                    </div>
-                    <div class="card-bottom">
-                        <p><i class="fa-solid fa-envelope"></i> nguyenvana@gmail.com</p>
-                        <p><i class="fa-solid fa-phone"></i> 0909xxxxxx</p>
-                    </div>
-                </div>
+    <!-- ANIMATED BACKGROUND -->
+    <div class="edumap-bg">
+        <div class="particles"></div>
+        <div class="bubble b1"></div>
+        <div class="bubble b2"></div>
+        <div class="bubble b3"></div>
+        <div class="bubble b4"></div>
+    </div>
 
-                <!-- CARD 2 -->
-                <div class="tutor-card">
-                    <div class="card-top">
-                        <div class="card-info">
-                            <span>Giảng viên</span>
-                            <h3>Trần Thị B</h3>
-                        </div>
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="tutor-avatar" alt="Avatar">
-                    </div>
-                    <div class="card-bottom">
-                        <p><i class="fa-solid fa-envelope"></i> ttb@example.com</p>
-                        <p><i class="fa-solid fa-phone"></i> 0912xxxxxx</p>
-                    </div>
-                </div>
-
-                <!-- CARD 3 -->
-                <div class="tutor-card">
-                    <div class="card-top">
-                        <div class="card-info">
-                            <span>PGS.TS</span>
-                            <h3>Huỳnh Công Pháp</h3>
-                        </div>
-                        <img src="https://randomuser.me/api/portraits/men/11.jpg" class="tutor-avatar" alt="Avatar">
-                    </div>
-                    <div class="card-bottom">
-                        <p><i class="fa-solid fa-envelope"></i> hcphap@vku.udn.vn</p>
-                        <p><i class="fa-solid fa-phone"></i> 0905114500</p>
-                    </div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">EduMap<span>.</span></div>
+            <ul class="nav-links">
+                <li><a href="find_tutor.html" class="active">Khám phá</a></li>
+                <li><a href="community.html">Cộng đồng</a></li>
+                <li><a href="leaderboard.html">Xếp hạng</a></li>
+            </ul>
+            <div class="user-profile">
+                <span class="user-name">Kiên</span>
+                <div class="avatar">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kien" alt="Avatar">
                 </div>
             </div>
         </div>
-    </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bubbles">
+            <div class="hero-bubble hb1"></div>
+            <div class="hero-bubble hb2"></div>
+            <div class="hero-bubble hb3"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Chào mừng trở lại, Kiên 👋</h1>
+            <p>Hệ thống ghi nhận 128 bạn học đang online quanh khu vực Đà Nẵng</p>
+            <div class="hero-btns">
+                <button class="btn-primary"><i class="fa-solid fa-earth-asia"></i> Khám phá cộng đồng</button>
+                <button class="btn-secondary">Tìm tutor AI</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-container">
+        
+        <div class="map-card card">
+            <div class="map-header">
+                <h3>Live Activity Map</h3>
+                <span class="status-live"><i class="fa-solid fa-circle"></i> Hệ thống đang ghi nhận thời gian thực</span>
+            </div>
+            <div class="map-placeholder">
+                <div class="marker m1">
+                    <div class="pulse"></div>
+                    <img src="https://i.pravatar.cc/150?u=11" alt="tutor">
+                </div>
+                <div class="marker m2">
+                    <div class="pulse"></div>
+                    <img src="https://i.pravatar.cc/150?u=22" alt="tutor">
+                </div>
+                <div class="map-label">
+                    <i class="fa-solid fa-location-dot"></i> Đà Nẵng — 120 học viên & 8 gia sư
+                </div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            
+            <div class="groups-section">
+                <h2 class="section-title"><i class="fa-solid fa-users-rectangle"></i> Nhóm học đang mở</h2>
+                <div class="group-cards">
+                    <div class="group-card card">
+                        <h4>IELTS Warriors</h4>
+                        <p>Tập trung Speaking & Writing. Đang có 24 thành viên hoạt động tích cực.</p>
+                        <button class="btn-sm">Tham gia ngay</button>
+                    </div>
+                    <div class="group-card card">
+                        <h4>Data Science VKU</h4>
+                        <p>Trao đổi về Python, SQL và các thuật toán máy học. Nhóm của trường mình nè!</p>
+                        <button class="btn-sm">Tham gia ngay</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-info-grid">
+                <div class="leaderboard card">
+                    <h4><i class="fa-solid fa-trophy" style="color: gold;"></i> Bảng xếp hạng</h4>
+                    <ul class="rank-list">
+                        <li><span>🥇 Minh Hoàng</span> <strong>540 XP</strong></li>
+                        <li><span>🥈 Nhật Huy</span> <strong>520 XP</strong></li>
+                        <li><span>🥉 Lan An</span> <strong>480 XP</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="activity-feed card">
+                    <h4>Hoạt động mới</h4>
+                    <div class="feed-item">
+                        <span class="dot blue"></span>
+                        <p><strong>Linh</strong> vừa tham gia nhóm IELTS Warriors</p>
+                    </div>
+                    <div class="feed-item">
+                        <span class="dot green"></span>
+                        <p><strong>Huy</strong> vừa kết nối với tutor Toán online</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
 </body>
 </html>

@@ -44,7 +44,7 @@ body {
 .login-content input:focus,
 .auth-box input:focus {
     border-color: #2C74B3;
-    box-shadow: 0 0 5px rgba(44,116,179,0.3);
+    box-shadow: 0 0 10px rgba(44,116,179,0.3);
 }
 
 .login-content button,
@@ -64,6 +64,8 @@ body {
 .login-content button:hover,
 .auth-box button:hover {
     opacity: 0.8;
+    transform: translateY(-2px);
+    transition: 0.3s;
 }
 .login-content button:active,
 .auth-box button:active {
