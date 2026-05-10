@@ -1,4 +1,3 @@
-
 const STORAGE_KEY = 'edumap_tutor_profile_v1';
 
 const defaultProfile = {
@@ -66,24 +65,7 @@ if (!isTutor) {
 
     const edt = document.getElementById('editToggle');
     if (edt) edt.style.display = 'none';
-// Edit UI
-let profile = loadProfile();
-renderProfile(profile);
 
-// Tutor-only access: this profile page is personal and should be editable only by the tutor.
-// We gate the UI client-side (for now) using a localStorage flag 'edumap_tutor_logged_in'.
-// If not set, replace the main content with a private message and hide edit controls.
-const isTutor = localStorage.getItem('edumap_tutor_logged_in') === '1';
-if (!isTutor) {
-    // hide the left-box for adding subjects
-    const leftBox = document.querySelector('.profile-left .box');
-    if (leftBox) leftBox.style.display = 'none';
-
-    // hide edit button
-    const edt = document.getElementById('editToggle');
-    if (edt) edt.style.display = 'none';
-
-    // replace main area with private note
     const main = document.querySelector('.profile-main');
     if (main) {
         main.innerHTML = `
@@ -95,16 +77,14 @@ if (!isTutor) {
                     <a href="find_tutor.html" class="btn-outline">Quay lại trang tìm gia sư</a>
                 </div>
             </div>`;
+
         const mock = document.getElementById('mockLogin');
         if (mock) mock.addEventListener('click', () => {
             localStorage.setItem('edumap_tutor_logged_in', '1');
             location.reload();
         });
     }
-    // stop further wiring of edit UI
-    // (script continues to exist, but event listeners for edit controls are not needed when not tutor)
-    // We return early from this script to avoid exposing edit handlers.
-    // Note: this is a client-side gate for demo/testing only; replace with server-side auth in production.
+
     throw new Error('tutor-only mode: UI restricted (client-side)');
 }
 
@@ -146,7 +126,7 @@ function exitEdit(cancel=false) {
         });
         saveProfile(profile);
     }
-  
+
     fields.forEach(id => {
         const input = document.querySelector(`[data-field="${id}"]`);
         if (!input) return;
