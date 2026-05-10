@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <title>EduMap</title>
 
-    <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
-
-    <!-- Leaflet -->
+    <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 
 <body>
 
-<!-- VIDEO -->
 <div class="video-background">
         <video autoplay muted loop playsinline id="myVideo">
             <source src="../Yêu_Cầu_Video_Màu_Xanh.mp4" type="video/mp4">
@@ -29,13 +26,28 @@
         </div>
         <a href="login.html" class="btn-login">ĐĂNG NHẬP</a>
     </nav>
-    <div id="map"></div>
-    /* login
-    
 
-<!-- JS -->
+    <div class="main-container">
+        <div id="map"></div>
+        <div class="login-section">
+            <div class="login-box">
+                <h2>Đăng nhập vào Edumap</h2>
+                <p>Sẵn sàng tiếp tục hành trình của bạn</p>
+                <input type="text" id = "email" placeholder="Nhập Email của bạn">
+                <input type="password" id = "password" placeholder="Mật khẩu">
+                <button id = "btnLogin">Đăng nhập</button>
+                <div class="login-footer">
+                    <a href="#">Quên mật khẩu?</a>
+                    <a href="register.html">Đăng ký ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="../js/main.js"></script>
+<script src="../js/login.js"></script>
+<script src="../js/auth.js"></script>
 
 </body>
 </html>

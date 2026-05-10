@@ -3,6 +3,100 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cộng đồng - EduMap</title>
+    <!-- FontAwesome Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/community.css">
+    <link rel="stylesheet" href="../css/find_tutor.css">
+</head>
+
+<body>
+    <div class="edumap-bg">
+
+        <div class="particles"></div>
+
+        <div class="bubble b1"></div>
+        <div class="bubble b2"></div>
+        <div class="bubble b3"></div>
+
+    </div>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i> EDUMAP
+        </div>
+
+        <div class="menu-links">
+            <a href="find_tutor.html">Khám phá</a>
+            <a href="community.html" class="active">Cộng đồng</a>
+            <a href="leaderboard.html">Bảng xếp hạng</a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="login.html" class="btn-login">Đăng nhập</a>
+        </div>
+    </nav>
+
+    <!-- 3-COLUMN LAYOUT -->
+    <div class="community-layout">
+
+        <!-- CỘT TRÁI (25%) - Dành cho bạn tự xử lý -->
+        <aside class="sidebar-left">
+            <div class="glass-panel empty-state">
+                <i class="fa-solid fa-code"></i>
+                <p>Khu vực tùy biến của bạn</p>
+                <span>(Menu, Group, Hashtag...)</span>
+            </div>
+        </aside>
+
+        <!-- CỘT GIỮA - MAIN FEED (50%) -->
+        <main class="feed-center">
+            
+            <!-- POST BOX -->
+            <div class="post-box glass-panel">
+                <div class="post-box-header">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="Avatar" class="avatar">
+                    <textarea placeholder="Chia sẻ kiến thức hoặc tìm đồng đội..." rows="2"></textarea>
+                </div>
+                <div class="post-box-actions">
+                    <div class="attach-tools">
+                        <button><i class="fa-solid fa-image"></i> Hình ảnh</button>
+                        <button><i class="fa-solid fa-paperclip"></i> Tài liệu</button>
+                    </div>
+                    <button class="btn-submit">Đăng bài <i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+
+            <!-- POST 1 -->
+            <div class="post glass-panel">
+                <div class="post-header">
+                    <img src="https://i.pravatar.cc/150?img=5" class="avatar" alt="Avatar">
+                    <div class="user-info">
+                        <!-- Tên người dùng có class "user-trigger" để click mở chat -->
+                        <h4 class="user-trigger" onclick="openChat('Trần Thị B', 'https://i.pravatar.cc/150?img=5')">Trần Thị B</h4>
+                        <span class="time">30 phút trước • <i class="fa-solid fa-earth-americas"></i></span>
+                    </div>
+                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
+                </div>
+
+                <div class="post-content">
+                    <p>Mình đang tìm gia sư Toán lớp 12 ở Đà Nẵng, có phương pháp dạy hiện đại trực quan. Ai biết chỗ uy tín giới thiệu giúp mình với nhé 🙏</p>
+                    <div class="post-tags">
+                        <span>#Toan12</span> <span>#DaNang</span> <span>#TimGiaSu</span>
+                    </div>
+                </div>
+
+                <div class="post-stats">
+                    <span><i class="fa-solid fa-heart text-red"></i> 12 Thích</span>
+                    <span>5 Bình luận</span>
+                </div>
+
+                <div class="actions">
+                    <button><i class="fa-regular fa-thumbs-up"></i> Thích</button>
+                    <button><i class="fa-regular fa-comment"></i> Bình luận</button>
+                    <button><i class="fa-solid fa-share-nodes"></i> Chia sẻ</button>
     <title>Cộng đồng - EduMap</title>
     <link rel="stylesheet" href="../css/community.css">
 </head>
@@ -61,6 +155,134 @@
             </div>
 
             <!-- POST 2 -->
+            <div class="post glass-panel">
+                <div class="post-header">
+                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
+                    <div class="user-info">
+                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">Nguyễn Văn A</h4>
+                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
+                    </div>
+                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
+                </div>
+
+                <div class="post-content">
+                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành 1-1 liên tục. Ai cần ib mình nhé ✨</p>
+                </div>
+
+                <div class="post-stats">
+                    <span><i class="fa-solid fa-heart text-red"></i> 45 Thích</span>
+                    <span>12 Bình luận</span>
+                </div>
+
+                <div class="actions">
+                    <button><i class="fa-regular fa-thumbs-up"></i> Thích</button>
+                    <button><i class="fa-regular fa-comment"></i> Bình luận</button>
+                    <button><i class="fa-solid fa-share-nodes"></i> Chia sẻ</button>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- CỘT PHẢI (25%) - LIÊN HỆ & CHAT -->
+        <aside class="sidebar-right">
+            
+            <!-- TRẠNG THÁI 1: DANH SÁCH LỊCH SỬ CHAT (Mặc định hiển thị) -->
+            <div id="contact-list" class="glass-panel active-panel">
+                <div class="panel-header">
+                    <h3>Liên hệ gần đây</h3>
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+                
+                <div class="contact-items">
+                    <!-- Liên hệ 1 -->
+                    <div class="chat-item" onclick="openChat('Trần Thị B', 'https://i.pravatar.cc/150?img=5')">
+                        <div class="avatar-container">
+                            <img src="https://i.pravatar.cc/150?img=5" alt="Avatar">
+                            <div class="online-dot"></div>
+                        </div>
+                        <div class="chat-item-info">
+                            <h5>Trần Thị B</h5>
+                            <p>Bạn: Chào bạn, mình có biết 1...</p>
+                        </div>
+                    </div>
+                    <!-- Liên hệ 2 -->
+                    <div class="chat-item" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
+                        <div class="avatar-container">
+                            <img src="https://i.pravatar.cc/150?img=1" alt="Avatar">
+                            <div class="offline-dot"></div>
+                        </div>
+                        <div class="chat-item-info">
+                            <h5>Nguyễn Văn A</h5>
+                            <p>Ok, lịch học là tối thứ 3 nhé!</p>
+                        </div>
+                    </div>
+                    <!-- Liên hệ 3 -->
+                    <div class="chat-item" onclick="openChat('Lê Hoàng C', 'https://i.pravatar.cc/150?img=8')">
+                        <div class="avatar-container">
+                            <img src="https://i.pravatar.cc/150?img=8" alt="Avatar">
+                            <div class="online-dot"></div>
+                        </div>
+                        <div class="chat-item-info">
+                            <h5>Lê Hoàng C</h5>
+                            <p>Cảm ơn admin duyệt bài.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRẠNG THÁI 2: KHUNG CHAT RIÊNG (Ẩn mặc định) -->
+            <div id="active-chat" class="glass-panel hidden-panel">
+                <div class="chat-header">
+                    <button class="btn-back" onclick="closeChat()"><i class="fa-solid fa-arrow-left"></i></button>
+                    <img id="chat-avatar" src="" alt="Avatar" class="avatar-small">
+                    <h3 id="chat-name">Tên người dùng</h3>
+                    <i class="fa-solid fa-circle-info info-icon"></i>
+                </div>
+                
+                <div class="chat-body">
+                    <div class="message received">
+                        <p>Chào bạn, bạn có tài liệu môn C++ không cho mình xin với?</p>
+                    </div>
+                    <div class="message sent">
+                        <p>Mình có nha, đợi mình xíu mình gửi link driver cho.</p>
+                    </div>
+                </div>
+
+                <div class="chat-footer">
+                    <i class="fa-solid fa-face-smile"></i>
+                    <input type="text" placeholder="Nhập tin nhắn...">
+                    <button class="btn-send"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- SCRIPT XỬ LÝ CHUYỂN ĐỔI CHAT -->
+    <script>
+        function openChat(name, avatarUrl) {
+            // Cập nhật thông tin người chat
+            document.getElementById('chat-name').innerText = name;
+            document.getElementById('chat-avatar').src = avatarUrl;
+            
+            // Chuyển đổi hiển thị Panel
+            document.getElementById('contact-list').classList.remove('active-panel');
+            document.getElementById('contact-list').classList.add('hidden-panel');
+            
+            document.getElementById('active-chat').classList.remove('hidden-panel');
+            document.getElementById('active-chat').classList.add('active-panel');
+        }
+
+        function closeChat() {
+            // Quay lại danh sách lịch sử chat
+            document.getElementById('active-chat').classList.remove('active-panel');
+            document.getElementById('active-chat').classList.add('hidden-panel');
+            
+            document.getElementById('contact-list').classList.remove('hidden-panel');
+            document.getElementById('contact-list').classList.add('active-panel');
+        }
+    </script>
             <div class="post">
                 <div class="user">
                     <img src="https://i.pravatar.cc/40?img=1">

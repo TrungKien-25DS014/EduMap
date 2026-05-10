@@ -1,3 +1,10 @@
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fb;
+}
+
 /* RESET */
 body {
     margin: 0;
@@ -13,8 +20,6 @@ body {
     align-items: center;
     height: 100vh;
 }
-
-/* BOX */
 .login-content,
 .auth-box {
     width: 380px;
@@ -27,14 +32,11 @@ body {
 
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
-
-/* TITLE */
 .login-content h2,
 .auth-box h2 {
     margin-bottom: 10px;
 }
 
-/* INPUT */
 .login-content input,
 .auth-box input {
     width: 100%;
@@ -45,6 +47,11 @@ body {
     outline: none;
     font-size: 14px;
 }
+.login-content input:focus,
+.auth-box input:focus {
+    border-color: #2C74B3;
+    box-shadow: 0 0 10px rgba(44,116,179,0.3);
+}
 
 /* FOCUS */
 .login-content input:focus,
@@ -53,7 +60,6 @@ body {
     box-shadow: 0 0 5px rgba(44,116,179,0.3);
 }
 
-/* BUTTON */
 .login-content button,
 .auth-box button {
     width: 100%;
@@ -71,13 +77,14 @@ body {
 .login-content button:hover,
 .auth-box button:hover {
     opacity: 0.8;
+    transform: translateY(-2px);
+    transition: 0.3s;
 }
 .login-content button:active,
 .auth-box button:active {
     opacity: 0.4;
 }
 
-/* LINK */
 .login-content a,
 .auth-box a {
     display: inline-block;
@@ -91,19 +98,17 @@ body {
 .auth-box a:hover {
     text-decoration: underline;
 }
-/* ===== ROLE SELECT ===== */
+
 .role-select {
     display: flex;
     gap: 15px;
     margin-bottom: 15px;
 }
 
-/* Ẩn radio */
 .role-option input {
     display: none;
 }
 
-/* BOX */
 .role-option span {
     display: block;
     padding: 12px 20px;
@@ -115,12 +120,10 @@ body {
     transition: 0.3s;
 }
 
-/* HOVER */
 .role-option span:hover {
     border-color: #2C74B3;
 }
 
-/* SELECTED */
 .role-option input:checked + span {
     background: linear-gradient(135deg, #5f9cff, #7b4dff);
     color: white;
@@ -129,7 +132,6 @@ body {
     position: relative;
 }
 
-/* thanh trắng bên trái */
 .role-option input:checked + span::before {
     content: "";
     position: absolute;
