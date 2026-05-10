@@ -1,9 +1,18 @@
+
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: #f5f7fb;
 }
 
+/* RESET */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fb; /* nền trắng nhẹ */
+}
+
+/* CENTER */
 .login-page,
 .auth-page {
     display: flex;
@@ -11,7 +20,6 @@ body {
     align-items: center;
     height: 100vh;
 }
-
 .login-content,
 .auth-box {
     width: 380px;
@@ -24,7 +32,6 @@ body {
 
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
-
 .login-content h2,
 .auth-box h2 {
     margin-bottom: 10px;
@@ -40,11 +47,17 @@ body {
     outline: none;
     font-size: 14px;
 }
-
 .login-content input:focus,
 .auth-box input:focus {
     border-color: #2C74B3;
     box-shadow: 0 0 10px rgba(44,116,179,0.3);
+}
+
+/* FOCUS */
+.login-content input:focus,
+.auth-box input:focus {
+    border-color: #2C74B3;
+    box-shadow: 0 0 5px rgba(44,116,179,0.3);
 }
 
 .login-content button,

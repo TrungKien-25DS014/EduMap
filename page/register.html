@@ -8,12 +8,48 @@
 </head>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script src="../js/config.js"></script>
+
+<script>
+    // Đoạn code này sẽ bắt sự kiện khi m bấm nút Đăng ký trên giao diện
+    const btn = document.querySelector('button');
+    btn.onclick = async () => {
+        const email = document.querySelector('input[placeholder="Email hoặc SĐT"]').value;
+        const password = document.querySelector('input[placeholder="Mật khẩu"]').value;
+        const fullName = document.querySelector('input[placeholder="Họ và tên"]').value;
+
+        // Lấy vai trò
+        let role = 'student';
+        const roles = document.querySelectorAll('input[name="role"]');
+        roles.forEach(r => { if(r.checked) role = r.value; });
+
+        btn.innerText = "Đang xử lý...";
+
+        // Gửi lệnh đăng ký tài khoản lên Supabase bằng URL và Key trong config.js
+        const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+        });
+
+        if (error) {
+            alert("Lỗi: " + error.message);
+        } else {
+            // Lưu thông tin vào bảng profiles m đã tạo bằng SQL lúc nãy
+            await supabase.from('profiles').insert([
+                { id: data.user.id, full_name: fullName, role: role }
+            ]);
+            alert("Đăng ký thành công rồi m ơi! Check cái bảng Users trên Supabase đi!");
+        }
+        btn.innerText = "Đăng ký";
+    };
+</script>
 <body>
 
 <div class="auth-page">
     <div class="auth-box">
         <h2>Đăng ký</h2>
 
+        <!-- CHỌN ROLE -->
         <p><strong>Bạn đăng ký làm:</strong></p>
         <div class="role-select">
             <label class="role-option">
@@ -26,7 +62,6 @@
                 <span>📚 Học viên</span>
             </label>
         </div>
-
         <input type="text" id="fullName" placeholder="Họ và tên">
         <input type="text" id="email" placeholder="Email hoặc SĐT">
         <input type="password" id="password" placeholder="Mật khẩu">
@@ -34,6 +69,11 @@
 
         <!-- reCAPTCHA v2 Checkbox -->
         <div class="g-recaptcha" data-sitekey="6Lf0W-IsAAAAAJAIIt1WZs5Ho5klCbLloBGX1Q69"></div>
+        <!-- INPUT -->
+        <input type="text" placeholder="Họ và tên">
+        <input type="text" placeholder="Email hoặc SĐT">
+        <input type="password" placeholder="Mật khẩu">
+        <input type="password" placeholder="Nhập lại mật khẩu">
 
         <button>Đăng ký</button>
 
@@ -47,3 +87,6 @@
     <script src="../js/auth.js"></script>
     <script src="../js/register.js"></script>
 </body></html>
+
+</body>
+</html>

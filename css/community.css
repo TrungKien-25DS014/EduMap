@@ -1,3 +1,4 @@
+
 :root {
     --primary-blue: #0A66C2;
     --primary-hover: #004182;
@@ -31,6 +32,23 @@ body {
     border-radius: 10px;
 }
 
+=======
+/* ===== BIẾN MÀU ===== */
+:root {
+    --primary-blue: #0A2647;
+    --accent-blue: #2C74B3;
+    --sky-blue: #BBE1FA;
+    --white-glass: rgba(255, 255, 255, 0.85);
+}
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fb; /* nền trắng nhẹ */
+}
+
+/* ===== NAV ===== */
 nav {
     display: flex;
     justify-content: space-between;
@@ -433,4 +451,209 @@ nav {
     .sidebar-left, .sidebar-right {
         display: none;
     }
+}
+=======
+    padding: 0 40px;
+    height: 70px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 3px solid var(--accent-blue);
+}
+
+/* LOGO */
+nav div:first-child {
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--primary-blue);
+}
+
+/* MENU */
+nav a {
+    text-decoration: none;
+    color: #144272;
+    margin: 0 10px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--accent-blue);
+}
+
+/* LOGIN BUTTON */
+nav div:last-child a {
+    background: var(--primary-blue);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 50px;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+    width: 60%;
+    margin: 40px auto;
+}
+
+/* ===== POST BOX ===== */
+.post-box {
+    background: var(--white-glass);
+    backdrop-filter: blur(15px);
+
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.post-box h3 {
+    margin-top: 0;
+    color: var(--primary-blue);
+}
+
+/* TEXTAREA */
+.post-box textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    resize: none;
+    outline: none;
+    margin-top: 10px;
+}
+
+/* BUTTON */
+.post-box button {
+    margin-top: 10px;
+    padding: 10px 25px;
+    border-radius: 20px;
+    border: none;
+
+    background: var(--primary-blue);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.post-box button:hover {
+    background: var(--accent-blue);
+    transform: scale(1.05);
+}
+
+/* ===== POST ===== */
+.post {
+    background: var(--white-glass);
+    backdrop-filter: blur(15px);
+
+    padding: 15px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* USER */
+.user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* CONTENT */
+.post p {
+    margin: 10px 0;
+}
+
+/* ACTION */
+.actions {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+.actions button:hover {
+    color: var(--primary-blue);
+}
+
+/* ===== HOVER EFFECT ===== */
+.post:hover {
+    transform: translateY(-3px);
+    transition: 0.3s;
+}
+.logo {
+    color: var(--primary-blue);
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+.menu-links a {
+    text-decoration: none;
+    color: #144272;
+    margin: 0 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.menu-links a:hover {
+    color: var(--accent-blue);
+}
+
+.menu-links a:active {
+    opacity: 0.4;
+}
+.btn-login {
+    background: var(--primary-blue);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-login:hover {
+    background: var(--accent-blue);
+    transform: scale(1.05);
+}
+
+.btn-login:active {
+    transform: scale(0.95);
+}
+/* USER INFO */
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* TIME */
+.time {
+    font-size: 12px;
+    color: #777;
+    margin-top: 2px;
 }
