@@ -6,6 +6,8 @@
     <title>EduMap — Discovery Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/find_tutor.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
     <div class="edumap-bg">
@@ -25,9 +27,9 @@
                 <li><a href="leaderboard.html">Xếp hạng</a></li>
             </ul>
             <div class="user-profile">
-                <span class="user-name">Kiên</span>
-                <div class="avatar">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kien" alt="Avatar">
+                <span class="user-name" id ="userNameDisplay">Đang tải...</span>
+                <div class="avatar" id = "userAvatarDisplay" style = "cursor: pointer;" title = "Sửa hồ sơ">
+                    <img id = "userAvatarImg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="Avatar">
                 </div>
             </div>
         </div>
@@ -40,13 +42,31 @@
             <div class="hero-bubble hb3"></div>
         </div>
         <div class="hero-content">
-            <h1>Chào mừng trở lại, Kiên 👋</h1>
-            <p>Hệ thống ghi nhận 128 bạn học đang online quanh khu vực Đà Nẵng</p>
+            <h1>Chào mừng trở lại, <span id="userNameDisplay">Đang tải...</span> 👋</h1>
+            <p>Hệ thống ghi nhận <strong id = "onlineCountDisplay" class = "text-primary">...</strong> bạn học đang online quanh khu vực <strong id = "locationDisplay"></strong></p>
         </div>
     </section>
 
     <main class="main-container">
-        
+        <aside class="left-aside">
+            <div class="map-filter-wrapper card">
+                <select class="glass-select" id="subjectFilter">
+                    <option value="" disabled selected>Chọn môn học...</option>
+                    <option value="toan">Toán Học</option>
+                    <option value="vat_ly">Vật Lý</option>
+                    <option value="hoa_hoc">Hóa Học</option>
+                    <option value="sinh_hoc">Sinh Học</option>
+                    <option value="tin_hoc">Tin Học</option>
+                    <option value="cong_nghe">Công Nghệ</option>
+                    <option value="ngu_van">Ngữ Văn</option>
+                    <option value="tieng_anh">Tiếng Anh</option>
+                    <option value="lich_su">Lịch Sử</option>
+                    <option value="dia_ly">Địa Lý</option>
+                    <option value="gdcd">Giáo Dục Công Dân</option>
+                    <option value="ngoai_ngu_khac">Ngoại Ngữ Khác</option>
+                </select>
+            </div>
+        </aside>
         <div class="map-card card">
             <div class="map-header">
                 <h3>Live Activity Map</h3>
@@ -66,6 +86,9 @@
                 </div>
             </div>
         </div>
+        <aside class="right-aside">
+            <p>qwertyujbcsdfghj</p>
+        </aside>
     </main>
 
 </body>
