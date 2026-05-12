@@ -8,6 +8,7 @@
     <!-- FontAwesome Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/community.css">
+    <link rel="stylesheet" href="../css/find_tutor.css">
 </head>
 
 <body>
@@ -52,6 +53,18 @@
 
         <!-- CỘT GIỮA - MAIN FEED (50%) -->
         <main class="feed-center">
+
+        <!-- CỘT TRÁI (25%) - Dành cho bạn tự xử lý -->
+        <aside class="sidebar-left">
+            <div class="glass-panel empty-state">
+                <i class="fa-solid fa-code"></i>
+                <p>Khu vực tùy biến của bạn</p>
+                <span>(Menu, Group, Hashtag...)</span>
+            </div>
+        </aside>
+
+        <!-- CỘT GIỮA - MAIN FEED (50%) -->
+        <main class="feed-center">
             
             <!-- POST BOX -->
             <div class="post-box glass-panel">
@@ -69,33 +82,57 @@
             </div>
 
             <!-- POST 1 -->
-            <div class="post glass-panel">
+            <div class="post glass-panel" data-post-id="1">
                 <div class="post-header">
                     <img src="https://i.pravatar.cc/150?img=5" class="avatar" alt="Avatar">
                     <div class="user-info">
                         <!-- Tên người dùng có class "user-trigger" để click mở chat -->
-                        <h4 class="user-trigger" onclick="openChat('Trần Thị B', 'https://i.pravatar.cc/150?img=5')">Trần Thị B</h4>
+                        <h4 class="user-trigger" onclick="openChat('Trần Thị B', 'https://i.pravatar.cc/150?img=5')">
+                            Trần Thị B</h4>
                         <span class="time">30 phút trước • <i class="fa-solid fa-earth-americas"></i></span>
                     </div>
                     <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
                 </div>
 
                 <div class="post-content">
-                    <p>Mình đang tìm gia sư Toán lớp 12 ở Đà Nẵng, có phương pháp dạy hiện đại trực quan. Ai biết chỗ uy tín giới thiệu giúp mình với nhé 🙏</p>
+                    <p>Mình đang tìm gia sư Toán lớp 12 ở Đà Nẵng, có phương pháp dạy hiện đại trực quan. Ai biết chỗ uy
+                        tín giới thiệu giúp mình với nhé 🙏</p>
                     <div class="post-tags">
                         <span>#Toan12</span> <span>#DaNang</span> <span>#TimGiaSu</span>
                     </div>
                 </div>
 
                 <div class="post-stats">
-                    <span><i class="fa-solid fa-heart text-red"></i> 12 Thích</span>
+                    <span class="like-count">12</span>
                     <span>5 Bình luận</span>
                 </div>
 
                 <div class="actions">
-                    <button><i class="fa-regular fa-thumbs-up"></i> Thích</button>
-                    <button><i class="fa-regular fa-comment"></i> Bình luận</button>
-                    <button><i class="fa-solid fa-share-nodes"></i> Chia sẻ</button>
+
+                    <button class="like-btn">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                        <span>Thích</span>
+
+                    </button>
+
+                    <button class="comment-btn">
+
+                        <i class="fa-regular fa-comment"></i>
+
+                        Bình luận
+
+                    </button>
+
+                    <button class="share-btn">
+
+                        <i class="fa-solid fa-share"></i>
+
+                        Chia sẻ
+
+                    </button>
+
                 </div>
             </div>
 
@@ -104,25 +141,49 @@
                 <div class="post-header">
                     <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
                     <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">Nguyễn Văn A</h4>
+                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
+                            Nguyễn Văn A</h4>
                         <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
                     </div>
                     <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
                 </div>
 
                 <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành 1-1 liên tục. Ai cần ib mình nhé ✨</p>
+                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
+                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
                 </div>
 
                 <div class="post-stats">
-                    <span><i class="fa-solid fa-heart text-red"></i> 45 Thích</span>
+                    <span class="like-count">0</span>
                     <span>12 Bình luận</span>
                 </div>
 
                 <div class="actions">
-                    <button><i class="fa-regular fa-thumbs-up"></i> Thích</button>
-                    <button><i class="fa-regular fa-comment"></i> Bình luận</button>
-                    <button><i class="fa-solid fa-share-nodes"></i> Chia sẻ</button>
+
+                    <button class="like-btn">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                        <span>Thích</span>
+
+                    </button>
+
+                    <button class="comment-btn">
+
+                        <i class="fa-regular fa-comment"></i>
+
+                        Bình luận
+
+                    </button>
+
+                    <button class="share-btn">
+
+                        <i class="fa-solid fa-share"></i>
+
+                        Chia sẻ
+
+                    </button>
+
                 </div>
             </div>
 
@@ -130,14 +191,14 @@
 
         <!-- CỘT PHẢI (25%) - LIÊN HỆ & CHAT -->
         <aside class="sidebar-right">
-            
+
             <!-- TRẠNG THÁI 1: DANH SÁCH LỊCH SỬ CHAT (Mặc định hiển thị) -->
             <div id="contact-list" class="glass-panel active-panel">
                 <div class="panel-header">
                     <h3>Liên hệ gần đây</h3>
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 </div>
-                
+
                 <div class="contact-items">
                     <!-- Liên hệ 1 -->
                     <div class="chat-item" onclick="openChat('Trần Thị B', 'https://i.pravatar.cc/150?img=5')">
@@ -183,7 +244,7 @@
                     <h3 id="chat-name">Tên người dùng</h3>
                     <i class="fa-solid fa-circle-info info-icon"></i>
                 </div>
-                
+
                 <div class="chat-body">
                     <div class="message received">
                         <p>Chào bạn, bạn có tài liệu môn C++ không cho mình xin với?</p>
@@ -210,11 +271,11 @@
             // Cập nhật thông tin người chat
             document.getElementById('chat-name').innerText = name;
             document.getElementById('chat-avatar').src = avatarUrl;
-            
+
             // Chuyển đổi hiển thị Panel
             document.getElementById('contact-list').classList.remove('active-panel');
             document.getElementById('contact-list').classList.add('hidden-panel');
-            
+
             document.getElementById('active-chat').classList.remove('hidden-panel');
             document.getElementById('active-chat').classList.add('active-panel');
         }
@@ -223,11 +284,12 @@
             // Quay lại danh sách lịch sử chat
             document.getElementById('active-chat').classList.remove('active-panel');
             document.getElementById('active-chat').classList.add('hidden-panel');
-            
+
             document.getElementById('contact-list').classList.remove('hidden-panel');
             document.getElementById('contact-list').classList.add('active-panel');
         }
     </script>
+    <script src="../js/community.js"></script>
 </body>
 
 </html>

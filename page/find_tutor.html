@@ -1,118 +1,125 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduMap - Live Map</title>
-
-    <!-- FONT AWESOME -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- LEAFLET -->
-    <link rel="stylesheet"
-        href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-    <!-- CSS -->
+    <title>EduMap — Discovery Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/find_tutor.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
-
 <body>
-
-    <!-- BACKGROUND -->
     <div class="edumap-bg">
         <div class="particles"></div>
-
         <div class="bubble b1"></div>
         <div class="bubble b2"></div>
         <div class="bubble b3"></div>
+        <div class="bubble b4"></div>
     </div>
 
-    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
-
-            <div class="logo">
-                EduMap<span>.</span>
-            </div>
-
+            <div class="logo">EduMap<span>.</span></div>
             <ul class="nav-links">
-                <li><a href="#" class="active">Khám phá</a></li>
+                <li><a href="find_tutor.html" class="active">Khám phá</a></li>
                 <li><a href="community.html">Cộng đồng</a></li>
                 <li><a href="leaderboard.html">Xếp hạng</a></li>
             </ul>
-
             <div class="user-profile">
-                <span class="user-name">Kiên</span>
-
-                <div class="avatar">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kien"
-                        alt="">
+                <span class="user-name" id ="userNameDisplay">Đang tải...</span>
+                <div class="avatar" id = "userAvatarDisplay" style = "cursor: pointer;" title = "Sửa hồ sơ">
+                    <img id = "userAvatarImg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="Avatar">
                 </div>
             </div>
-
         </div>
     </nav>
 
-    <!-- HERO -->
     <section class="hero">
-
-        <div class="hero-content">
-            <h1>Live Activity Map</h1>
-
-            <p>
-                Hệ thống đang ghi nhận tutor & học viên theo thời gian thực
-            </p>
-
-            <div class="hero-btns">
-                <button class="btn-primary">
-                    <i class="fa-solid fa-location-dot"></i>
-                    Khám phá quanh bạn
-                </button>
-
-                <button class="btn-secondary">
-                    Tutor AI
-                </button>
-            </div>
+        <div class="hero-bubbles">
+            <div class="hero-bubble hb1"></div>
+            <div class="hero-bubble hb2"></div>
+            <div class="hero-bubble hb3"></div>
         </div>
-
+        <div class="hero-content">
+            <h1>Chào mừng trở lại, <span id="userNameDisplay">Đang tải...</span> 👋</h1>
+            <p>Hệ thống ghi nhận <strong id = "onlineCountDisplay" class = "text-primary">...</strong> bạn học đang online quanh khu vực <strong id = "locationDisplay"></strong></p>
+        </div>
     </section>
 
-    <!-- MAIN -->
-    <main class="main-container">
-
-        <div class="card map-card">
-
+    <main class="main-container" id="mainContainer">
+        
+        <aside class="left-aside">
+            <div class="map-filter-wrapper card">
+                <select class="glass-select" id="subjectFilter">
+                    <option value="" disabled selected>Chọn môn học...</option>
+                    <option value="toan">Toán Học</option>
+                    <option value="vat_ly">Vật Lý</option>
+                    <option value="hoa_hoc">Hóa Học</option>
+                    <option value="ngoai_ngu">Ngoại Ngữ</option>
+                    <option value="lap_trinh">Lập Trình</option>
+                    <option value="nghe_thuat">Nghệ Thuật</option>
+                    <option value="khoa_hoc_xa_hoi">Khoa Học Xã Hội</option>
+                    <option value="ky_nang_song">........</option>
+                </select>
+            </div>
+        </aside>
+        
+        <div class="map-card card" style="display: flex; flex-direction: column;">
+            
             <div class="map-header">
-
-                <h2>
-                    <i class="fa-solid fa-map-location-dot"></i>
-                    Bản đồ thời gian thực
-                </h2>
-
-                <span class="status-live">
-                    <i class="fa-solid fa-circle"></i>
-                    Online
-                </span>
-
+                <h3>Live Activity Map</h3>
+                <span class="status-live"><i class="fa-solid fa-circle"></i> Hệ thống đang ghi nhận thời gian thực</span>
             </div>
-
-            <!-- MAP -->
-            <div class="map-wrapper">
-                <div id="map"></div>
-            </div>
-
+            
+            <div id="map" style="width: 100%; height: 500px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.06); z-index: 1; overflow: hidden;"></div>
+            
         </div>
+        <!-- asdie right -->
+        <aside class="right-aside card" id="rightAside">
+            
+            <div class="profile-card-modern">
+                <div class="profile-top">
+                    <img id="avatar" class="avatar-box" src="https://i.pravatar.cc/300?img=12" alt="Avatar">
+                    
+                    <div class="info-lines">
+                        <h2 id="name" class="t-name">...</h2>
+                        <p id="subtitle" class="t-sub">...</p>
+                        <p id="price" class="t-price">...</p>
+                        <p id="formats" class="t-format">...</p>
+                    </div>
+                </div>
+                
+                <hr class="p-divider">
+                
+                <div class="profile-bottom">
+                    <div class="info-group">
+                        <h3>Giới thiệu</h3>
+                        <p id="bio">...</p>
+                    </div>
+                    
+                    <div class="info-group">
+                        <h3>Học vấn</h3>
+                        <p id="education">...</p>
+                    </div>
+                    
+                    <div class="info-group">
+                        <h3>Kinh nghiệm</h3>
+                        <p id="experience">...</p>
+                    </div>
+                    
+                    <div class="info-group">
+                        <h3>Ngôn ngữ</h3>
+                        <p id="languages">...</p>
+                    </div>
+                </div>
+            </div>
 
+        </aside>
     </main>
-
-    <!-- LEAFLET -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-    <!-- JS -->
+    <script src="../js/supabse-config.js"></script>
+    <script src="../js/user-info.js"></script>   
+    <script src="../js/profile.js"></script>
     <script src="../js/find_tutor.js"></script>
-
 </body>
-
 </html>
