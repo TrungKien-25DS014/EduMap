@@ -1,0 +1,413 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Hà Nội",
+        "name": "Hà Nội"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105.6,
+              20.8
+            ],
+            [
+              106.0,
+              20.8
+            ],
+            [
+              106.0,
+              21.2
+            ],
+            [
+              105.6,
+              21.2
+            ],
+            [
+              105.6,
+              20.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Hồ Chí Minh",
+        "name": "Hồ Chí Minh"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              106.5,
+              10.6
+            ],
+            [
+              106.9,
+              10.6
+            ],
+            [
+              106.9,
+              11.0
+            ],
+            [
+              106.5,
+              11.0
+            ],
+            [
+              106.5,
+              10.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Đà Nẵng",
+        "name": "Đà Nẵng"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.9,
+              15.9
+            ],
+            [
+              108.3,
+              15.9
+            ],
+            [
+              108.3,
+              16.2
+            ],
+            [
+              107.9,
+              16.2
+            ],
+            [
+              107.9,
+              15.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Kon Tum",
+        "name": "Kon Tum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.3,
+              14.1
+            ],
+            [
+              108.3,
+              14.1
+            ],
+            [
+              108.3,
+              15.3
+            ],
+            [
+              107.3,
+              15.3
+            ],
+            [
+              107.3,
+              14.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Gia Lai",
+        "name": "Gia Lai"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.5,
+              13.3
+            ],
+            [
+              108.7,
+              13.3
+            ],
+            [
+              108.7,
+              14.3
+            ],
+            [
+              107.5,
+              14.3
+            ],
+            [
+              107.5,
+              13.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Đắk Lắk",
+        "name": "Đắk Lắk"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.4,
+              12.2
+            ],
+            [
+              108.7,
+              12.2
+            ],
+            [
+              108.7,
+              13.3
+            ],
+            [
+              107.4,
+              13.3
+            ],
+            [
+              107.4,
+              12.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Đắk Nông",
+        "name": "Đắk Nông"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.3,
+              11.5
+            ],
+            [
+              108.2,
+              11.5
+            ],
+            [
+              108.2,
+              12.7
+            ],
+            [
+              107.3,
+              12.7
+            ],
+            [
+              107.3,
+              11.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Lâm Đồng",
+        "name": "Lâm Đồng"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.7,
+              11.0
+            ],
+            [
+              108.9,
+              11.0
+            ],
+            [
+              108.9,
+              12.4
+            ],
+            [
+              107.7,
+              12.4
+            ],
+            [
+              107.7,
+              11.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Quảng Nam",
+        "name": "Quảng Nam"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.5,
+              15.0
+            ],
+            [
+              108.5,
+              15.0
+            ],
+            [
+              108.5,
+              16.0
+            ],
+            [
+              107.5,
+              16.0
+            ],
+            [
+              107.5,
+              15.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Bình Định",
+        "name": "Bình Định"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              108.5,
+              13.5
+            ],
+            [
+              109.3,
+              13.5
+            ],
+            [
+              109.3,
+              14.5
+            ],
+            [
+              108.5,
+              14.5
+            ],
+            [
+              108.5,
+              13.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Hoàng Sa",
+        "name": "Hoàng Sa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              111.0,
+              15.5
+            ],
+            [
+              112.0,
+              15.5
+            ],
+            [
+              112.0,
+              16.8
+            ],
+            [
+              111.0,
+              16.8
+            ],
+            [
+              111.0,
+              15.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME_1": "Trường Sa",
+        "name": "Trường Sa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              111.5,
+              7.0
+            ],
+            [
+              117.0,
+              7.0
+            ],
+            [
+              117.0,
+              12.0
+            ],
+            [
+              111.5,
+              12.0
+            ],
+            [
+              111.5,
+              7.0
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

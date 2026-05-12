@@ -47,7 +47,8 @@
         </div>
     </section>
 
-    <main class="main-container">
+    <main class="main-container" id="mainContainer">
+        
         <aside class="left-aside">
             <div class="map-filter-wrapper card">
                 <select class="glass-select" id="subjectFilter">
@@ -55,41 +56,70 @@
                     <option value="toan">Toán Học</option>
                     <option value="vat_ly">Vật Lý</option>
                     <option value="hoa_hoc">Hóa Học</option>
-                    <option value="sinh_hoc">Sinh Học</option>
-                    <option value="tin_hoc">Tin Học</option>
-                    <option value="cong_nghe">Công Nghệ</option>
-                    <option value="ngu_van">Ngữ Văn</option>
-                    <option value="tieng_anh">Tiếng Anh</option>
-                    <option value="lich_su">Lịch Sử</option>
-                    <option value="dia_ly">Địa Lý</option>
-                    <option value="gdcd">Giáo Dục Công Dân</option>
-                    <option value="ngoai_ngu_khac">Ngoại Ngữ Khác</option>
+                    <option value="ngoai_ngu">Ngoại Ngữ</option>
+                    <option value="lap_trinh">Lập Trình</option>
+                    <option value="nghe_thuat">Nghệ Thuật</option>
+                    <option value="khoa_hoc_xa_hoi">Khoa Học Xã Hội</option>
+                    <option value="ky_nang_song">........</option>
                 </select>
             </div>
         </aside>
-        <div class="map-card card">
+        
+        <div class="map-card card" style="display: flex; flex-direction: column;">
+            
             <div class="map-header">
                 <h3>Live Activity Map</h3>
                 <span class="status-live"><i class="fa-solid fa-circle"></i> Hệ thống đang ghi nhận thời gian thực</span>
             </div>
-            <div class="map-placeholder">
-                <div class="marker m1">
-                    <div class="pulse"></div>
-                    <img src="https://i.pravatar.cc/150?u=11" alt="tutor">
+            
+            <div id="map" style="width: 100%; height: 500px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.06); z-index: 1; overflow: hidden;"></div>
+            
+        </div>
+        <!-- asdie right -->
+        <aside class="right-aside card" id="rightAside">
+            
+            <div class="profile-card-modern">
+                <div class="profile-top">
+                    <img id="avatar" class="avatar-box" src="https://i.pravatar.cc/300?img=12" alt="Avatar">
+                    
+                    <div class="info-lines">
+                        <h2 id="name" class="t-name">...</h2>
+                        <p id="subtitle" class="t-sub">...</p>
+                        <p id="price" class="t-price">...</p>
+                        <p id="formats" class="t-format">...</p>
+                    </div>
                 </div>
-                <div class="marker m2">
-                    <div class="pulse"></div>
-                    <img src="https://i.pravatar.cc/150?u=22" alt="tutor">
-                </div>
-                <div class="map-label">
-                    <i class="fa-solid fa-location-dot"></i> Đà Nẵng — 120 học viên & 8 gia sư
+                
+                <hr class="p-divider">
+                
+                <div class="profile-bottom">
+                    <div class="info-group">
+                        <h3>Giới thiệu</h3>
+                        <p id="bio">...</p>
+                    </div>
+                    
+                    <div class="info-group">
+                        <h3>Học vấn</h3>
+                        <p id="education">...</p>
+                    </div>
+                    
+                    <div class="info-group">
+                        <h3>Kinh nghiệm</h3>
+                        <p id="experience">...</p>
+                    </div>
+                    
+                    <div class="info-group">
+                        <h3>Ngôn ngữ</h3>
+                        <p id="languages">...</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <aside class="right-aside">
-            <p>qwertyujbcsdfghj</p>
+
         </aside>
     </main>
-
+    <script src="../js/supabse-config.js"></script>
+    <script src="../js/user-info.js"></script>   
+    <script src="../js/profile.js"></script>
+    <script src="../js/find_tutor.js"></script>
 </body>
 </html>
