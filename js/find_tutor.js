@@ -506,6 +506,7 @@ function initFilter() {
         const selectedSubject = e.target.value;
         if(selectedSubject === "all") {
             renderTutorsOnMap(mockTutors);
+            filterSelect.selectedIndex = 0; 
         } else {
             const filteredTutors = mockTutors.filter(tutor => 
                 tutor.tags && tutor.tags.includes(selectedSubject)

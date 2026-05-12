@@ -2,39 +2,50 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Đăng ký</title>
-    <link rel="stylesheet" href="../css/login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký | EduMap</title>
+    <link rel="stylesheet" href="../css/forgot-password.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <body>
-<div class="auth-page">
-    <div class="auth-box">
-        <h2>Đăng ký</h2>
-        <p><strong>Bạn đăng ký làm:</strong></p>
-        <div class="role-select">
-            <label class="role-option">
-                <input type="radio" name="role" value="tutor" checked>
-                <span>🎓 Gia sư</span>
-            </label>
-            <label class="role-option">
-                <input type="radio" name="role" value="student">
-                <span>📚 Học viên</span>
-            </label>
-        </div>
-        <input type="text" id="fullName" placeholder="Họ và tên">
-        <input type="text" id="email" placeholder="Email hoặc SĐT">
-        <input type="password" id="password" placeholder="Mật khẩu">
-        <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu">
-        <div class="g-recaptcha" data-sitekey="6Lf0W-IsAAAAAJAIIt1WZs5Ho5klCbLloBGX1Q69"></div>
-        <button>Đăng ký</button>
-        <a href="login.html">Đăng nhập</a>
-        <br><br>
-        <a href="index.html">⬅ Trang chủ</a>
+    <div class="edumap-bg">
+        <div class="particles"></div>
+        <div class="bubble b1"></div>
+        <div class="bubble b2"></div>
+        <div class="bubble b3"></div>
     </div>
-</div>
+    <main class="auth-wrapper">
+        <div class="auth-card">
+            <h1>Tạo tài khoản</h1>
+            <p>Tham gia cộng đồng EduMap để bắt đầu hành trình học tập.</p>
+            <div class="form-group">
+                <input type="text" id="fullName" placeholder="Họ và tên" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Email hoặc Số điện thoại" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Mật khẩu" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+            </div>
+            <div class="recaptcha-container">
+                <div class="g-recaptcha" data-sitekey="6Lf0W-IsAAAAAJAIIt1WZs5Ho5klCbLloBGX1Q69" data-theme="dark"></div>
+            </div>
+            <button id="btnRegister" class="btn-submit">Đăng ký ngay</button>
+            <div class="auth-links">
+                <span style="color: var(--text-muted);">Bạn đã có tài khoản?</span> 
+                <a href="login.html">Đăng nhập</a>
+            </div>
+            <div style="margin-top: 20px;">
+                <a href="index.html" style="color: var(--text-muted); font-size: 13px; text-decoration: none;">⬅ Quay lại trang chủ</a>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/config.js"></script>
-    <script src="../js/auth.js"></script>
+    <script src="../js/supabse.js"></script>
     <script src="../js/register.js"></script>
 </body>
 </html>
