@@ -10,20 +10,16 @@ async function registerUser(email, password) {
         alert("Vui lòng nhập đúng định dạng @gmail.com");
         return;
     }
-
     if (password.length < 6) {
         alert("Mật khẩu phải từ 6 ký tự trở lên");
         return;
     }
-
     try {
         const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
         });
-
         if (error) throw error;
-        
         alert("Đăng ký thành công! Vui lòng check email để xác nhận.");
     } catch (err) {
         console.error("Lỗi đăng ký:", err.message);

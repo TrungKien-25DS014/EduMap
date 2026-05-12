@@ -4,21 +4,11 @@
     --sky-blue: #BBE1FA;
     --white-glass: rgba(255, 255, 255, 0.8);
 }
-
-<<<<<<< HEAD
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: white;
-        }
-=======
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #000;
 }
->>>>>>> 4f3416adf97c854b5ff750071734bec992d4ecab
-
 .video-background {
     position: fixed;
     right: 0;
@@ -28,7 +18,6 @@ body {
     z-index: -1000;
     overflow: hidden;
 }
-
 #myVideo {
     position: absolute;
     top: 50%;
@@ -38,7 +27,6 @@ body {
     min-height: 100%;
     object-fit: cover;
 }
-
 .video-background::after {
     content: "";
     position: absolute;
@@ -50,7 +38,6 @@ body {
     backdrop-filter: blur(3px);
     z-index: -999;
 }
-
 nav {
     display: flex;
     justify-content: space-between;
@@ -68,7 +55,6 @@ nav {
     font-weight:500;
     letter-spacing: 0.5px;
 }
-
 .logo {
     color: white;
     font-weight: 800;
@@ -76,7 +62,6 @@ nav {
     letter-spacing: 1px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
-
 .menu-links a {
     text-decoration: none;
     color: white;
@@ -89,11 +74,9 @@ nav {
     position: relative;
     padding-bottom: 5px;
 }
-
 .menu-links a:hover {
     color: var(--sky-blue);
 }
-
 .menu-links a::after {
     content: '';
     position: absolute;
@@ -104,15 +87,12 @@ nav {
     background-color: var(--sky-blue);
     transition: width 0.3s ease;
 }
-
 .menu-links a:hover::after {
     width: 100%;
 }
-
 .menu-links a:active {
     opacity: 0.4;
 }
-
 .btn-login {
     background: var(--primary-blue);
     color: white;
@@ -123,61 +103,13 @@ nav {
     transition: 0.3s;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
-
-<<<<<<< HEAD
-        .leaflet-popup-content-wrapper {
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.95);
-        }
-        .login-page {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .login-content {
-            width: 350px;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-
-            background: white;
-            backdrop-filter: blur(15px);
-            color: black;
-        }
-        .login-content input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 10px;
-            border: none;
-        }
-        .login-content button {
-            width: 100%;
-            padding: 10px;
-            border-radius: 20px;
-            border: none;
-            background: #0A2647;
-            color: white;
-            cursor: pointer;
-        }
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 25px;
-            cursor: pointer;
-        }
-=======
 .btn-login:hover {
     background: var(--accent-blue);
     transform: scale(1.05);
 }
-
 .btn-login:active {
     transform: scale(0.95);
 }
-
 .main-container {
     display: flex;
     justify-content: center;
@@ -190,7 +122,6 @@ nav {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     border: 6px solid white;
 }
-
 #map {
     width: 250px;
     height: 100%;
@@ -199,7 +130,6 @@ nav {
     box-shadow: none;
     filter: saturate(0.8);
 }
-
 .login-section {
     width: 375px;
     background: white;
@@ -207,7 +137,6 @@ nav {
     justify-content: center;
     align-items: center;
 }
-
 .login-box {
     width: 100%;
     max-width: 400px;
@@ -218,19 +147,16 @@ nav {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.2);
 }
-
 .login-box h2 {
     margin-top: 0;
     font-size: 24px;
     margin-bottom: 10px;
 }
-
 .login-box p {
     font-size: 14px;
     margin-bottom: 30px;
     opacity: 0.8;
 }
-
 .login-box input {
     width: 100%;
     padding: 12px 15px;
@@ -242,11 +168,9 @@ nav {
     outline: none;
     box-sizing: border-box;
 }
-
 .login-box input::placeholder {
     color: #999;
 }
-
 .login-box button {
     width: 100%;
     padding: 12px;
@@ -259,52 +183,42 @@ nav {
     cursor: pointer;
     transition: 0.3s;
 }
-
 .login-box button:hover {
     background: var(--accent-blue);
     transform: translateY(-2px);
 }
-
 .login-footer {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
     font-size: 13px;
 }
-
 .login-footer a {
     color: var(--primary-blue);
     text-decoration: none;
 }
-
 .login-footer a:hover {
     text-decoration: underline;
 }
-
 .leaflet-popup-content-wrapper {
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.95);
 }
-
 .login-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
-
 .login-content {
     width: 350px;
     padding: 30px;
     border-radius: 20px;
     text-align: center;
-
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(15px);
-
     color: white;
 }
-
 .login-content input {
     width: 100%;
     padding: 10px;
@@ -312,7 +226,6 @@ nav {
     border-radius: 10px;
     border: none;
 }
-
 .login-content button {
     width: 100%;
     padding: 10px;
@@ -322,7 +235,6 @@ nav {
     color: white;
     cursor: pointer;
 }
-
 .close-btn {
     position: absolute;
     top: 20px;
@@ -330,4 +242,63 @@ nav {
     font-size: 25px;
     cursor: pointer;
 }
->>>>>>> 4f3416adf97c854b5ff750071734bec992d4ecab
+.map-footer {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    padding-top: 40px;
+    margin-top: 0;
+}
+.footer-container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.footer-box {
+    flex: 1;
+    min-width: 250px;
+}
+.footer-box h3 {
+    margin-bottom: 15px;
+    color: #38bdf8;
+}
+.footer-box p,
+.footer-box a {
+    color: #cbd5e1;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+.footer-box a:hover {
+    color: #38bdf8;
+    transform: translateX(5px);
+}
+.footer-bottom {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 14px;
+    color: #94a3b8;
+}
+.policy-page {
+    width: 100%;
+    background: rgba(255,255,255,0.9);
+    padding: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    line-height: 1.8;
+}
+.policy-page h1 {
+    color: #2563eb;
+    margin-bottom: 30px;
+}
+.policy-page p {
+    margin-right: 20px;
+    color: #333;
+}
+.policy-page ul {
+    margin-left: 20px;
+}

@@ -20,7 +20,6 @@ if (btn) {
             alert("Vui lòng xác nhận bạn không phải là người máy.");
             return;
         }
-
         try {
             btn.disabled = true;
             btn.innerText = "Đang xử lý...";
@@ -40,19 +39,15 @@ if (btn) {
         }
     };
 }
-
 async function checkValueNotExists(column, value) {
     const { data, error } = await supabase
-        .from('users') // đổi tên bảng của bạn ở đây
+        .from('users')
         .select(column)
         .eq(column, value)
         .maybeSingle();
-
     if (error) {
         console.error("Lỗi Supabase:", error);
-        return false; // coi như fail luôn nếu lỗi
+        return false;
     }
-
-    // Nếu có data => đã tồn tại => return false
     return !data;
 }

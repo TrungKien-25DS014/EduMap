@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 });
-
 let map;
 let currentOpenTutorId = null; 
 let markerLayers = []; 
@@ -92,36 +91,6 @@ const mockTutors = [
         tags: ["lap_trinh"]
     },
     {
-        id: "tutor_04",
-        name: "Trần Thanh Tuyến",
-        subtitle: "Giảng viên trung học • Lập trình cơ bản",
-        avatar: "https://i.pravatar.cc/300?img=7",
-        price: "100k / buổi",
-        bio: "Giảng viên trung học với hơn 10 năm kinh nghiệm giảng dạy lập trình cơ bản. Phương pháp giảng dạy dễ hiesy, phù hợp với học sinh mới bắt đau.",
-        education: "Cử nhân Khoa học Máy tính",
-        experience: "10 năm giảng dạy",
-        languages: "Tiếng Việt, Tiếng Anh",
-        formats: "Tại nhà / Online",
-        lat: 11.9753,    
-        lng: 108.2532,
-        tags: ["lap_trinh"]
-    },
-    {
-        id: "tutor_05",
-        name: "Phạm Thị Hồng",
-        subtitle: "Giảng viên trung học • Lập trình cơ bản",
-        avatar: "https://i.pravatar.cc/300?img=8",
-        price: "100k / buổi",
-        bio: "Giảng viên trung học với hơn 10 năm kinh nghiệm giảng dạy lập trình cơ bản. Phương pháp giảng dạy dễ hiesy, phù hợp với học sinh mới bắt đau.",
-        education: "Cử nhân Khoa học Máy tính",
-        experience: "10 năm giảng dạy",
-        languages: "Tiếng Việt, Tiếng Anh",
-        formats: "Tại nhà / Online",
-        lat: 15.9753,    
-        lng: 107.2532,
-        tags: ["lap_trinh"]
-    },
-    {
         id: "tutor_06",
         name: "Trần Văn Hiếu",
         subtitle: "Giảng viên Đại học • Toán cao cấp & Đại số tuyến tính",
@@ -133,7 +102,7 @@ const mockTutors = [
         languages: "Tiếng Việt, Tiếng Anh",
         formats: "Tại nhà / Online",
         lat: 16.0601,    
-        lng: 108.2154,   // Hải Châu
+        lng: 108.2154,
         tags: ["toan_hoc", "dai_hoc"]
     },
     {
@@ -148,7 +117,7 @@ const mockTutors = [
         languages: "Tiếng Anh, Tiếng Việt",
         formats: "Online / Quán Cafe",
         lat: 16.0723,    
-        lng: 108.2230,   // Hải Châu
+        lng: 108.2230,
         tags: ["ngoai_ngu", "tieng_anh"]
     },
     {
@@ -163,7 +132,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Online",
         lat: 16.0512,    
-        lng: 108.2011,   // Thanh Khê
+        lng: 108.2011,
         tags: ["lap_trinh", "java", "oop"]
     },
     {
@@ -178,7 +147,7 @@ const mockTutors = [
         languages: "Tiếng Việt, Tiếng Anh",
         formats: "Tại nhà / Quán Cafe",
         lat: 15.9780,    
-        lng: 108.2510,   // Khu vực Ngũ Hành Sơn (Gần VKU)
+        lng: 108.2510,
         tags: ["lap_trinh", "c_plus_plus", "ctdl"]
     },
     {
@@ -193,7 +162,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Tại phòng tập / Công viên",
         lat: 16.0421,    
-        lng: 108.2205,   // Cẩm Lệ
+        lng: 108.2205,
         tags: ["the_thao", "karate"]
     },
     {
@@ -208,7 +177,7 @@ const mockTutors = [
         languages: "Tiếng Anh, Tiếng Việt",
         formats: "Online",
         lat: 16.0689,    
-        lng: 108.1892,   // Liên Chiểu
+        lng: 108.1892,
         tags: ["data_science", "python", "lap_trinh"]
     },
     {
@@ -223,7 +192,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Tại nhà / Online",
         lat: 16.0815,    
-        lng: 108.2415,   // Sơn Trà
+        lng: 108.2415,
         tags: ["thiet_ke", "ui_ux"]
     },
     {
@@ -238,7 +207,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Online / Tại nhà",
         lat: 16.0354,    
-        lng: 108.2148,   // Cẩm Lệ
+        lng: 108.2148,
         tags: ["lap_trinh", "web_dev"]
     },
     {
@@ -253,7 +222,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Tại nhà",
         lat: 16.0755,    
-        lng: 108.1523,   // Liên Chiểu
+        lng: 108.1523,
         tags: ["vat_ly", "dai_hoc"]
     },
     {
@@ -268,7 +237,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Online / Quán Cafe",
         lat: 16.0123,    
-        lng: 108.2456,   // Ngũ Hành Sơn
+        lng: 108.2456,
         tags: ["lap_trinh", "database", "mysql"]
     },
     {
@@ -283,7 +252,7 @@ const mockTutors = [
         languages: "Tiếng Việt, Tiếng Anh",
         formats: "Online",
         lat: 16.0654,    
-        lng: 108.2211,   // Hải Châu
+        lng: 108.2211,
         tags: ["startup", "kinh_doanh"]
     },
     {
@@ -298,7 +267,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Tại phòng tập nhạc",
         lat: 16.0488,    
-        lng: 108.2355,   // Sơn Trà
+        lng: 108.2355,
         tags: ["am_nhac", "piano"]
     },
     {
@@ -313,7 +282,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Online / Tại nhà",
         lat: 16.0712,    
-        lng: 108.2198,   // Hải Châu
+        lng: 108.2198,
         tags: ["thiet_ke", "canva", "đồ_họa"]
     },
     {
@@ -328,7 +297,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Online / Tại nhà",
         lat: 15.9810,    
-        lng: 108.2580,   // Khu vực Làng Đại học
+        lng: 108.2580,
         tags: ["ky_nang_mem", "thuyet_trinh"]
     },
     {
@@ -343,7 +312,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Tại nhà / Online",
         lat: 16.0598,    
-        lng: 108.2301,   // Sơn Trà
+        lng: 108.2301,
         tags: ["mang_may_tinh", "bao_mat"]
     },
     {
@@ -358,7 +327,7 @@ const mockTutors = [
         languages: "Tiếng Việt, Tiếng Anh",
         formats: "Online / Tại nhà",
         lat: 21.0360,    
-        lng: 105.7816,   // Cầu Giấy, Hà Nội
+        lng: 105.7816,
         tags: ["data_science", "python", "machine_learning"]
     },
     {
@@ -373,7 +342,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Online",
         lat: 21.0153,    
-        lng: 105.8234,   // Đống Đa, Hà Nội
+        lng: 105.8234,
         tags: ["thiet_ke", "ui_ux", "do_hoa"]
     },
     {
@@ -388,7 +357,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Tại nhà / Quán Cafe",
         lat: 21.0063,    
-        lng: 105.8427,   // Hai Bà Trưng (gần Bách Khoa), Hà Nội
+        lng: 105.8427,
         tags: ["lap_trinh", "c_plus_plus", "thuat_toan"]
     },
     {
@@ -403,7 +372,7 @@ const mockTutors = [
         languages: "Tiếng Anh, Tiếng Việt",
         formats: "Tại nhà / Online",
         lat: 21.0285,    
-        lng: 105.8542,   // Hoàn Kiếm, Hà Nội
+        lng: 105.8542,
         tags: ["ngoai_ngu", "tieng_anh", "ielts"]
     },
     {
@@ -418,7 +387,7 @@ const mockTutors = [
         languages: "Tiếng Việt, Tiếng Anh",
         formats: "Online",
         lat: 20.9937,    
-        lng: 105.8055,   // Thanh Xuân, Hà Nội
+        lng: 105.8055,
         tags: ["startup", "kinh_doanh", "tai_chinh"]
     },
     {
@@ -433,7 +402,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Online / Tại nhà",
         lat: 10.7769,    
-        lng: 106.7009,   // Quận 1, TP.HCM
+        lng: 106.7009,
         tags: ["lap_trinh", "java", "backend"]
     },
     {
@@ -448,7 +417,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Tại phòng tập",
         lat: 10.7845,    
-        lng: 106.6853,   // Quận 3, TP.HCM
+        lng: 106.6853,
         tags: ["the_thao", "vo_thuat", "taekwondo"]
     },
     {
@@ -463,7 +432,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Tại nhà / Online",
         lat: 10.7725,    
-        lng: 106.6675,   // Quận 10, TP.HCM
+        lng: 106.6675,
         tags: ["toan_hoc", "dai_hoc"]
     },
     {
@@ -478,7 +447,7 @@ const mockTutors = [
         languages: "Tiếng Việt",
         formats: "Online / Quán Cafe",
         lat: 10.8016,    
-        lng: 106.6558,   // Tân Bình, TP.HCM
+        lng: 106.6558,
         tags: ["lap_trinh", "database", "sql"]
     },
     {
@@ -493,11 +462,10 @@ const mockTutors = [
         languages: "Tiếng Việt, Tiếng Anh",
         formats: "Online / Tại trung tâm",
         lat: 10.8105,    
-        lng: 106.7091,   // Bình Thạnh, TP.HCM
+        lng: 106.7091,
         tags: ["ky_nang_mem", "thuyet_trinh", "lanh_dao"]
     }
 ];
-
 function initMap() {
     if (!document.getElementById('map')) return;
     map = L.map('map').setView([16.0544, 108.2022], 13);
@@ -514,13 +482,12 @@ function initMap() {
         if (map) map.invalidateSize();
     }).observe(document.getElementById('map'));
 }
-
 function renderTutorsOnMap(tutorsToRender) {
     markerLayers.forEach(marker => map.removeLayer(marker));
     markerLayers = []; 
     tutorsToRender.forEach(tutor => {
         const marker = L.marker([tutor.lat, tutor.lng]).addTo(map);
-        markerLayers.push(marker); // Nhét vào mảng để nhớ
+        markerLayers.push(marker);
         marker.bindTooltip(tutor.name);
         marker.on('click', (e) => {
             L.DomEvent.stopPropagation(e);
@@ -532,7 +499,6 @@ function renderTutorsOnMap(tutorsToRender) {
         });
     });
 }
-
 function initFilter() {
     const filterSelect = document.getElementById('subjectFilter');
     if(!filterSelect) return;
@@ -549,10 +515,8 @@ function initFilter() {
         closeTutorProfile();
     });
 }
-
 function openTutorProfile(tutorData) {
     currentOpenTutorId = tutorData.id;
-    
     document.getElementById('name').textContent = tutorData.name;
     document.getElementById('subtitle').textContent = tutorData.subtitle;
     document.getElementById('price').textContent = tutorData.price;
@@ -562,14 +526,12 @@ function openTutorProfile(tutorData) {
     document.getElementById('languages').textContent = tutorData.languages;
     document.getElementById('formats').textContent = tutorData.formats;
     document.getElementById('avatar').src = tutorData.avatar;
-    
     const mainContainer = document.getElementById('mainContainer');
     mainContainer.classList.add('show-profile');
     if (map) {
         map.flyTo([tutorData.lat, tutorData.lng], 14, { animate: true, duration: 0.5 });
     }
 }
-
 function closeTutorProfile() {
     currentOpenTutorId = null;
     const mainContainer = document.getElementById('mainContainer');
@@ -577,7 +539,6 @@ function closeTutorProfile() {
         mainContainer.classList.remove('show-profile');
     }
 }
-
 document.addEventListener('DOMContentLoaded', () => {
     initMap();
 });

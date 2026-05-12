@@ -3,7 +3,6 @@ body {
     font-family: 'Segoe UI', sans-serif;
     background: #f5f7fb;
 }
-
 .login-page,
 .auth-page {
     display: flex;
@@ -11,25 +10,20 @@ body {
     align-items: center;
     height: 100vh;
 }
-
 .login-content,
 .auth-box {
     width: 380px;
     padding: 35px;
     border-radius: 20px;
     text-align: center;
-
     background: #ffffff;
     color: #0A2647;
-
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
-
 .login-content h2,
 .auth-box h2 {
     margin-bottom: 10px;
 }
-
 .login-content input,
 .auth-box input {
     width: 100%;
@@ -40,13 +34,11 @@ body {
     outline: none;
     font-size: 14px;
 }
-
 .login-content input:focus,
 .auth-box input:focus {
     border-color: #2C74B3;
     box-shadow: 0 0 10px rgba(44,116,179,0.3);
 }
-
 .login-content button,
 .auth-box button {
     width: 100%;
@@ -60,7 +52,6 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
-
 .login-content button:hover,
 .auth-box button:hover {
     opacity: 0.8;
@@ -71,7 +62,6 @@ body {
 .auth-box button:active {
     opacity: 0.4;
 }
-
 .login-content a,
 .auth-box a {
     display: inline-block;
@@ -80,22 +70,18 @@ body {
     text-decoration: none;
     font-size: 14px;
 }
-
 .login-content a:hover,
 .auth-box a:hover {
     text-decoration: underline;
 }
-
 .role-select {
     display: flex;
     gap: 15px;
     margin-bottom: 15px;
 }
-
 .role-option input {
     display: none;
 }
-
 .role-option span {
     display: block;
     padding: 12px 20px;
@@ -106,11 +92,9 @@ body {
     color: #555;
     transition: 0.3s;
 }
-
 .role-option span:hover {
     border-color: #2C74B3;
 }
-
 .role-option input:checked + span {
     background: linear-gradient(135deg, #5f9cff, #7b4dff);
     color: white;
@@ -118,7 +102,6 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     position: relative;
 }
-
 .role-option input:checked + span::before {
     content: "";
     position: absolute;

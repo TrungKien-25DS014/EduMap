@@ -2,15 +2,12 @@ const UserInfo = {
     getUserID: () => {
         return localStorage.getItem('userID');
     },
-
     isLoggedIn: () => {
         return !!localStorage.getItem('userID');
     },
-
     getUserProfile: async () => {
         const userID = UserInfo.getUserID();
         if (!userID) return null;
-
         try{
             const { data, error } = await supabase
                 .from('users')

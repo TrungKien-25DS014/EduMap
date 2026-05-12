@@ -1,5 +1,4 @@
 const STORAGE_KEY = 'edumap_tutor_profile_v1';
-
 const defaultProfile = {
     name: 'PGS.TS. Huỳnh Công Pháp',
     subtitle: 'Giảng viên đại học • Toán, Hóa',
@@ -11,7 +10,6 @@ const defaultProfile = {
     price: '200k / buổi',
     subjects: [ {subject: 'Toán', grade: 'Lớp 10-12'} ]
 };
-
 function loadProfile() {
     try {
         const raw = localStorage.getItem(STORAGE_KEY);
@@ -19,11 +17,9 @@ function loadProfile() {
         return JSON.parse(raw);
     } catch (e) { return defaultProfile; }
 }
-
 function saveProfile(p) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
 }
-
 function renderProfile(p) {
     document.getElementById('name').textContent = p.name;
     document.getElementById('subtitle').textContent = p.subtitle;
@@ -33,7 +29,6 @@ function renderProfile(p) {
     document.getElementById('languages').textContent = p.languages;
     document.getElementById('formats').textContent = p.formats;
     document.getElementById('price').textContent = p.price;
-
     const list = document.getElementById('subjectsList');
     list.innerHTML = '';
     p.subjects.forEach((s, idx) => {
@@ -42,7 +37,6 @@ function renderProfile(p) {
         row.innerHTML = `<span class="sub">${escapeHtml(s.subject)}</span> <span class="grade">${escapeHtml(s.grade)}</span> <button data-i="${idx}" class="btn-small remove">Xoá</button>`;
         list.appendChild(row);
     });
-
     Array.from(document.querySelectorAll('.subjects-list .remove')).forEach(btn => {
         btn.addEventListener('click', () => {
             const i = Number(btn.dataset.i);
@@ -52,20 +46,15 @@ function renderProfile(p) {
         });
     });
 }
-
 function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
 let profile = loadProfile();
 renderProfile(profile);
-
 const isTutor = localStorage.getItem('edumap_tutor_logged_in') === '1';
 if (!isTutor) {
     const leftBox = document.querySelector('.profile-left .box');
     if (leftBox) leftBox.style.display = 'none';
-
     const edt = document.getElementById('editToggle');
     if (edt) edt.style.display = 'none';
-
     const main = document.querySelector('.profile-main');
     if (main) {
         main.innerHTML = `
@@ -77,26 +66,21 @@ if (!isTutor) {
                     <a href="find_tutor.html" class="btn-outline">Quay lại trang tìm gia sư</a>
                 </div>
             </div>`;
-
         const mock = document.getElementById('mockLogin');
         if (mock) mock.addEventListener('click', () => {
             localStorage.setItem('edumap_tutor_logged_in', '1');
             location.reload();
         });
     }
-
     throw new Error('tutor-only mode: UI restricted (client-side)');
 }
-
 const editToggle = document.getElementById('editToggle');
 const addBtn = document.getElementById('addSub');
 const newSubject = document.getElementById('newSubject');
 const newGrade = document.getElementById('newGrade');
 const saveBtn = document.getElementById('saveBtn');
 const cancelBtn = document.getElementById('cancelBtn');
-
 let editing = false;
-
 function enterEdit() {
     editing = true;
     editToggle.textContent = 'Đang chỉnh sửa...';
@@ -115,7 +99,6 @@ function enterEdit() {
     saveBtn.style.display = '';
     cancelBtn.style.display = '';
 }
-
 function exitEdit(cancel=false) {
     const fields = ['name','subtitle','bio','education','experience','languages','formats','price'];
     if (!cancel) {
@@ -126,7 +109,6 @@ function exitEdit(cancel=false) {
         });
         saveProfile(profile);
     }
-
     fields.forEach(id => {
         const input = document.querySelector(`[data-field="${id}"]`);
         if (!input) return;
@@ -136,7 +118,6 @@ function exitEdit(cancel=false) {
         if (id === 'price') el.className = 'price';
         input.parentNode.replaceChild(el, input);
     });
-
     renderProfile(profile);
     editing = false;
     editToggle.textContent = 'Chỉnh sửa hồ sơ';
@@ -144,7 +125,6 @@ function exitEdit(cancel=false) {
     saveBtn.style.display = 'none';
     cancelBtn.style.display = 'none';
 }
-
 editToggle.addEventListener('click', enterEdit);
 addBtn.addEventListener('click', () => {
     const subj = newSubject.value.trim();
@@ -156,8 +136,6 @@ addBtn.addEventListener('click', () => {
     newSubject.value = '';
     newGrade.value = '';
 });
-
 saveBtn.addEventListener('click', () => exitEdit(false));
 cancelBtn.addEventListener('click', () => exitEdit(true));
-
 newSubject.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addBtn.click(); } });
