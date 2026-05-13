@@ -11,7 +11,7 @@ btnReset.addEventListener("click", async () => {
     btnReset.innerText = "Đang gửi...";
 
     const { error } = await window.supabaseClient.auth.resetPasswordForEmail(email, {
-        redirectTo: window.location.origin + "http://127.0.0.1:5500/EduMap/page/reset-password.html"
+        redirectTo: `${window.location.origin}/EduMap/page/reset-password.html`
     });
 
     if (error) {
