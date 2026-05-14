@@ -1,22 +1,24 @@
 const UserInfo = {
-    getUserID: () => {
-        return localStorage.getItem('userID');
+    getUserID: async () => {
+        const { data: { user } } = await window.supabaseClient.auth.getUser();
+        return user ? user.id : null;
     },
-    isLoggedIn: () => {
-        return !!localStorage.getItem('userID');
+    isLoggedIn: async () => {
+        const id = await UserInfo.getUserID();
+        return !!id;
     },
     getUserProfile: async () => {
-        const userID = UserInfo.getUserID();
+        const userID = await UserInfo.getUserID();
         if (!userID) return null;
-        try{
-            const { data, error } = await supabase
-                .from('users')
+        try {
+            const { data, error } = await window.supabaseClient
+                .from('accounts')
                 .select('*')
                 .eq('id', userID)
-                .Single();
+                .single(); 
             if (error) throw error;
-            return data;
-        }catch(e) {
+            return { userProfile: data }; 
+        } catch(e) {
             console.error("Lỗi khi lấy thông tin người dùng:", e.message);
             return null;
         }

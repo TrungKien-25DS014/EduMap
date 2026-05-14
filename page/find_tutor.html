@@ -21,12 +21,13 @@
         <div class="nav-container">
             <div class="logo">EduMap<span>.</span></div>
             <ul class="nav-links">
+                <a href="index.html">Trang chủ</a>
                 <li><a href="find_tutor.html" class="active">Khám phá</a></li>
                 <li><a href="community.html">Cộng đồng</a></li>
                 <li><a href="leaderboard.html">Xếp hạng</a></li>
             </ul>
             <div class="user-profile">
-                <span class="user-name" id ="userNameDisplay">Đang tải...</span>
+                <span class="user-name" id ="heroUserName">Đang tải...</span>
                 <div class="avatar" id = "userAvatarDisplay" style = "cursor: pointer;" title = "Sửa hồ sơ">
                     <img id = "userAvatarImg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="Avatar">
                 </div>
@@ -46,7 +47,14 @@
     </section>
     <main class="main-container" id="mainContainer">
         <aside class="left-aside">
-            <div class="map-filter-wrapper card">
+            <div class="map-filter-wrapper card">      
+                <div class="search-wrapper" style="position: relative; margin-bottom: 15px;">
+                    <div class="search-input-container">
+                        <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; margin-right: 8px;"></i>
+                        <input type="text" id="tutorSearchInput" placeholder="Tìm tên, kỹ năng..." autocomplete="off">
+                    </div>
+                    <ul id="searchSuggestions" class="search-suggestions glass-panel hidden-panel"></ul>
+                </div>
                 <select class="glass-select" id="subjectFilter">
                     <option value="" disabled selected>Chọn môn học...</option>
                     <option value="toan">Toán Học</option>
@@ -100,9 +108,9 @@
             </div>
         </aside>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> 
     <script src="../js/supabse.js"></script>
     <script src="../js/user-info.js"></script>   
-    <script src="../js/profile.js"></script>
     <script src="../js/find_tutor.js"></script>
 </body>
 </html>

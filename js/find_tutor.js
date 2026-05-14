@@ -1,13 +1,20 @@
 document.addEventListener('DOMContentLoaded', async () => {
     if (typeof UserInfo !== 'undefined') {
         const userData = await UserInfo.getUserProfile();
-        if (userData && userData.userProfile) {
+        const nameElements = document.querySelectorAll('#userNameDisplay, #heroUserName');
+        const avatarImg = document.getElementById('userAvatarImg');
+        if (userData && userData.userProfile && userData.userProfile.full_name) {
             const name = userData.userProfile.full_name;
-            document.getElementById('userNameDisplay').textContent = name;
-            const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`;
-            document.getElementById('userAvatarImg').src = avatarUrl;
+            nameElements.forEach(el => {
+                el.textContent = name;
+            });
+            if(avatarImg) {
+                avatarImg.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`;
+            }
         } else {
-            document.getElementById('userNameDisplay').textContent = 'Khách';
+            nameElements.forEach(el => {
+                el.textContent = 'Khách';
+            });
         }
     }
 });
@@ -543,3 +550,119 @@ function closeTutorProfile() {
 document.addEventListener('DOMContentLoaded', () => {
     initMap();
 });
+// --- LOGIC TÌM KIẾM GIA SƯ ---
+function initSearch() {
+    const searchInput = document.getElementById('tutorSearchInput');
+    const suggestionsBox = document.getElementById('searchSuggestions');
+    if (!searchInput || !suggestionsBox) return;
+
+    let debounceTimer;
+
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        const query = e.target.value.toLowerCase().trim();
+
+        if (query.length === 0) {
+            suggestionsBox.classList.add('hidden-panel');
+            renderTutorsOnMap(mockTutors); 
+            return;
+        }
+
+        debounceTimer = setTimeout(() => {
+            const filteredTutors = mockTutors.filter(tutor => {
+                const matchName = tutor.name.toLowerCase().includes(query);
+                const matchBio = tutor.bio.toLowerCase().includes(query);
+                const matchTags = tutor.tags.some(tag => tag.toLowerCase().includes(query));
+                return matchName || matchBio || matchTags;
+            });
+
+            renderTutorsOnMap(filteredTutors);
+            
+            // Xóa kết quả cũ
+            suggestionsBox.innerHTML = ''; 
+            
+            if (filteredTutors.length === 0) {
+                suggestionsBox.innerHTML = `<div style="padding: 15px; text-align: center; color: #94a3b8; font-size: 13px;">Không tìm thấy gia sư nào phù hợp.</div>`;
+            } else {
+                filteredTutors.forEach(tutor => {
+                    const li = document.createElement('li');
+                    li.className = 'suggestion-item';
+                    const displayTags = tutor.tags.map(t => t.replace('_', ' ')).join(', ');
+                    li.innerHTML = `
+                        <img src="${tutor.avatar}" alt="${tutor.name}">
+                        <div class="suggestion-info">
+                            <span class="suggestion-name">${tutor.name}</span>
+                            <span class="suggestion-sub">${tutor.price} • ${displayTags}</span>
+                        </div>
+                    `;
+                    li.addEventListener('click', () => {
+                        suggestionsBox.classList.add('hidden-panel');
+                        searchInput.value = tutor.name;
+                        openTutorProfile(tutor);
+                        renderTutorsOnMap([tutor]);
+                    });
+                    suggestionsBox.appendChild(li);
+                });
+            }
+            suggestionsBox.classList.remove('hidden-panel');
+        }, 300);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-wrapper')) {
+            suggestionsBox.classList.add('hidden-panel');
+        }
+    });
+}
+
+// CẬP NHẬT GỌI HÀM Ở CUỐI FILE
+document.addEventListener('DOMContentLoaded', () => {
+    initMap();
+    initSearch(); // Thêm dòng này vào
+});
+
+function renderSuggestions(tutors, container) {
+    try {
+        container.innerHTML = ''; // Xóa kết quả cũ
+        
+        if (tutors.length === 0) {
+            container.innerHTML = `
+                <div style="padding: 15px; text-align: center; color: #94a3b8; font-size: 13px;">
+                    Không tìm thấy gia sư nào phù hợp.
+                </div>
+            `;
+            container.classList.remove('hidden-panel');
+            return;
+        }
+        tutors.forEach(tutor => {
+            const li = document.createElement('li');
+            li.className = 'suggestion-item';
+            
+            const displayTags = tutor.tags.map(t => t.replace('_', ' ')).join(', ');
+
+            li.innerHTML = `
+                <img src="${tutor.avatar}" alt="${tutor.name}">
+                <div class="suggestion-info">
+                    <span class="suggestion-name">${tutor.name}</span>
+                    <span class="suggestion-sub">${tutor.price} • ${displayTags}</span>
+                </div>
+            `;
+
+            li.addEventListener('click', () => {
+                // Đóng dropdown và cập nhật ô input
+                container.classList.add('hidden-panel');
+                document.getElementById('tutorSearchInput').value = tutor.name;
+                
+                openTutorProfile(tutor);
+                
+                renderTutorsOnMap([tutor]);
+            });
+
+            container.appendChild(li);
+        });
+
+        container.classList.remove('hidden-panel');
+    } catch (error) {
+        console.error("Lỗi trong renderSuggestions:", error);
+    }
+}

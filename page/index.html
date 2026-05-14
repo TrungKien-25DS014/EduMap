@@ -2,80 +2,120 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>EduMap</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/login.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMap | Nền tảng kết nối tri thức</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
-    <div class="video-background">
-        <video autoplay muted loop playsinline id="myVideo">
-            <source src="../Yêu_Cầu_Video_Màu_Xanh.mp4" type="video/mp4">
-        </video>
-    </div>
+
     <nav>
-        <div class="logo">EDUMAP</div>
+        <div class="logo">EduMap<span>.</span></div>
         <div class="menu-links">
-            <a href="index.html">Trang Chủ</a>
-            <a href="community.html">Cộng Đồng</a>
-            <a href="leaderboard.html">Bảng Xếp Hạng</a>
+            <a href="index.html" class="active">Trang chủ</a>
+            <a href="find_tutor.html">Khám phá</a>
+            <a href="community.html">Cộng đồng</a>
+            <a href="leaderboard.html">Xếp hạng</a>
         </div>
-        <a href="index.html" class="btn-login">ĐĂNG NHẬP</a>
+        <button id="openLoginBtn" class="btn-login-nav">Đăng nhập</button>
     </nav>
-    <div class="main-container">
-        <div id="map"></div>
-        <div class="login-section">
-            <div class="login-box">
-                <h2>Đăng nhập vào Edumap</h2>
+
+    <section class="hero">
+        <div class="hero-bg-image"></div>
+        <div class="hero-gradient-overlay"></div>
+        <div class="hero-gradient-bottom"></div>
+
+        <div class="hero-content">
+            <div class="info-text">
+                <h1>Hành trình tri thức <br>bắt đầu tại đây.</h1>
+                <p>EduMap giúp bạn kết nối với những gia sư giỏi nhất, hỗ trợ học tập cá nhân hóa và cộng đồng chia sẻ tài liệu lớn mạnh.</p>
+                <a href="find_tutor.html" class="btn-main">Bắt đầu khám phá</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="loginModal" class="modal-overlay">
+        <div class="login-card">
+            <i class="fa-solid fa-xmark close-modal" id="closeModalBtn"></i>
+            
+            <div id="loginView">
+                <h2>Đăng nhập EduMap</h2>
                 <p>Sẵn sàng tiếp tục hành trình của bạn</p>
-                <input type="text" id="email" placeholder="Nhập Email của bạn">
-                <input type="password" id="password" placeholder="Mật khẩu">
-                <button id="btnLogin">Đăng nhập</button>
+                <input type="text" id="email" class="glass-input" placeholder="Nhập Email của bạn">
+                <input type="password" id="password" class="glass-input" placeholder="Mật khẩu">
+                <button id="btnLogin" class="btn-main" style="width: 100%;">Đăng nhập</button>
                 <div class="login-footer">
-                    <a href="forgot-password.html">Quên mật khẩu?</a>
-                    <a href="register.html">Đăng ký ngay</a>
+                    <a href="#" id="showForgotView">Quên mật khẩu?</a>
+                    <a href="#" id="showRegisterView">Đăng ký ngay</a>
+                </div>
+            </div>
+
+            <div id="forgotView" style="display: none;">
+                <h2>Quên mật khẩu?</h2>
+                <p>Nhập email để nhận liên kết khôi phục.</p>
+                <input type="email" id="forgotEmail" class="glass-input" placeholder="VD: name@example.com">
+                <button id="btnResetInline" class="btn-main" style="width: 100%; margin-top: 10px;">Gửi liên kết</button>
+                <div class="login-footer" style="justify-content: center; margin-top: 20px;">
+                    <a href="#" class="back-to-login">⬅ Quay lại đăng nhập</a>
+                </div>
+            </div>
+
+            <div id="registerView" style="display: none;">
+                <h2>Tạo tài khoản</h2>
+                <p>Tham gia cộng đồng EduMap ngay hôm nay</p>
+                <input type="text" id="regFullName" class="glass-input" placeholder="Họ và tên">
+                <input type="email" id="regEmail" class="glass-input" placeholder="Email (Gmail)">
+                <input type="password" id="regPassword" class="glass-input" placeholder="Mật khẩu">
+                <input type="password" id="regConfirmPassword" class="glass-input" placeholder="Nhập lại mật khẩu">
+                <button id="btnRegisterInline" class="btn-main" style="width: 100%; margin-top: 10px;">Đăng ký</button>
+                <div class="login-footer" style="justify-content: center; margin-top: 20px;">
+                    <a href="#" class="back-to-login">⬅ Đã có tài khoản? Đăng nhập</a>
                 </div>
             </div>
         </div>
     </div>
-    <footer class="map-footer">
-        <div class="footer-container">
-            <div class="footer-box">
-                <h3>EduMap</h3>
-                <p>
-                    Nền tảng tìm gia sư và kết nối học tập
-                    dành cho sinh viên.
-                </p>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo">EduMap<span>.</span></div>
+                <p style="margin-top: 15px;">Dẫn đầu nền tảng kết nối gia sư tại Việt Nam.</p>
             </div>
-            <div class="footer-box">
-                <h3>Liên kết</h3>
-                <a href="#">Trang chủ</a>
-                <a href="#">Tìm gia sư</a>
-                <a href="#">Cộng đồng</a>
-                <a href="#">Liên hệ</a>
+            <div class="footer-col">
+                <h3>Về EduMap</h3>
+                <a href="index.html">Giới thiệu</a>
+                <a href="find_tutor.html">Khám phá</a>
+                <a href="community.html">Cộng đồng</a>
+                <a href="leaderboard.html">Xếp hạng</a>
             </div>
-            <div class="footer-box">
-                <h3>Liên hệ</h3>
-                <p>Email: edumap@gmail.com</p>
-                <p>SĐT: 0123 456 789</p>
-                <p>Đà Nẵng, Việt Nam</p>
-            </div>
-            <div class="footer-box">
-                <h3>Hỗ trợ</h3>
+            <div class="footer-col">
+                <h3>Chính sách</h3>
                 <a href="terms.html">Điều khoản sử dụng</a>
                 <a href="privacy.html">Chính sách bảo mật</a>
+                <a href="#">Quy định cộng đồng</a>
+            </div>
+            <div class="footer-col">
+                <h3>Hỗ trợ</h3>
+                <p><i class="fas fa-envelope"></i> help@edumap.vn</p>
+                <p><i class="fas fa-phone"></i> 0123 456 789</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            © 2026 EduMap | All Rights Reserved
-        </div>
+        <p style="text-align: center; margin-top: 30px; color: #475569; font-size: 13px;">&copy; 2026 EduMap Project. Design for Phan Trung Kiên.</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="../js/supabse.js"></script>
+    <div id="policyModal" class="modal-overlay">
+        <div class="login-card" style="max-width: 600px; text-align: left;">
+            <i class="fa-solid fa-xmark close-modal" id="closePolicyBtn"></i>
+            
+            <h2 id="policyTitle" style="color: var(--accent); margin-bottom: 15px; text-align: center;">Tiêu đề</h2>
+            <div id="policyContent" style="color: #cbd5e1; line-height: 1.6; max-height: 60vh; overflow-y: auto; padding-right: 10px; font-size: 14px;">
+                </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabse.js"></script> 
+    <script src="../js/index.js"></script>   
     <script src="../js/login.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/login.js"></script>
-    <script src="../js/auth.js"></script>
+
 </body>
 </html>

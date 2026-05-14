@@ -15,17 +15,21 @@
         <div class="bubble b2"></div>
         <div class="bubble b3"></div>
     </div>
-    <nav>
-        <div class="logo">
-            <i class="fa-solid fa-graduation-cap"></i> EDUMAP
-        </div>
-        <div class="menu-links">
-            <a href="find_tutor.html">Khám phá</a>
-            <a href="community.html" class="active">Cộng đồng</a>
-            <a href="leaderboard.html">Bảng xếp hạng</a>
-        </div>
-        <div class="nav-actions">
-            <a href="login.html" class="btn-login">Đăng nhập</a>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">EduMap<span>.</span></div>
+            <ul class="nav-links">
+                <a href="index.html">Trang chủ</a>
+                <li><a href="find_tutor.html">Khám phá</a></li>
+                <li><a href="community.html" class="active">Cộng đồng</a></li>
+                <li><a href="leaderboard.html">Xếp hạng</a></li>
+            </ul>
+            <div class="user-profile">
+                <span class="user-name" id ="userNameDisplay">Đang tải...</span>
+                <div class="avatar" id = "userAvatarDisplay" style = "cursor: pointer;" title = "Sửa hồ sơ">
+                    <img id = "userAvatarImg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="Avatar">
+                </div>
+            </div>
         </div>
     </nav>
     <div class="community-layout">
@@ -198,6 +202,9 @@
             document.getElementById('contact-list').classList.add('active-panel');
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabse.js"></script>
+    <script src="../js/user-info.js"></script>
     <script src="../js/community.js"></script>
 </body>
 </html>
