@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         closeModalBtn.addEventListener('click', () => loginModal.classList.remove('active'));
     }
 
-    window.addEventListener('click', (e) => {
+    window.addEventListener('mousedown', (e) => {
         if (e.target === loginModal) loginModal.classList.remove('active');
     });
 

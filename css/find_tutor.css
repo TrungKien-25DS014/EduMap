@@ -996,3 +996,15 @@ textarea::placeholder,
 .hidden-panel {
     display: none !important;
 }
+.star-rating i { 
+    color: #475569; 
+    font-size: 14px; 
+    cursor: pointer; 
+    transition: 0.2s; 
+}
+.star-rating i.active { 
+    color: #f59e0b !important; 
+}
+body.light-mode .star-rating i { 
+    color: #cbd5e1; 
+}

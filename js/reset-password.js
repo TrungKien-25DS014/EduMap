@@ -15,6 +15,7 @@ if (btnSave) {
             btnSave.innerText = "Cập nhật mật khẩu";
         } else {
             alert("Đổi mật khẩu thành công!");
+            await window.supabaseClient.auth.signOut();
             window.location.href = "index.html";
         }
     });

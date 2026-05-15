@@ -40,6 +40,7 @@ likeButtons.forEach(button => {
 function openChat(name, avatarUrl) {
     document.getElementById('chat-name').innerText = name;
     document.getElementById('chat-avatar').src = avatarUrl;
+    document.querySelector('.chat-body').innerHTML = '';
     document.getElementById('contact-list').classList.remove('active-panel');
     document.getElementById('contact-list').classList.add('hidden-panel');
     document.getElementById('active-chat').classList.remove('hidden-panel');

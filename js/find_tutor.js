@@ -350,3 +350,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     updateDropdownName();
 });
+document.querySelectorAll('#tutorRating i').forEach(star => {
+    star.onclick = function() {
+        let val = parseInt(this.dataset.val);
+        document.querySelectorAll('#tutorRating i').forEach(s => {
+            s.classList.toggle('active', parseInt(s.dataset.val) <= val);
+        });
+    };
+});

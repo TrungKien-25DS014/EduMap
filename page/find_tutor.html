@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/find_tutor.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="edumap-bg">
@@ -85,9 +86,18 @@
         </div>
         <aside class="right-aside card" id="rightAside">
             <div class="profile-card-modern">
-                <div class="profile-top">
-                    <img id="avatar" class="avatar-box" src="https://i.pravatar.cc/300?img=12" alt="Avatar">
-                    <div class="info-lines">
+                <div class="profile-top" style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div style="flex-shrink: 0; text-align: center;">
+                        <img id="avatar" class="avatar-box" src="https://i.pravatar.cc/300?img=12" alt="Avatar" style="display: block; margin-bottom: 5px;">
+                        <div class="star-rating" id="tutorRating" style="cursor: pointer; font-size: 18px; line-height: 1;">
+                            <span class="star active" data-val="1" style="color: #f59e0b;">★</span>
+                            <span class="star active" data-val="2" style="color: #f59e0b;">★</span>
+                            <span class="star active" data-val="3" style="color: #f59e0b;">★</span>
+                            <span class="star active" data-val="4" style="color: #f59e0b;">★</span>
+                            <span class="star active" data-val="5" style="color: #f59e0b;">★</span>
+                        </div>
+                    </div>
+                    <div class="info-lines" style="flex: 1;">
                         <h2 id="name" class="t-name">...</h2>
                         <p id="subtitle" class="t-sub">...</p>
                         <p id="price" class="t-price">...</p>
