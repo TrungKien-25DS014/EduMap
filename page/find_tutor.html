@@ -27,9 +27,17 @@
                 <li><a href="leaderboard.html">Xếp hạng</a></li>
             </ul>
             <div class="user-profile">
-                <span class="user-name" id ="heroUserName">Đang tải...</span>
-                <div class="avatar" id = "userAvatarDisplay" style = "cursor: pointer;" title = "Sửa hồ sơ">
-                    <img id = "userAvatarImg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="Avatar">
+                <span class="user-name" id="userNameDisplay">Đang tải...</span>
+                <div class="avatar-wrapper" id="avatarWrapper">
+                    <div class="avatar" id="userAvatarDisplay">
+                        <img id="userAvatarImg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="Avatar">
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="dropdown-divider"></div>
+                        <button id="btnLogout" class="logout-btn">
+                            <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,8 +109,8 @@
                         <p id="experience">...</p>
                     </div>
                     <div class="info-group">
-                        <h3>Ngôn ngữ</h3>
-                        <p id="languages">...</p>
+                        <h3>Chuyên môn</h3>
+                        <p id="subjects">...</p>
                     </div>
                 </div>
             </div>

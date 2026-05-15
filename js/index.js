@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    const navAuthBtn = document.getElementById('navAuthBtn');
     const loginModal = document.getElementById('loginModal');
-    const openLoginBtn = document.getElementById('openLoginBtn');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const loginView = document.getElementById('loginView');
     const forgotView = document.getElementById('forgotView');
@@ -20,10 +20,32 @@ document.addEventListener('DOMContentLoaded', () => {
         view.style.display = 'block';
     }
 
-    if (openLoginBtn) {
-        openLoginBtn.addEventListener('click', () => {
-            showView(loginView);
-            loginModal.classList.add('active');
+    const updateAuthButton = (user) => {
+        if (!navAuthBtn) return;
+        if (user) {
+            navAuthBtn.textContent = 'Đăng xuất';
+            navAuthBtn.style.background = '#ef4444';
+            navAuthBtn.onclick = async (e) => {
+                e.preventDefault();
+                await window.supabaseClient.auth.signOut();
+                window.location.reload();
+            };
+        } else {
+            navAuthBtn.textContent = 'Đăng nhập';
+            navAuthBtn.style.background = '';
+            navAuthBtn.onclick = () => {
+                showView(loginView);
+                loginModal.classList.add('active');
+            };
+        }
+    };
+
+    if (window.supabaseClient) {
+        const { data: { session } } = await window.supabaseClient.auth.getSession();
+        updateAuthButton(session?.user);
+
+        window.supabaseClient.auth.onAuthStateChange((event, session) => {
+            updateAuthButton(session?.user);
         });
     }
 
@@ -61,12 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
         btnReset.addEventListener('click', async () => {
             const email = document.getElementById('forgotEmail').value.trim();
             if (!email) return alert("Vui lòng nhập email!");
-            
             btnReset.innerText = "Đang gửi...";
             const { error } = await window.supabaseClient.auth.resetPasswordForEmail(email, {
                 redirectTo: `${window.location.origin}/EduMap/page/reset-password.html`
             });
-
             if (error) alert(error.message);
             else alert("Đã gửi email khôi phục!");
             btnReset.innerText = "Gửi liên kết";
@@ -96,12 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     password: password,
                     options: { data: { full_name: fullName } }
                 });
-
                 if (error) throw error;
                 const { error: insErr } = await window.supabaseClient
                     .from('accounts')
                     .insert({ id: data.user.id, email: email, full_name: fullName });
-
                 if (insErr) throw insErr;
                 alert("Đăng ký thành công! Hãy đăng nhập.");
                 showView(loginView);
@@ -113,9 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-});
 
-document.addEventListener('DOMContentLoaded', () => {
     const policyData = {
         terms: {
             title: "Điều khoản sử dụng",
@@ -151,41 +167,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = policyData[type];
         if (data) {
             policyTitle.innerText = data.title;
-            // Thay thế dấu xuống dòng bằng thẻ <br> để hiển thị nội dung đẹp hơn
             policyContent.innerHTML = data.content.replace(/\n/g, '<br>');
-            policyModal.classList.add('active'); // Kích hoạt class 'active' giống form đăng nhập
+            policyModal.classList.add('active');
         }
     }
 
-    const closePolicy = () => {
-        policyModal.classList.remove('active');
-    };
-
     if (closePolicyBtn) {
-        closePolicyBtn.onclick = closePolicy;
+        closePolicyBtn.onclick = () => policyModal.classList.remove('active');
     }
 
     window.addEventListener('click', (e) => {
-        if (e.target === policyModal) closePolicy();
+        if (e.target === policyModal) policyModal.classList.remove('active');
     });
 
     document.querySelectorAll('.footer-col a').forEach(link => {
         const text = link.innerText.toLowerCase();
         if (text.includes('điều khoản')) {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                openPolicy('terms');
-            });
+            link.addEventListener('click', (e) => { e.preventDefault(); openPolicy('terms'); });
         } else if (text.includes('bảo mật')) {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                openPolicy('privacy');
-            });
+            link.addEventListener('click', (e) => { e.preventDefault(); openPolicy('privacy'); });
         } else if (text.includes('quy định')) {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                openPolicy('community');
-            });
+            link.addEventListener('click', (e) => { e.preventDefault(); openPolicy('community'); });
         }
     });
 });

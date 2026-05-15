@@ -24,9 +24,17 @@
                 <li><a href="leaderboard.html" class="active">Xếp hạng</a></li>
             </ul>
             <div class="user-profile">
-                <span class="user-name" id ="userNameDisplay">Đang tải...</span>
-                <div class="avatar" id = "userAvatarDisplay" style = "cursor: pointer;" title = "Sửa hồ sơ">
-                    <img id = "userAvatarImg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="Avatar">
+                <span class="user-name" id="userNameDisplay">Đang tải...</span>
+                <div class="avatar-wrapper" id="avatarWrapper">
+                    <div class="avatar" id="userAvatarDisplay">
+                        <img id="userAvatarImg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="Avatar">
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="dropdown-divider"></div>
+                        <button id="btnLogout" class="logout-btn">
+                            <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,74 +42,48 @@
     <div class="container">
         <div class="leaderboard-header">
             <h2>Bảng Xếp Hạng Người Dùng</h2>
-            <p style="color:#666; margin-top:6px;">Xếp hạng dựa trên điểm đánh giá của học sinh</p>
+            <p style="color:#666; margin-top:6px; margin-bottom: 70px;">Xếp hạng dựa trên điểm đánh giá của học sinh</p>
         </div>
         <div class="top-three">
             <div class="card rank-2">
                 <div class="rank">#2</div>
-                <img class="avatar" src="https://i.pravatar.cc/150?img=32" alt="Avt">
-                <div class="name">Hà L</div>
+                <img class="avatar" src="https://i.pravatar.cc/150?img=5" alt="Avt">
+                <div class="name">Trần Mai Anh</div>
                 <div class="points">1,920 điểm</div>
             </div>
             <div class="card rank-1">
                 <div class="rank">#1</div>
-                <img class="avatar" src="https://i.pravatar.cc/150?img=12" alt="Avt">
-                <div class="name">Minh T</div>
+                <img class="avatar" src="https://i.pravatar.cc/150?img=26" alt="Avt">
+                <div class="name">Vũ Quốc Đạt</div>
                 <div class="points">2,480 điểm</div>
             </div>
             <div class="card rank-3">
                 <div class="rank">#3</div>
-                <img class="avatar" src="https://i.pravatar.cc/150?img=8" alt="Avt">
-                <div class="name">An P</div>
+                <img class="avatar" src="https://i.pravatar.cc/150?img=12" alt="Avt">
+                <div class="name">Nguyễn Lê Vy</div>
                 <div class="points">1,640 điểm</div>
             </div>
         </div>
-        <table class="leaderboard-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Người dùng</th>
-                    <th>Số điểm</th>
-                    <th>Thành tích</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="user-row">
-                    <td>4</td>
-                    <td><img src="https://i.pravatar.cc/40?img=7" alt="avt"> Linh Q</td>
-                    <td>1,420</td>
-                    <td>Top bài viết</td>
-                </tr>
-                <tr class="user-row">
-                    <td>5</td>
-                    <td><img src="https://i.pravatar.cc/40?img=11" alt="avt"> Trường N</td>
-                    <td>1,350</td>
-                    <td>Người giúp đỡ</td>
-                </tr>
-                <tr class="user-row">
-                    <td>6</td>
-                    <td><img src="https://i.pravatar.cc/40?img=9" alt="avt"> Hương T</td>
-                    <td>1,200</td>
-                    <td>Tham gia hoạt động</td>
-                </tr>
-                <tr class="user-row">
-                    <td>7</td>
-                    <td><img src="https://i.pravatar.cc/40?img=5" alt="avt"> Nam V</td>
-                    <td>1,090</td>
-                    <td>Đóng góp tài liệu</td>
-                </tr>
-                <tr class="user-row">
-                    <td>8</td>
-                    <td><img src="https://i.pravatar.cc/40?img=3" alt="avt"> Oanh B</td>
-                    <td>980</td>
-                    <td>Hoạt động đều đặn</td>
-                </tr>
-            </tbody>
-        </table>
+        
+        <div class="table-container">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Gia sư</th>
+                        <th>Số điểm</th>
+                        <th>Thành tích</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                </tbody>
+            </table>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/supabse.js"></script>
     <script src="../js/user-info.js"></script>
-    <script src="../js/community.js"></script>
+    <script src="../js/find_tutor.js"></script>
+    <script src="../js/leaderboard.js"></script>
 </body>
 </html>

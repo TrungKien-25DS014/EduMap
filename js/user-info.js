@@ -25,3 +25,19 @@ const UserInfo = {
     }
 };
 window.UserInfo = UserInfo;
+const handleLogout = async () => {
+    try {
+        const { error } = await window.supabaseClient.auth.signOut();
+        if (error) throw error;
+        alert("Đã đăng xuất thành công!");
+        window.location.href = "index.html"; 
+    } catch (error) {
+        console.error("Lỗi khi đăng xuất:", error.message);
+    }
+};
+document.addEventListener('DOMContentLoaded', () => {
+    const btnLogout = document.getElementById('btnLogout');
+    if (btnLogout) {
+        btnLogout.addEventListener('click', handleLogout);
+    }
+});
