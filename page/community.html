@@ -15,6 +15,7 @@
         <div class="bubble b2"></div>
         <div class="bubble b3"></div>
     </div>
+
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">EduMap<span>.</span></div>
@@ -40,7 +41,9 @@
             </div>
         </div>
     </nav>
+
     <div class="community-layout">
+        <!-- Sidebar trái -->
         <aside class="sidebar-left">
             <div class="glass-panel empty-state">
                 <i class="fa-solid fa-code"></i>
@@ -48,487 +51,152 @@
                 <span>(Menu, Group, Hashtag...)</span>
             </div>
         </aside>
-        <main class="feed-center">
-            <div class="post-box glass-panel">
+
+        <!-- Feed chính -->
+        <main class="feed-center" id="feedCenter">
+            <!-- Ô viết bài -->
+            <div class="post-box glass-panel" id="postBox">
                 <div class="post-box-header">
-                    <img src="https://i.pravatar.cc/150?img=11" alt="Avatar" class="avatar">
-                    <textarea placeholder="Chia sẻ kiến thức hoặc tìm đồng đội..." rows="2"></textarea>
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" id="postBoxAvatar" alt="Avatar" class="avatar">
+                    <textarea id="postTextarea" placeholder="Chia sẻ kiến thức hoặc tìm đồng đội... (Ctrl+Enter để đăng)" rows="2"></textarea>
                 </div>
                 <div class="post-box-actions">
                     <div class="attach-tools">
                         <button><i class="fa-solid fa-image"></i> Hình ảnh</button>
                         <button><i class="fa-solid fa-paperclip"></i> Tài liệu</button>
                     </div>
-                    <button class="btn-submit">Đăng bài <i class="fa-solid fa-paper-plane"></i></button>
+                    <button class="btn-submit" id="submitPostBtn">Đăng bài <i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
+
+            <!-- Mock posts đa dạng -->
             <div class="post glass-panel" id="post-static-0">
                 <div class="post-header">
                     <img src="https://i.pravatar.cc/150?img=5" class="avatar" alt="Avatar">
                     <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Trần Thị B', 'https://i.pravatar.cc/150?img=5')">
-                            Trần Thị B</h4>
+                        <h4 class="user-trigger" onclick="openChat('Trần Thị B','https://i.pravatar.cc/150?img=5')">Trần Thị B</h4>
                         <span class="time">30 phút trước • <i class="fa-solid fa-earth-americas"></i></span>
                     </div>
                     <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
                 </div>
                 <div class="post-content">
-                    <p>Mình đang tìm gia sư Toán lớp 12 ở Đà Nẵng, có phương pháp dạy hiện đại trực quan. Ai biết chỗ uy
-                        tín giới thiệu giúp mình với nhé 🙏</p>
-                    <div class="post-tags">
-                        <span>#Toan12</span> <span>#DaNang</span> <span>#TimGiaSu</span>
-                    </div>
+                    <p>Mình đang tìm gia sư Toán lớp 12 ở Đà Nẵng, có phương pháp dạy hiện đại trực quan. Ai biết chỗ uy tín giới thiệu giúp mình với nhé 🙏</p>
+                    <div class="post-tags"><span>#Toan12</span> <span>#DaNang</span> <span>#TimGiaSu</span></div>
                 </div>
                 <div class="post-stats">
-                    <span class="like-count">12</span>
-                    <span>5 Bình luận</span>
+                    <span class="stat-like-count"><span class="like-icon-circle"><i class="fa-solid fa-thumbs-up" style="font-size:9px;"></i></span> 12</span>
+                    <span>5 bình luận</span>
                 </div>
+                <div style="border-top:1px solid rgba(255,255,255,0.08);margin:4px 0;"></div>
                 <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-1">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-2">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-3">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-4">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-5">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-6">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-7">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-8">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-9">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-10">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-11">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-12">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
-                </div>
-            </div>
-            <div class="post glass-panel" id="post-static-13">
-                <div class="post-header">
-                    <img src="https://i.pravatar.cc/150?img=1" class="avatar" alt="Avatar">
-                    <div class="user-info">
-                        <h4 class="user-trigger" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
-                            Nguyễn Văn A</h4>
-                        <span class="time">2 giờ trước • <i class="fa-solid fa-user-group"></i></span>
-                    </div>
-                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
-                </div>
-                <div class="post-content">
-                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ mùa dịch. Phương pháp thực hành
-                        1-1 liên tục. Ai cần ib mình nhé ✨</p>
-                </div>
-                <div class="post-stats">
-                    <span class="like-count">0</span>
-                    <span>12 Bình luận</span>
-                </div>
-                <div class="actions">
-                    <button class="like-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Thích</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fa-regular fa-comment"></i>
-                        Bình luận
-                    </button>
-                    <button class="share-btn">
-                        <i class="fa-solid fa-share"></i>
-                        Chia sẻ
-                    </button>
+                    <button class="like-btn"><i class="fa-regular fa-heart"></i> <span>Thích</span></button>
+                    <button class="comment-btn"><i class="fa-regular fa-comment"></i> Bình luận</button>
+                    <button class="share-btn"><i class="fa-solid fa-share"></i> Chia sẻ</button>
                 </div>
             </div>
 
+            <div class="post glass-panel" id="post-static-1">
+                <div class="post-header">
+                    <img src="https://i.pravatar.cc/150?img=12" class="avatar" alt="Avatar">
+                    <div class="user-info">
+                        <h4 class="user-trigger" onclick="openChat('Lê Hoàng C','https://i.pravatar.cc/150?img=12')">Lê Hoàng C</h4>
+                        <span class="time">1 giờ trước • <i class="fa-solid fa-user-group"></i></span>
+                    </div>
+                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
+                </div>
+                <div class="post-content">
+                    <p>Mình nhận dạy tiếng Anh giao tiếp online, giá sinh viên hỗ trợ. Phương pháp thực hành 1-1 liên tục, cam kết tiến bộ sau 2 tháng. Ai cần IB mình nhé ✨</p>
+                    <div class="post-tags"><span>#TiengAnh</span> <span>#Online</span> <span>#GiasuGioitre</span></div>
+                </div>
+                <div class="post-stats">
+                    <span class="stat-like-count"><span class="like-icon-circle"><i class="fa-solid fa-thumbs-up" style="font-size:9px;"></i></span> 34</span>
+                    <span>12 bình luận</span>
+                </div>
+                <div style="border-top:1px solid rgba(255,255,255,0.08);margin:4px 0;"></div>
+                <div class="actions">
+                    <button class="like-btn"><i class="fa-regular fa-heart"></i> <span>Thích</span></button>
+                    <button class="comment-btn"><i class="fa-regular fa-comment"></i> Bình luận</button>
+                    <button class="share-btn"><i class="fa-solid fa-share"></i> Chia sẻ</button>
+                </div>
+            </div>
+
+            <div class="post glass-panel" id="post-static-2">
+                <div class="post-header">
+                    <img src="https://i.pravatar.cc/150?img=26" class="avatar" alt="Avatar">
+                    <div class="user-info">
+                        <h4 class="user-trigger" onclick="openChat('Vũ Quốc Đạt','https://i.pravatar.cc/150?img=26')">Vũ Quốc Đạt</h4>
+                        <span class="time">3 giờ trước • <i class="fa-solid fa-earth-americas"></i></span>
+                    </div>
+                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
+                </div>
+                <div class="post-content">
+                    <p>Chia sẻ tài liệu luyện thi IELTS Writing Task 2 — bộ 100 đề mẫu kèm bài giải band 8.0. Mình tổng hợp mất 3 tháng, ai cần cmt email để mình gửi nhé! 📚</p>
+                    <div class="post-tags"><span>#IELTS</span> <span>#Writing</span> <span>#TaiLieuMienPhi</span></div>
+                </div>
+                <div class="post-stats">
+                    <span class="stat-like-count"><span class="like-icon-circle"><i class="fa-solid fa-thumbs-up" style="font-size:9px;"></i></span> 218</span>
+                    <span>87 bình luận · 45 lượt chia sẻ</span>
+                </div>
+                <div style="border-top:1px solid rgba(255,255,255,0.08);margin:4px 0;"></div>
+                <div class="actions">
+                    <button class="like-btn"><i class="fa-regular fa-heart"></i> <span>Thích</span></button>
+                    <button class="comment-btn"><i class="fa-regular fa-comment"></i> Bình luận</button>
+                    <button class="share-btn"><i class="fa-solid fa-share"></i> Chia sẻ</button>
+                </div>
+            </div>
+
+            <div class="post glass-panel" id="post-static-3">
+                <div class="post-header">
+                    <img src="https://i.pravatar.cc/150?img=32" class="avatar" alt="Avatar">
+                    <div class="user-info">
+                        <h4 class="user-trigger">Nguyễn Lê Vy</h4>
+                        <span class="time">5 giờ trước • <i class="fa-solid fa-earth-americas"></i></span>
+                    </div>
+                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
+                </div>
+                <div class="post-content">
+                    <p>Hỏi nhanh: Các bạn học lập trình từ con số 0 thì dùng tài nguyên gì hiệu quả nhất? Mình đang phân vân giữa CS50, The Odin Project và tự học qua YouTube 🤔</p>
+                    <div class="post-tags"><span>#LapTrinh</span> <span>#HoiDap</span> <span>#HocCode</span></div>
+                </div>
+                <div class="post-stats">
+                    <span class="stat-like-count"><span class="like-icon-circle"><i class="fa-solid fa-thumbs-up" style="font-size:9px;"></i></span> 56</span>
+                    <span>31 bình luận</span>
+                </div>
+                <div style="border-top:1px solid rgba(255,255,255,0.08);margin:4px 0;"></div>
+                <div class="actions">
+                    <button class="like-btn"><i class="fa-regular fa-heart"></i> <span>Thích</span></button>
+                    <button class="comment-btn"><i class="fa-regular fa-comment"></i> Bình luận</button>
+                    <button class="share-btn"><i class="fa-solid fa-share"></i> Chia sẻ</button>
+                </div>
+            </div>
+
+            <div class="post glass-panel" id="post-static-4">
+                <div class="post-header">
+                    <img src="https://i.pravatar.cc/150?img=8" class="avatar" alt="Avatar">
+                    <div class="user-info">
+                        <h4 class="user-trigger" onclick="openChat('Phạm Minh Tuấn','https://i.pravatar.cc/150?img=8')">Phạm Minh Tuấn</h4>
+                        <span class="time">Hôm qua • <i class="fa-solid fa-earth-americas"></i></span>
+                    </div>
+                    <button class="post-options"><i class="fa-solid fa-ellipsis"></i></button>
+                </div>
+                <div class="post-content">
+                    <p>PGS.TS — 15 năm kinh nghiệm giảng dạy Vật Lý đại học và luyện thi THPT Quốc Gia. Hiện nhận dạy thêm cuối tuần tại TP.HCM. Lớp nhỏ ≤5 học sinh, tập trung bản chất vật lý thay vì học thuộc công thức. DM để biết thêm chi tiết 👨‍🏫</p>
+                    <div class="post-tags"><span>#VatLy</span> <span>#THPT</span> <span>#TPHCM</span> <span>#LuyenThi</span></div>
+                </div>
+                <div class="post-stats">
+                    <span class="stat-like-count"><span class="like-icon-circle"><i class="fa-solid fa-thumbs-up" style="font-size:9px;"></i></span> 103</span>
+                    <span>19 bình luận · 8 lượt chia sẻ</span>
+                </div>
+                <div style="border-top:1px solid rgba(255,255,255,0.08);margin:4px 0;"></div>
+                <div class="actions">
+                    <button class="like-btn"><i class="fa-regular fa-heart"></i> <span>Thích</span></button>
+                    <button class="comment-btn"><i class="fa-regular fa-comment"></i> Bình luận</button>
+                    <button class="share-btn"><i class="fa-solid fa-share"></i> Chia sẻ</button>
+                </div>
+            </div>
         </main>
+
+        <!-- Sidebar phải: chat -->
         <aside class="sidebar-right">
             <div id="contact-list" class="glass-panel active-panel">
                 <div class="panel-header">
@@ -536,32 +204,26 @@
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 </div>
                 <div class="contact-items">
-                    <div class="chat-item" onclick="openChat('Trần Thị B', 'https://i.pravatar.cc/150?img=5')">
+                    <div class="chat-item" onclick="openChat('Trần Thị B','https://i.pravatar.cc/150?img=5')">
                         <div class="avatar-container">
                             <img src="https://i.pravatar.cc/150?img=5" alt="Avatar">
                             <div class="online-dot"></div>
                         </div>
-                        <div class="chat-item-info">
-                            <h5>Trần Thị B</h5>
-                        </div>
+                        <div class="chat-item-info"><h5>Trần Thị B</h5></div>
                     </div>
-                    <div class="chat-item" onclick="openChat('Nguyễn Văn A', 'https://i.pravatar.cc/150?img=1')">
+                    <div class="chat-item" onclick="openChat('Nguyễn Văn A','https://i.pravatar.cc/150?img=1')">
                         <div class="avatar-container">
                             <img src="https://i.pravatar.cc/150?img=1" alt="Avatar">
                             <div class="offline-dot"></div>
                         </div>
-                        <div class="chat-item-info">
-                            <h5>Nguyễn Văn A</h5>
-                        </div>
+                        <div class="chat-item-info"><h5>Nguyễn Văn A</h5></div>
                     </div>
-                    <div class="chat-item" onclick="openChat('Lê Hoàng C', 'https://i.pravatar.cc/150?img=8')">
+                    <div class="chat-item" onclick="openChat('Lê Hoàng C','https://i.pravatar.cc/150?img=8')">
                         <div class="avatar-container">
                             <img src="https://i.pravatar.cc/150?img=8" alt="Avatar">
                             <div class="online-dot"></div>
                         </div>
-                        <div class="chat-item-info">
-                            <h5>Lê Hoàng C</h5>
-                        </div>
+                        <div class="chat-item-info"><h5>Lê Hoàng C</h5></div>
                     </div>
                 </div>
             </div>
@@ -572,8 +234,7 @@
                     <h3 id="chat-name">Tên người dùng</h3>
                     <i class="fa-solid fa-circle-info info-icon"></i>
                 </div>
-                <div class="chat-body">
-                </div>
+                <div class="chat-body"></div>
                 <div class="chat-footer">
                     <i class="fa-solid fa-face-smile"></i>
                     <input type="text" placeholder="Nhập tin nhắn...">
@@ -582,6 +243,7 @@
             </div>
         </aside>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/supabse.js"></script>
     <script src="../js/user-info.js"></script>
