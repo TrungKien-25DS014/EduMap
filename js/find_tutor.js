@@ -21,149 +21,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 let map;
 let currentOpenTutorId = null;
 let markerLayers = [];
-const mockTutors = [
-    {
-        id: "tutor_01", name: "PGS.TS. Huỳnh Công Pháp", subtitle: "Giảng viên đại học • Toán, Hóa", avatar: "https://i.pravatar.cc/150?img=11", price: "200k / buổi",
-        bio: "Thầy có hơn 15 năm kinh nghiệm giảng dạy, chuyên luyện thi đại học môn Toán và Hóa cho học sinh cấp 3. Phương pháp dạy trực quan, bám sát đề thi.",
-        education: "Tiến sĩ Toán", experience: "15 năm giảng dạy", subjects: "Toán Học, Hóa Học", formats: "Tại nhà / Online",
-        lat: 16.0544, lng: 108.2022, tags: ["toan", "hoa_hoc"] 
-    },
-    {
-        id: "tutor_02", name: "Trần Mai Anh", subtitle: "Sinh viên năm 4 • Tiếng Anh giao tiếp", avatar: "https://i.pravatar.cc/150?img=5", price: "120k / buổi",
-        bio: "IELTS 8.0. 3 năm kinh nghiệm làm gia sư tiếng Anh giao tiếp và luyện thi IELTS. Trẻ trung, nhiệt tình.",
-        education: "Cử nhân Ngôn ngữ Anh", experience: "3 năm gia sư", subjects: "Tiếng Anh", formats: "Online",
-        lat: 16.0723, lng: 108.2230, tags: ["ngoai_ngu"]
-    },
-    {
-        id: "tutor_03", name: "Lê Văn Hùng", subtitle: "Giáo viên trung học • Lập trình cơ bản", avatar: "https://i.pravatar.cc/150?img=6", price: "100k / buổi",
-        bio: "Giáo viên với hơn 10 năm kinh nghiệm giảng dạy lập trình C/C++, Scratch cho học sinh mới bắt đầu.",
-        education: "Cử nhân Khoa học Máy tính", experience: "10 năm giảng dạy", subjects: "Lập trình C++, Python", formats: "Tại nhà / Online",
-        lat: 16.0601, lng: 108.2154, tags: ["lap_trinh"]
-    },
-    {
-        id: "tutor_04", name: "Nguyễn Lê Vy", subtitle: "Thạc sĩ Vật lý • Vật Lý Đại cương", avatar: "https://i.pravatar.cc/150?img=12", price: "150k / buổi",
-        bio: "Chuyên giải bài tập Lý thuyết, Vật lý đại cương cho sinh viên khối kỹ thuật Bách Khoa, Sư Phạm Kỹ Thuật.",
-        education: "Thạc sĩ Vật Lý", experience: "5 năm giảng dạy", subjects: "Vật Lý", formats: "Tại nhà / Online",
-        lat: 16.0815, lng: 108.2415, tags: ["vat_ly"]
-    },
-    {
-        id: "tutor_05", name: "Trương Tuấn Anh", subtitle: "Designer • UI/UX & Đồ họa", avatar: "https://i.pravatar.cc/150?img=17", price: "180k / buổi",
-        bio: "Chia sẻ kinh nghiệm thiết kế giao diện Figma, tư vấn làm portfolio cho người mới bắt đầu.",
-        education: "Cử nhân Thiết kế Mỹ thuật số", experience: "3 năm kinh nghiệm", subjects: "Thiết kế Đồ họa, UI/UX", formats: "Tại nhà / Online",
-        lat: 16.0123, lng: 108.2456, tags: ["nghe_thuat", "lap_trinh"]
-    },
-    {
-        id: "tutor_06", name: "Phan Minh Khôi", subtitle: "Nhà nghiên cứu Lịch Sử", avatar: "https://i.pravatar.cc/150?img=31", price: "120k / buổi",
-        bio: "Giúp các em học sinh có cái nhìn mới mẻ về Lịch Sử, Địa Lý. Luyện thi THPT Quốc Gia khối C.",
-        education: "Cử nhân Sư phạm Lịch Sử", experience: "4 năm luyện thi", subjects: "Lịch Sử, Địa Lý", formats: "Tại nhà / Quán Cafe",
-        lat: 16.0354, lng: 108.2148, tags: ["khoa_hoc_xa_hoi"]
-    },
-    {
-        id: "tutor_07", name: "Vũ Quốc Đạt", subtitle: "Senior Data Scientist • Machine Learning", avatar: "https://i.pravatar.cc/150?img=26", price: "350k / buổi",
-        bio: "Nhận hướng dẫn sinh viên làm đồ án tốt nghiệp về Machine Learning, Deep Learning bằng Python.",
-        education: "Thạc sĩ Trí tuệ Nhân tạo", experience: "6 năm làm việc", subjects: "Lập trình, Khoa học dữ liệu", formats: "Online",
-        lat: 16.0512, lng: 108.2011, tags: ["lap_trinh", "toan"]
-    },
-    {
-        id: "tutor_08", name: "Hoàng Trọng Khang", subtitle: "Trợ giảng Đại học • Cấu trúc dữ liệu", avatar: "https://i.pravatar.cc/150?img=14", price: "100k / buổi",
-        bio: "Dạy kèm C++, Data Structures & Algorithms từ cơ bản đến nâng cao cho sinh viên IT.",
-        education: "Sinh viên năm cuối CNTT", experience: "2 năm trợ giảng", subjects: "Lập trình C++, CTDL", formats: "Tại nhà / Quán Cafe",
-        lat: 15.9780, lng: 108.2510, tags: ["lap_trinh"] 
-    },
-    {
-        id: "tutor_09", name: "Đào Ngọc Yến", subtitle: "Giảng viên IELTS • Tiếng Anh", avatar: "https://i.pravatar.cc/150?img=29", price: "180k / buổi",
-        bio: "Sở hữu IELTS 8.5. Nhận kèm riêng 1-1 các kỹ năng Speaking và Writing.",
-        education: "Cử nhân Ngôn ngữ Anh", experience: "5 năm luyện thi", subjects: "Tiếng Anh (IELTS/TOEIC)", formats: "Tại nhà / Online",
-        lat: 16.0689, lng: 108.1892, tags: ["ngoai_ngu"]
-    },
-    {
-        id: "tutor_10", name: "Nguyễn Đình Sơn", subtitle: "Giảng viên Mỹ Thuật", avatar: "https://i.pravatar.cc/150?img=15", price: "250k / buổi",
-        bio: "Dạy vẽ tĩnh vật, vẽ chân dung cơ bản và nâng cao để thi vào các trường Kiến trúc, Mỹ thuật.",
-        education: "Thạc sĩ Mỹ thuật", experience: "7 năm giảng dạy", subjects: "Hội họa, Vẽ kỹ thuật", formats: "Tại xưởng vẽ",
-        lat: 16.0755, lng: 108.1523, tags: ["nghe_thuat"]
-    },
-    {
-        id: "tutor_11", name: "Đinh Tấn Phát", subtitle: "Database Admin • SQL", avatar: "https://i.pravatar.cc/150?img=20", price: "180k / buổi",
-        bio: "Hỗ trợ thiết kế cơ sở dữ liệu cho đồ án MySQL, SQL Server.",
-        education: "Cử nhân HTTT", experience: "5 năm quản trị", subjects: "Lập trình, Cơ sở dữ liệu", formats: "Online",
-        lat: 16.0421, lng: 108.2205, tags: ["lap_trinh"]
-    },
-    {
-        id: "tutor_12", name: "Lương Thị Kiều", subtitle: "Cố vấn Kinh tế & Xã hội học", avatar: "https://i.pravatar.cc/150?img=21", price: "300k / buổi",
-        bio: "Dạy các môn đại cương Triết học Mác-Lênin, Kinh tế chính trị, Xã hội học cho sinh viên đại học.",
-        education: "MBA", experience: "Sáng lập 2 startup", subjects: "Kinh tế học, Triết học", formats: "Online",
-        lat: 16.0654, lng: 108.2211, tags: ["khoa_hoc_xa_hoi"]
-    },
-    {
-        id: "tutor_13", name: "Hồ Bá Lộc", subtitle: "Nghệ sĩ tự do • Piano", avatar: "https://i.pravatar.cc/150?img=22", price: "200k / buổi",
-        bio: "Nhận dạy đệm hát Piano cơ bản và thanh nhạc.",
-        education: "Cử nhân Thanh nhạc", experience: "8 năm biểu diễn", subjects: "Âm nhạc (Piano, Thanh nhạc)", formats: "Tại phòng tập nhạc",
-        lat: 16.0488, lng: 108.2355, tags: ["nghe_thuat"]
-    },
-    {
-        id: "tutor_14", name: "Bùi Thị Mai", subtitle: "Giáo viên Hóa cấp 3", avatar: "https://i.pravatar.cc/150?img=18", price: "150k / buổi",
-        bio: "Bí quyết cân bằng phương trình hóa học siêu tốc, luyện thi ĐH khối A, B.",
-        education: "Cử nhân Sư phạm Hóa", experience: "2 năm giảng dạy", subjects: "Hóa Học", formats: "Tại nhà",
-        lat: 16.0598, lng: 108.2301, tags: ["hoa_hoc"]
-    },
-    {
-        id: "tutor_15", name: "Trần Thanh Thúy", subtitle: "Luyện thi khối D", avatar: "https://i.pravatar.cc/150?img=32", price: "200k / buổi",
-        bio: "Gia sư chuyên Toán - Văn - Anh khối D. Giáo án riêng biệt cho học sinh mất gốc.",
-        education: "Đại học Sư Phạm", experience: "5 năm gia sư", subjects: "Toán Học, Tiếng Anh, Văn", formats: "Tại nhà",
-        lat: 16.0850, lng: 108.1500, tags: ["toan", "ngoai_ngu", "khoa_hoc_xa_hoi"] // Liên Chiểu
-    },
-    { id: "tutor_16", name: "Lê Minh Tuấn", subtitle: "Backend Dev", avatar: "https://i.pravatar.cc/150?img=13", price: "200k/buổi", bio: "Java, Spring Boot.", education: "KS", experience: "4 năm", subjects: "Lập trình", formats: "Online", lat: 16.015, lng: 108.200, tags: ["lap_trinh"] },
-    { id: "tutor_17", name: "Phạm Thu Hương", subtitle: "TOEIC 900+", avatar: "https://i.pravatar.cc/150?img=16", price: "150k/buổi", bio: "Luyện TOEIC.", education: "Cử nhân", experience: "3 năm", subjects: "Ngoại ngữ", formats: "Tại nhà", lat: 16.070, lng: 108.220, tags: ["ngoai_ngu"] },
-    { id: "tutor_18", name: "Đặng Văn Nam", subtitle: "Chuyên Hóa", avatar: "https://i.pravatar.cc/150?img=19", price: "130k/buổi", bio: "Ôn thi HSG Hóa.", education: "Thạc sĩ", experience: "6 năm", subjects: "Hóa Học", formats: "Tại nhà", lat: 16.060, lng: 108.240, tags: ["hoa_hoc"] },
-    { id: "tutor_19", name: "Vũ Hà Linh", subtitle: "Văn học", avatar: "https://i.pravatar.cc/150?img=23", price: "100k/buổi", bio: "Dạy Văn cảm thụ.", education: "Sư phạm", experience: "2 năm", subjects: "Văn học", formats: "Online", lat: 16.040, lng: 108.210, tags: ["khoa_hoc_xa_hoi"] },
-    { id: "tutor_20", name: "Thái Văn Quyết", subtitle: "Chuyên Toán", avatar: "https://i.pravatar.cc/150?img=24", price: "150k/buổi", bio: "Luyện Toán cấp 2.", education: "Sư phạm", experience: "4 năm", subjects: "Toán Học", formats: "Tại nhà", lat: 16.020, lng: 108.230, tags: ["toan"] },
-    { id: "tutor_21", name: "Ngô Khắc Duy", subtitle: "Đồ họa PTS", avatar: "https://i.pravatar.cc/150?img=25", price: "220k/buổi", bio: "PTS, AI.", education: "Thiết kế", experience: "6 năm", subjects: "Nghệ thuật", formats: "Online", lat: 16.050, lng: 108.250, tags: ["nghe_thuat"] },
-    { id: "tutor_22", name: "Nguyễn Thu Trang", subtitle: "Vật lý 12", avatar: "https://i.pravatar.cc/150?img=27", price: "250k/buổi", bio: "Luyện Lý đại học.", education: "Cử nhân", experience: "7 năm", subjects: "Vật Lý", formats: "Tại nhà", lat: 16.080, lng: 108.190, tags: ["vat_ly"] },
-    { id: "tutor_23", name: "Bùi Tiến Dũng", subtitle: "Lập trình C", avatar: "https://i.pravatar.cc/150?img=28", price: "200k/buổi", bio: "Cơ bản C/C++.", education: "Đại học", experience: "4 năm", subjects: "Lập trình", formats: "Tại nhà", lat: 16.090, lng: 108.180, tags: ["lap_trinh"] },
-    { id: "tutor_24", name: "Lê Hoàng Long", subtitle: "Lịch sử & Tiếng Anh", avatar: "https://i.pravatar.cc/150?img=30", price: "400k/buổi", bio: "Tích hợp.", education: "Thạc sĩ", experience: "10 năm", subjects: "Lịch sử, Ngoại ngữ", formats: "Online", lat: 16.010, lng: 108.240, tags: ["khoa_hoc_xa_hoi", "ngoai_ngu"] },
-    { id: "tutor_25", name: "Võ Trọng Nghĩa", subtitle: "Xác suất thống kê", avatar: "https://i.pravatar.cc/150?img=33", price: "250k/buổi", bio: "Toán đại học.", education: "Tiến sĩ", experience: "12 năm", subjects: "Toán Học", formats: "Online", lat: 16.030, lng: 108.220, tags: ["toan"] },
-    { id: "tutor_26", name: "Đỗ Phương Thảo", subtitle: "Cơ sở dữ liệu", avatar: "https://i.pravatar.cc/150?img=34", price: "220k/buổi", bio: "SQL, NoSQL.", education: "Kỹ sư", experience: "5 năm", subjects: "Lập trình", formats: "Online", lat: 16.045, lng: 108.195, tags: ["lap_trinh"] },
-    { id: "tutor_27", name: "Ngô Quốc Bảo", subtitle: "Nghệ thuật giao tiếp", avatar: "https://i.pravatar.cc/150?img=35", price: "200k/buổi", bio: "Kỹ năng mềm.", education: "MBA", experience: "6 năm", subjects: "Kỹ năng mềm", formats: "Tại nhà", lat: 16.055, lng: 108.205, tags: ["khoa_hoc_xa_hoi"] },
-    { id: "tutor_28", name: "Phạm Tấn Tài", subtitle: "Gia sư Hóa 9", avatar: "https://i.pravatar.cc/150?img=36", price: "120k/buổi", bio: "Lấy lại căn bản Hóa.", education: "Sư phạm", experience: "3 năm", subjects: "Hóa Học", formats: "Tại nhà", lat: 16.065, lng: 108.215, tags: ["hoa_hoc"] },
-    { id: "tutor_29", name: "Lý Nhã Kỳ", subtitle: "Tiếng Trung HSK", avatar: "https://i.pravatar.cc/150?img=37", price: "150k/buổi", bio: "Luyện thi HSK 3,4.", education: "Ngôn ngữ", experience: "4 năm", subjects: "Ngoại ngữ", formats: "Online", lat: 16.025, lng: 108.235, tags: ["ngoai_ngu"] },
-    { id: "tutor_30", name: "Vương Đình Huệ", subtitle: "Toán cao cấp", avatar: "https://i.pravatar.cc/150?img=38", price: "300k/buổi", bio: "Đại số tuyến tính.", education: "Tiến sĩ", experience: "15 năm", subjects: "Toán Học", formats: "Online", lat: 16.075, lng: 108.225, tags: ["toan"] },
-    {
-        id: "tutor_31", name: "Trần Bảo Sơn", subtitle: "Giảng viên IT • Hà Nội", avatar: "https://i.pravatar.cc/150?img=39", price: "200k / buổi",
-        bio: "Nhận dạy Frontend (ReactJS) từ xa cho các bạn muốn chuyển ngành.", education: "Kỹ sư", experience: "5 năm", subjects: "Lập trình", formats: "Online",
-        lat: 21.0285, lng: 105.8542, tags: ["lap_trinh"]
-    },
-    {
-        id: "tutor_32", name: "Nguyễn Hải Yến", subtitle: "Luyện thi Tiếng Anh • Hà Nội", avatar: "https://i.pravatar.cc/150?img=40", price: "180k / buổi",
-        bio: "Chuyên luyện thi vào lớp 10 chuyên Anh Chu Văn An, Ams.", education: "Sư phạm Anh", experience: "8 năm", subjects: "Tiếng Anh", formats: "Tại nhà / Online",
-        lat: 21.0063, lng: 105.8427, tags: ["ngoai_ngu"]
-    },
-    { id: "tutor_33", name: "Bùi Quang Huy", subtitle: "Toán Olympic • HN", avatar: "https://i.pravatar.cc/150?img=41", price: "250k/buổi", bio: "Toán chuyên.", education: "Thạc sĩ", experience: "6 năm", subjects: "Toán Học", formats: "Online", lat: 21.0153, lng: 105.8234, tags: ["toan"] },
-    { id: "tutor_34", name: "Đinh Thu Hương", subtitle: "Hóa phân tích • HN", avatar: "https://i.pravatar.cc/150?img=42", price: "150k/buổi", bio: "Hóa ĐH.", education: "Cử nhân", experience: "3 năm", subjects: "Hóa Học", formats: "Tại nhà", lat: 21.0360, lng: 105.7816, tags: ["hoa_hoc"] },
-    { id: "tutor_35", name: "Lê Minh Khôi", subtitle: "Thiết kế Đồ họa • HN", avatar: "https://i.pravatar.cc/150?img=43", price: "200k/buổi", bio: "Illustrator, Photoshop.", education: "Mỹ thuật", experience: "5 năm", subjects: "Nghệ thuật", formats: "Online", lat: 20.9937, lng: 105.8055, tags: ["nghe_thuat"] },
-    {
-        id: "tutor_36", name: "Phạm Tường Vy", subtitle: "Gia sư Tiếng Nhật • TP.HCM", avatar: "https://i.pravatar.cc/150?img=44", price: "160k / buổi",
-        bio: "Luyện thi JLPT N4, N3. Có kinh nghiệm sống và làm việc 3 năm tại Nhật.", education: "Ngôn ngữ Nhật", experience: "4 năm", subjects: "Tiếng Nhật", formats: "Online",
-        lat: 10.7626, lng: 106.6601, tags: ["ngoai_ngu"]
-    },
-    {
-        id: "tutor_37", name: "Huỳnh Tuấn Kiệt", subtitle: "Kỹ sư Điện • TP.HCM", avatar: "https://i.pravatar.cc/150?img=45", price: "180k / buổi",
-        bio: "Dạy Vật lý đại cương, Mạch điện tử cho sinh viên kỹ thuật.", education: "Kỹ sư Điện tử", experience: "5 năm", subjects: "Vật Lý", formats: "Online",
-        lat: 10.7769, lng: 106.7009, tags: ["vat_ly"]
-    },
-    { id: "tutor_38", name: "Trần Gia Hân", subtitle: "Ngữ Văn 12 • TP.HCM", avatar: "https://i.pravatar.cc/150?img=46", price: "130k/buổi", bio: "Ôn thi THPTQG.", education: "Sư phạm", experience: "4 năm", subjects: "Văn học", formats: "Tại nhà", lat: 10.7845, lng: 106.6853, tags: ["khoa_hoc_xa_hoi"] },
-    { id: "tutor_39", name: "Võ Thành Luân", subtitle: "C# & .NET • TP.HCM", avatar: "https://i.pravatar.cc/150?img=47", price: "220k/buổi", bio: "Backend dev.", education: "IT", experience: "6 năm", subjects: "Lập trình", formats: "Online", lat: 10.7725, lng: 106.6675, tags: ["lap_trinh"] },
-    { id: "tutor_40", name: "Đỗ Mai Anh", subtitle: "Toán tư duy • TP.HCM", avatar: "https://i.pravatar.cc/150?img=48", price: "150k/buổi", bio: "Toán cấp 1, 2.", education: "Cử nhân", experience: "3 năm", subjects: "Toán Học", formats: "Tại nhà", lat: 10.8016, lng: 106.6558, tags: ["toan"] },
-    { id: "tutor_41", name: "Tôn Thất Bách", subtitle: "Văn hóa lịch sử • Huế", avatar: "https://i.pravatar.cc/150?img=49", price: "150k/buổi", bio: "Lịch sử VN.", education: "Thạc sĩ", experience: "7 năm", subjects: "Lịch sử", formats: "Online", lat: 16.4637, lng: 107.5909, tags: ["khoa_hoc_xa_hoi"] },
-    { id: "tutor_42", name: "Lê Cẩm Tú", subtitle: "Piano cổ điển • Huế", avatar: "https://i.pravatar.cc/150?img=50", price: "200k/buổi", bio: "Học viện Âm nhạc.", education: "Cử nhân", experience: "5 năm", subjects: "Âm nhạc", formats: "Online", lat: 16.4700, lng: 107.5800, tags: ["nghe_thuat"] },
-    { id: "tutor_43", name: "Nguyễn Vĩnh Phát", subtitle: "Sinh học 12 • Cần Thơ", avatar: "https://i.pravatar.cc/150?img=51", price: "120k/buổi", bio: "Luyện thi khối B.", education: "Sư phạm Sinh", experience: "4 năm", subjects: "Hóa, Khoa học Tự nhiên", formats: "Online", lat: 10.0452, lng: 105.7469, tags: ["hoa_hoc"] }, // Khối B thường gộp với hóa
-    { id: "tutor_44", name: "Đặng Thùy Trâm", subtitle: "Tiếng Anh trẻ em • Cần Thơ", avatar: "https://i.pravatar.cc/150?img=52", price: "100k/buổi", bio: "Starters, Movers.", education: "Ngôn ngữ Anh", experience: "2 năm", subjects: "Tiếng Anh", formats: "Online", lat: 10.0350, lng: 105.7500, tags: ["ngoai_ngu"] },
-    { id: "tutor_45", name: "Hoàng Minh Trí", subtitle: "Vật lý 10-11 • Nha Trang", avatar: "https://i.pravatar.cc/150?img=53", price: "130k/buổi", bio: "Vật lý cấp 3.", education: "Sư phạm", experience: "5 năm", subjects: "Vật Lý", formats: "Online", lat: 12.2388, lng: 109.1967, tags: ["vat_ly"] },
-    { id: "tutor_46", name: "Vũ Ngọc Mai", subtitle: "Toán 12 • Nha Trang", avatar: "https://i.pravatar.cc/150?img=54", price: "150k/buổi", bio: "Toán ĐH.", education: "ĐH", experience: "3 năm", subjects: "Toán Học", formats: "Online", lat: 12.2450, lng: 109.1900, tags: ["toan"] },
-    { id: "tutor_47", name: "Đỗ Hải Phong", subtitle: "Lập trình Web • Hải Phòng", avatar: "https://i.pravatar.cc/150?img=55", price: "180k/buổi", bio: "HTML, CSS, JS.", education: "CNTT", experience: "4 năm", subjects: "Lập trình", formats: "Online", lat: 20.8449, lng: 106.6881, tags: ["lap_trinh"] },
-    { id: "tutor_48", name: "Phạm Tú Anh", subtitle: "Hóa đại cương • Hải Phòng", avatar: "https://i.pravatar.cc/150?img=56", price: "140k/buổi", bio: "Hóa phân tích.", education: "Hóa học", experience: "3 năm", subjects: "Hóa Học", formats: "Online", lat: 20.8500, lng: 106.6800, tags: ["hoa_hoc"] },
-    { id: "tutor_49", name: "Trịnh Xuân Hoàng", subtitle: "Nhiếp ảnh • Đà Lạt", avatar: "https://i.pravatar.cc/150?img=57", price: "300k/buổi", bio: "Bố cục, Ánh sáng.", education: "Tự học", experience: "8 năm", subjects: "Nghệ thuật, Nhiếp ảnh", formats: "Online", lat: 11.9404, lng: 108.4583, tags: ["nghe_thuat"] },
-    { id: "tutor_50", name: "Cao Thanh Tùng", subtitle: "Toán Cao cấp • TP.Vinh", avatar: "https://i.pravatar.cc/150?img=58", price: "160k/buổi", bio: "Toán sinh viên.", education: "Sư phạm", experience: "6 năm", subjects: "Toán Học", formats: "Online", lat: 18.6796, lng: 105.6813, tags: ["toan"] }
-];
+// runtime tutors data (populated from Supabase if available)
+let tutorsData = [];
 function initMap() {
     if (!document.getElementById('map')) return;
     if (map !== undefined) return;
@@ -175,8 +34,17 @@ function initMap() {
     map.on('click', function () {
         closeTutorProfile();
     });
-    renderTutorsOnMap(mockTutors);
-    initFilter();
+    // load tutors from Supabase
+    fetchTutorsFromSupabase().then(fetched => {
+        tutorsData = Array.isArray(fetched) ? fetched : [];
+        renderTutorsOnMap(tutorsData);
+        initFilter();
+    }).catch(err => {
+        console.warn('Không thể lấy tutors từ Supabase.', err);
+        tutorsData = [];
+        renderTutorsOnMap(tutorsData);
+        initFilter();
+    });
     new ResizeObserver(() => {
         if (map) map.invalidateSize();
     }).observe(document.getElementById('map'));
@@ -204,10 +72,10 @@ function initFilter() {
     filterSelect.addEventListener('change', (e) => {
         const selectedSubject = e.target.value;
         if (selectedSubject === "all") {
-            renderTutorsOnMap(mockTutors);
+            renderTutorsOnMap(tutorsData);
             filterSelect.selectedIndex = 0;
         } else {
-            const filteredTutors = mockTutors.filter(tutor =>
+            const filteredTutors = tutorsData.filter(tutor =>
                 tutor.tags && tutor.tags.includes(selectedSubject)
             );
             renderTutorsOnMap(filteredTutors);
@@ -226,6 +94,22 @@ function openTutorProfile(tutorData) {
     document.getElementById('subjects').textContent = tutorData.subjects;
     document.getElementById('formats').textContent = tutorData.formats;
     document.getElementById('avatar').src = tutorData.avatar;
+    // Attach tutor id to rating widget so saving knows which tutor
+    const formatsRating = document.getElementById('formatsRating');
+    if (formatsRating) {
+        formatsRating.dataset.tutorId = tutorData.id;
+        // fetch existing ratings (avg + user's) and display
+        getTutorRatings(tutorData.id).then(info => {
+            if (!info) return;
+            // set average as title and default displayed rating to user's rating if available
+            formatsRating.title = `Đánh giá trung bình: ${info.avg.toFixed(2)} (${info.count} lượt)`;
+            const displayVal = info.userRating || Math.round(info.avg) || 0;
+            formatsRating.dataset.rating = displayVal;
+            Array.from(formatsRating.querySelectorAll('[data-val]')).forEach(x => {
+                x.classList.toggle('active', parseInt(x.dataset.val) <= displayVal);
+            });
+        }).catch(e => console.warn('Lỗi lấy rating:', e));
+    }
     const mainContainer = document.getElementById('mainContainer');
     mainContainer.classList.add('show-profile');
     if (map) {
@@ -268,13 +152,13 @@ function initSearch() {
         if (filterSelect && query.length > 0) {
             filterSelect.selectedIndex = 0;
         }
-        if (normalizedQuery.length === 0) {
-            suggestionsBox.classList.add('hidden-panel');
-            renderTutorsOnMap(mockTutors);
-            return;
-        }
+            if (normalizedQuery.length === 0) {
+                suggestionsBox.classList.add('hidden-panel');
+                renderTutorsOnMap(tutorsData);
+                return;
+            }
         debounceTimer = setTimeout(() => {
-            const filteredTutors = mockTutors.filter(tutor => {
+                const filteredTutors = tutorsData.filter(tutor => {
                 const matchName = removeVietnameseTones(tutor.name).includes(normalizedQuery);
                 const matchTags = tutor.tags.some(tag => removeVietnameseTones(tag).includes(normalizedQuery));
                 return matchName || matchTags;
@@ -358,3 +242,174 @@ document.querySelectorAll('#tutorRating i').forEach(star => {
         });
     };
 });
+
+// Initialize all star-rating widgets (supports <i> or <span> inside .star-rating)
+function initStarRatingWidgets() {
+    document.querySelectorAll('.star-rating').forEach(widget => {
+        const stars = Array.from(widget.querySelectorAll('[data-val]'));
+        if (!stars.length) return;
+        // click handler
+        stars.forEach(s => {
+                s.addEventListener('click', async () => {
+                    const val = parseInt(s.dataset.val);
+                    widget.dataset.rating = val;
+                    stars.forEach(x => x.classList.toggle('active', parseInt(x.dataset.val) <= val));
+                    // if widget is tied to a tutor, save rating
+                    const tutorId = widget.dataset.tutorId;
+                    if (tutorId && window.supabaseClient) {
+                        try {
+                            const res = await saveTutorRating(tutorId, val);
+                            if (res && res.error && res.error.message === 'not_logged_in') {
+                                // revert UI
+                                const prev = parseInt(widget.dataset.rating) || 0;
+                                stars.forEach(x => x.classList.toggle('active', parseInt(x.dataset.val) <= prev));
+                                alert('Bạn cần đăng nhập để đánh giá. Vui lòng đăng nhập rồi thử lại.');
+                                return;
+                            }
+                            if (res && res.error) {
+                                console.warn('Lỗi lưu rating:', res.error);
+                                alert('Lưu đánh giá không thành công. Vui lòng thử lại sau.');
+                                return;
+                            }
+                            // success: refresh summary
+                            const info = await getTutorRatings(tutorId);
+                            if (info) widget.title = `Đánh giá trung bình: ${info.avg.toFixed(2)} (${info.count} lượt)`;
+                        } catch (err) {
+                            console.warn('Lỗi lưu rating:', err);
+                            alert('Có lỗi xảy ra khi lưu đánh giá.');
+                        }
+                    }
+                });
+            s.addEventListener('mouseover', () => {
+                const hv = parseInt(s.dataset.val);
+                stars.forEach(x => x.classList.toggle('active', parseInt(x.dataset.val) <= hv));
+            });
+        });
+        // restore on mouseleave to selected rating
+        widget.addEventListener('mouseleave', () => {
+            const sel = parseInt(widget.dataset.rating) || 0;
+            stars.forEach(x => x.classList.toggle('active', parseInt(x.dataset.val) <= sel));
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initStarRatingWidgets();
+});
+
+/* ================= Supabase integration helpers ================= */
+// Assumptions:
+// - There is a `tutors` table with columns: id, name, subtitle, avatar, price, bio, education, experience, subjects, formats, lat, lng, tags
+// - There is a `tutor_ratings` table with columns: id, tutor_id, user_id, rating, created_at
+async function fetchTutorsFromSupabase() {
+    if (!window.supabaseClient) return null;
+    try {
+        const { data, error } = await window.supabaseClient
+            .from('tutors')
+            .select('*');
+        if (error) {
+            console.warn('Supabase fetch tutors error:', error);
+            return null;
+        }
+        // normalize tags if needed (text -> array)
+        const normalized = data.map(t => ({
+            id: t.id,
+            name: t.name,
+            subtitle: t.subtitle,
+            avatar: t.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(t.name || 'anon')}`,
+            price: t.price || '',
+            bio: t.bio || '',
+            education: t.education || '',
+            experience: t.experience || '',
+            subjects: t.subjects || '',
+            formats: t.formats || '',
+            lat: parseFloat(t.lat) || 0,
+            lng: parseFloat(t.lng) || 0,
+            tags: Array.isArray(t.tags) ? t.tags : (typeof t.tags === 'string' ? t.tags.split(',').map(x => x.trim()) : [])
+        }));
+        return normalized;
+    } catch (err) {
+        console.error('fetchTutorsFromSupabase failed', err);
+        return null;
+    }
+}
+
+async function saveTutorRating(tutorId, rating) {
+    if (!window.supabaseClient) throw new Error('Supabase client not available');
+    try {
+        // Check session first (avoids AuthSessionMissingError)
+        const sessionRes = await window.supabaseClient.auth.getSession();
+        const session = sessionRes && sessionRes.data ? sessionRes.data.session : null;
+        if (!session) {
+            // Not logged in
+            return { error: { message: 'not_logged_in' } };
+        }
+        const user = session.user;
+        const userId = user ? user.id : null;
+        // Upsert rating so each user has at most one rating per tutor
+        const payload = [{ tutor_id: tutorId, user_id: userId, rating }];
+        const { data, error } = await window.supabaseClient
+            .from('tutor_ratings')
+            .upsert(payload, { onConflict: 'tutor_id,user_id' });
+        if (error) {
+            console.warn('saveTutorRating error:', error);
+            return { error };
+        }
+        return { data };
+    } catch (err) {
+        console.error('saveTutorRating failed', err);
+        return { error: err };
+    }
+}
+
+// get average rating and count; also fetch current user's rating if logged in
+async function getTutorRatings(tutorId) {
+    if (!window.supabaseClient) return null;
+    try {
+        // avg and count
+        const { data: agg, error: aggErr } = await window.supabaseClient
+            .rpc('get_tutor_rating_summary', { p_tutor_id: tutorId });
+        // If RPC not available, fallback to query
+        let avg = 0, count = 0;
+        if (aggErr || !agg) {
+            const { data, error } = await window.supabaseClient
+                .from('tutor_ratings')
+                .select('rating', { count: 'exact' })
+                .eq('tutor_id', tutorId);
+            if (error) {
+                console.warn('getTutorRatings fallback error:', error);
+            } else if (data && data.length) {
+                count = data.length;
+                avg = data.reduce((s, r) => s + (r.rating || 0), 0) / count;
+            }
+        } else {
+            // expect rpc returns { avg, count }
+            avg = parseFloat(agg.avg) || 0;
+            count = parseInt(agg.count) || 0;
+        }
+        // user's rating
+        let userRating = null;
+        try {
+            const userRes = await window.supabaseClient.auth.getUser();
+            const user = userRes && userRes.data ? userRes.data.user : null;
+            if (user) {
+                const { data: ur, error: urErr } = await window.supabaseClient
+                    .from('tutor_ratings')
+                    .select('rating')
+                    .eq('tutor_id', tutorId)
+                    .eq('user_id', user.id)
+                    .limit(1)
+                    .order('created_at', { ascending: false });
+                if (!urErr && ur && ur.length) userRating = ur[0].rating;
+            }
+        } catch (e) {
+            // ignore
+        }
+        return { avg, count, userRating };
+    } catch (err) {
+        console.error('getTutorRatings failed', err);
+        return null;
+    }
+}
+
+/* ================= end Supabase helpers ================= */

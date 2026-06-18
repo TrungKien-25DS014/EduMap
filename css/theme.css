@@ -98,82 +98,82 @@
 /* ── Light mode ──────────────────────────────────────────── */
 body.light-mode {
     /* Backgrounds: softer, low-glare neutrals */
-    --bg-main:            #f7f9fc; /* very light cool gray */
-    --bg-gradient-1:      #eef6ff;
-    --bg-gradient-2:      #e0eefc;
-    --bg-dark:            #f7f9fc;
+    --bg-main:            #f5f7fb; /* slightly off-white to reduce glare */
+    --bg-gradient-1:      #f3f8ff; /* soft blue tint for hero */
+    --bg-gradient-2:      #eef6ff;
+    --bg-dark:            #f5f7fb;
     --primary-blue:       #1e40af; /* slightly deeper for better contrast */
     --secondary-blue:     #2563eb;
 
-    /* Text: improve contrast for body and muted text */
-    --text-primary:       #0f172a; /* strong, readable primary text */
-    --text-white:         #0f172a;
-    --text-muted:         #64748b; /* slate-500 — good for secondary labels */
-    --text-subtle:        #475569; /* slightly darker than muted for subtle headings */
+    /* Text: tuned down slightly from pure-black to reduce harshness */
+    --text-primary:       #0b1723; /* very dark but softer navy */
+    --text-white:         #0b1723;
+    --text-muted:         #64748b; /* softer muted tone */
+    --text-subtle:        #475569; /* subtle headings, readable without high contrast */
 
     /* Accent */
     --accent:             #2563eb;
     --accent-blue:        #2563eb;
     --accent-hover:       #1d4ed8;
 
-    /* Glass / cards: reduce glare and soften shadows */
-    --glass-bg:           rgba(255, 255, 255, 0.95);
-    --glass-card:         rgba(255, 255, 255, 0.98);
-    --glass-border:       rgba(37, 99, 235, 0.10);
-    --glass-border-light: rgba(37, 99, 235, 0.14);
-    --glass-shadow:       0 16px 32px rgba(14, 30, 60, 0.06);
+    /* Glass / cards: softened white with very light borders and gentle shadow */
+    --glass-bg:           rgba(250, 251, 253, 0.96);
+    --glass-card:         rgba(250, 251, 253, 0.98);
+    --glass-border:       rgba(15, 23, 42, 0.04);
+    --glass-border-light: rgba(15, 23, 42, 0.03);
+    --glass-shadow:       0 10px 20px rgba(14, 30, 60, 0.03);
 
-    /* Inputs: clearer fields with gentle borders */
+    /* Inputs: subtle fields with gentle borders to avoid glare */
     --input-bg:           rgba(255, 255, 255, 0.98);
-    --input-bg-focus:     #ffffff;
-    --input-border:       rgba(15, 23, 42, 0.06);
-    --input-placeholder:  rgba(71, 85, 105, 0.45);
+    --input-bg-focus:     rgba(255, 255, 255, 1);
+    --input-border:       rgba(15, 23, 42, 0.08);
+    --input-placeholder:  rgba(71, 85, 105, 0.42);
 
     /* Overlays */
-    --overlay-solid:      #f7f9fc;
-    --overlay-fade:       rgba(247, 249, 252, 0.88);
-    --overlay-modal:      rgba(2, 6, 23, 0.10); /* subtle dim for modals without heavy contrast */
+    --overlay-solid:      #f5f7fb;
+    --overlay-fade:       rgba(245, 247, 251, 0.92);
+    --overlay-modal:      rgba(2, 6, 23, 0.08); /* very subtle dim to avoid heavy contrast */
 
     /* Nav */
-    --nav-bg:             rgba(255, 255, 255, 0.96);
+    --nav-bg:             rgba(255, 255, 255, 0.98);
     --nav-border:         rgba(15, 23, 42, 0.06);
 
     /* Misc UI */
-    --divider:            rgba(15, 23, 42, 0.06);
+    --divider:            rgba(15, 23, 42, 0.05);
     --scrollbar-thumb:    #93c5fd;
-    --white-glass:        rgba(15, 23, 42, 0.04);
+    --white-glass:        rgba(15, 23, 42, 0.03);
 
     /* Hero gradients (index page) */
     --hero-overlay-1:     rgba(238, 246, 255, 0.95);
     --hero-overlay-2:     rgba(238, 246, 255, 0.60);
     --hero-bottom:        #f7f9fc;
 
-    /* Footer: keep a darker footer for separation but soften the tone */
-    --footer-bg:          #15304f;
+    /* Footer: darker navy for grounding the page */
+    --footer-bg:          #0f2a45;
     --footer-border:      rgba(255, 255, 255, 0.06);
-    --footer-text:        #cfe7ff;
+    --footer-text:        #dbeafe;
     --footer-link-hover:  #ffffff;
 
     /* Login modal card */
-    --modal-card-bg:      rgba(255, 255, 255, 0.99);
-    --modal-card-border:  rgba(15, 23, 42, 0.06);
-    --modal-card-shadow:  0 22px 44px rgba(14, 30, 60, 0.06);
-    --modal-overlay-bg:   rgba(2, 6, 23, 0.10);
+    --modal-card-bg:      rgba(255,255,255,0.98);
+    --modal-card-border:  rgba(15, 23, 42, 0.05);
+    --modal-card-shadow:  0 18px 36px rgba(14, 30, 60, 0.04);
+    --modal-overlay-bg:   rgba(2, 6, 23, 0.08);
     --modal-text-muted:   #64748b;
     --modal-close-color:  #64748b;
-    --modal-close-hover:  #0f172a;
+    --modal-close-hover:  #0b1723;
     --modal-link-color:   #475569;
 
     /* Inputs inside modal */
-    --glass-input-bg:     #ffffff;
-    --glass-input-border: rgba(15, 23, 42, 0.06);
-    --glass-input-text:   #0f172a;
-    --glass-input-placeholder: rgba(71, 85, 105, 0.45);
-    --glass-input-focus-bg: #ffffff;
-    --glass-input-focus-shadow: 0 0 12px rgba(37, 99, 235, 0.10);
+    --glass-input-bg:     rgba(255,255,255,0.98);
+    --glass-input-border: rgba(15, 23, 42, 0.08);
+    --glass-input-text:   #0b1723;
+    --glass-input-placeholder: rgba(71, 85, 105, 0.42);
+    --glass-input-focus-bg: rgba(255,255,255,1);
+    --glass-input-focus-shadow: 0 0 10px rgba(37, 99, 235, 0.08);
 
     /* Nav links */
-    --nav-link-color:     #475569;
+    --nav-link-color:     #334155;
     --nav-link-hover:     #1d4ed8;
     --nav-active-bg:      rgba(37, 99, 235, 0.08);
 

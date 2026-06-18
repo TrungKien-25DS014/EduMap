@@ -152,19 +152,19 @@ body.light-mode .hero-bg-image {
 }
 
 body.light-mode .info-text h1 {
-    color: #0f172a;
-    text-shadow: 0 2px 16px rgba(255, 255, 255, 0.6);
+    color: var(--text-primary);
+    text-shadow: none;
 }
 
 .info-text p {
     font-size: 18px;
-    color: #cbd5e1;
+    color: var(--text-subtle);
     margin-bottom: 40px;
     line-height: 1.6;
 }
 
 body.light-mode .info-text p {
-    color: #1e3a6e;
+    color: var(--text-muted);
 }
 
 .btn-main {
@@ -321,11 +321,11 @@ footer {
 }
 
 .footer-col .logo span {
-    color: #93c5fd;
+    color: var(--accent);
 }
 
 .footer-col h3 {
-    color: #93c5fd;
+    color: var(--footer-text);
     margin-bottom: 20px;
     font-size: 16px;
     text-transform: uppercase;

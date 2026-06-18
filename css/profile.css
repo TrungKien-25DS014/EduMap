@@ -27,7 +27,7 @@
     height: 320px;
     object-fit: cover;
     border-radius: 12px;
-    border: 6px solid #fff;
+    border: 6px solid var(--glass-card);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
@@ -62,10 +62,10 @@
 }
 
 .tag {
-    background: #e6f0fb;
+    background: var(--glass-bg);
     padding: 6px 10px;
     border-radius: 8px;
-    color: #145;
+    color: var(--text-primary);
     font-weight: 700;
 }
 
@@ -80,12 +80,12 @@
 }
 
 .sub-line {
-    color: #6b7280;
+    color: var(--text-muted);
     margin-bottom: 14px;
 }
 
 .about p {
-    color: #334155;
+    color: var(--text-primary);
     line-height: 1.6;
 }
 
@@ -117,7 +117,7 @@
 }
 
 .r-meta {
-    color: #6b7280;
+    color: var(--text-muted);
     font-size: 13px;
 }
 
@@ -172,11 +172,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #ffffff;
+    background: var(--glass-bg);
     padding: 8px 10px;
     border-radius: 10px;
-    border: 1px solid rgba(10, 20, 40, 0.06);
-    box-shadow: 0 6px 18px rgba(10, 20, 40, 0.03);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
 }
 
 .subject-row .sub {
@@ -185,15 +185,15 @@
 }
 
 .subject-row .grade {
-    color: #6b7280;
+    color: var(--text-muted);
     margin-left: 10px;
     font-size: 13px;
 }
 
 .subject-row .remove {
     background: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    color: #9b1c1c;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    color: var(--color-red);
     padding: 6px 8px;
     border-radius: 8px;
     cursor: pointer;
@@ -209,14 +209,14 @@
     flex: 1;
     padding: 8px 10px;
     border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--input-border);
     outline: none;
     transition: box-shadow .12s, border-color .12s;
-    background: #fff;
+    background: var(--input-bg);
 }
 
 .add-row input::placeholder {
-    color: #9aa4ae;
+    color: var(--input-placeholder);
 }
 
 .add-row input:focus {

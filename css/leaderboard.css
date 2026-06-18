@@ -24,34 +24,35 @@ body {
     padding: 18px;
     border-radius: 16px;
     width: 220px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--glass-shadow);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    color: #0a2647;
+    color: var(--text-primary);
 }
 
 .card.rank-1 {
-    background: linear-gradient(180deg, #FFD75A 0%, #FFC857 100%);
+    /* softer gold gradient for top rank to avoid harsh brightness */
+    background: linear-gradient(180deg, #F7E6B8 0%, #EFC66A 100%);
     min-height: 280px;
     transform: translateY(-12px);
-    border: 3px solid rgba(255, 200, 50, 0.25);
+    border: 2px solid rgba(231, 173, 70, 0.14);
 }
 
 .card.rank-2 {
-    background: linear-gradient(180deg, #E6EEF7 0%, #D6E6F8 100%);
+    background: linear-gradient(180deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
     min-height: 240px;
     transform: translateY(-6px);
-    border: 2px solid rgba(60, 110, 170, 0.12);
+    border: 1px solid rgba(37, 99, 235, 0.08);
 }
 
 .card.rank-3 {
     background: linear-gradient(180deg, #E7C29A 0%, #D9A66D 100%);
     min-height: 220px;
     transform: translateY(0);
-    border: 2px solid rgba(150, 90, 40, 0.12);
+    border: 1px solid rgba(150, 90, 40, 0.08);
 }
 
 .card.rank-1 .avatar {
@@ -92,7 +93,7 @@ body {
 
 .points {
     font-size: 18px;
-    color: #333;
+    color: var(--text-primary);
     margin-top: 8px;
     font-weight: 700;
 }
@@ -102,32 +103,33 @@ body {
     border-collapse: separate; 
     border-spacing: 0;
     margin-top: 130px;
-    background: rgba(10, 38, 71, 0.3) !important; 
+    background: var(--glass-bg) !important; 
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--glass-border);
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--glass-shadow);
 }
 
 .leaderboard-table th {
-    background: rgba(44, 116, 179, 0.5) !important; 
-    color: #ffffff !important;
+    /* make header softer: light accent wash + darker text (less glaring) */
+    background: linear-gradient(180deg, rgba(37,99,235,0.12) 0%, rgba(37,99,235,0.08) 100%) !important;
+    color: var(--text-primary) !important;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 14px;
     padding: 18px 20px;
     text-align: left;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid rgba(15,23,42,0.04);
 }
 
 .leaderboard-table td {
     padding: 16px 20px;
     text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    color: #cbd5e1;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+    color: var(--text-muted);
     font-size: 15px;
     vertical-align: middle;
 }
@@ -137,7 +139,7 @@ body {
 }
 
 .leaderboard-table tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(15, 23, 42, 0.02);
 }
 
 .leaderboard-table tr:last-child td {
@@ -150,7 +152,7 @@ body {
     border-radius: 50%;
     margin-right: 12px;
     vertical-align: middle;
-    border: 2px solid rgba(44, 116, 179, 0.5);
+    border: 2px solid rgba(37, 99, 235, 0.25);
 }
 
 @media (max-width: 800px) {

@@ -982,3 +982,8 @@ textarea::placeholder,
 body.light-mode .star-rating i { 
     color: #cbd5e1; 
 }
+/* Small variant used under the formats block */
+.star-rating.small { font-size: 12px; line-height: 1; }
+.star-rating.small i { font-size: 13px; color: #94a3b8; }
+.star-rating.small i.active { color: #f59e0b; transform: scale(1.05); }
+.formats-rating { display: inline-block; }
