@@ -1,30 +1,4 @@
-:root {
-    --bg-main: #030d1a;
-    --bg-gradient-1: #0a2647;
-    --bg-gradient-2: #144272;
-    --text-primary: #ffffff;
-    --text-muted: #94a3b8;
-    --accent: #2C74B3;
-    --glass-bg: rgba(20, 66, 114, 0.28);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --input-bg: rgba(255, 255, 255, 0.05);
-    --overlay-solid: #030d1a;
-    --overlay-fade: rgba(3, 13, 26, 0.7);
-}
-
-body.light-mode {
-    --bg-main: #f8fafc;
-    --bg-gradient-1: #e2e8f0;
-    --bg-gradient-2: #cbd5e1;
-    --text-primary: #0f172a;
-    --text-muted: #64748b;
-    --accent: #2563eb;
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(0, 0, 0, 0.1);
-    --input-bg: rgba(0, 0, 0, 0.03);
-    --overlay-solid: #f8fafc;
-    --overlay-fade: rgba(248, 250, 252, 0.8);
-}
+@import "./theme.css";
 
 body {
     background-color: var(--bg-main);
@@ -44,7 +18,7 @@ body {
     inset: 0;
     z-index: -1;
     overflow: hidden;
-    background: #030d1a;
+    background: var(--bg-main);
 }
 
 .particles {
@@ -90,7 +64,7 @@ body {
 
 .navbar {
     height: 80px;
-    background: rgba(10, 38, 71, 0.55);
+    background: var(--nav-bg);
     backdrop-filter: blur(18px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     position: sticky;
@@ -340,7 +314,7 @@ body {
     position: absolute;
     bottom: 25px;
     left: 25px;
-    background: rgba(10, 38, 71, 0.88);
+    background: var(--overlay-fade);
     padding: 12px 22px;
     border-radius: 999px;
     font-size: 14px;
@@ -544,7 +518,7 @@ body {
 
 body {
     background: #030d1a !important;
-    color: #ffffff !important;
+    color: var(--text-primary) !important;
 }
 
 nav {
@@ -565,7 +539,7 @@ nav {
 .chat-header h3,
 .panel-header h3,
 .user-trigger {
-    color: #ffffff !important;
+    color: var(--text-primary) !important;
 }
 
 .time,
@@ -596,7 +570,7 @@ textarea::placeholder,
 
 .chat-header,
 .chat-footer {
-    background: rgba(10, 38, 71, 0.6) !important;
+    background: var(--nav-bg) !important;
     border-color: rgba(255, 255, 255, 0.06) !important;
 }
 
@@ -610,16 +584,16 @@ textarea::placeholder,
 }
 
 .sent {
-    background: #2C74B3 !important;
+    background: var(--accent) !important;
 }
 
 .menu-links a {
-    color: #cbd5e1 !important;
+    color: var(--text-subtle) !important;
 }
 
 .menu-links a.active,
 .menu-links a:hover {
-    color: #2C74B3 !important;
+    color: var(--accent) !important;
     background: rgba(44, 116, 179, 0.12) !important;
 }
 
@@ -852,7 +826,7 @@ textarea::placeholder,
     list-style: none;
     max-height: 250px;
     overflow-y: auto;
-    background: rgba(10, 38, 71, 0.95) !important;
+    background: var(--nav-bg) !important;
     backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: 12px;
@@ -911,7 +885,7 @@ textarea::placeholder,
     top: calc(100% + 15px);
     right: 0;
     width: 220px;
-    background: rgba(10, 38, 71, 0.95);
+    background: var(--nav-bg);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;

@@ -1,30 +1,4 @@
-:root {
-    --bg-main: #030d1a;
-    --bg-gradient-1: #0a2647;
-    --bg-gradient-2: #144272;
-    --text-primary: #ffffff;
-    --text-muted: #94a3b8;
-    --accent: #2C74B3;
-    --glass-bg: rgba(20, 66, 114, 0.28);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --input-bg: rgba(255, 255, 255, 0.05);
-    --overlay-solid: #030d1a;
-    --overlay-fade: rgba(3, 13, 26, 0.7);
-}
-
-body.light-mode {
-    --bg-main: #f8fafc;
-    --bg-gradient-1: #e2e8f0;
-    --bg-gradient-2: #cbd5e1;
-    --text-primary: #0f172a;
-    --text-muted: #64748b;
-    --accent: #2563eb;
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(0, 0, 0, 0.1);
-    --input-bg: rgba(0, 0, 0, 0.03);
-    --overlay-solid: #f8fafc;
-    --overlay-fade: rgba(248, 250, 252, 0.8);
-}
+@import "./theme.css";
 
 body {
     background-color: var(--bg-main);

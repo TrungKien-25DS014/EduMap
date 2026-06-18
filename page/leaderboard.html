@@ -29,7 +29,17 @@
                     <div class="avatar" id="userAvatarDisplay">
                         <img id="userAvatarImg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="Avatar">
                     </div>
-                    <div class="user-dropdown" id="userDropdown">
+                                        <div class="user-dropdown" id="userDropdown">
+                        <div class="dropdown-info" id="dropdownUserInfo">
+                            <p id="dropdownUserName">...</p>
+                            <small id="dropdownUserEmail">...</small>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <label class="dropdown-item theme-toggle-row" style="cursor:pointer;">
+                            <i class="fa-solid fa-circle-half-stroke"></i>
+                            <span>Chế độ sáng</span>
+                            <input type="checkbox" id="dropdownThemeToggle" style="margin-left:auto;">
+                        </label>
                         <div class="dropdown-divider"></div>
                         <button id="btnLogout" class="logout-btn">
                             <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
@@ -85,5 +95,6 @@
     <script src="../js/user-info.js"></script>
     <script src="../js/find_tutor.js"></script>
     <script src="../js/leaderboard.js"></script>
+    <script src="../js/theme.js"></script>
 </body>
 </html>

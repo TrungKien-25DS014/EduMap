@@ -1,9 +1,4 @@
-:root {
-    --bg-dark: #030d1a;
-    --primary-blue: #0A2647;
-    --accent: #2C74B3;
-    --text-white: #ffffff;
-}
+@import "./theme.css";
 
 * {
     margin: 0;
@@ -31,10 +26,24 @@ nav {
     z-index: 1000;
 }
 
+body.light-mode nav {
+    background: var(--nav-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--nav-border);
+    box-shadow: 0 2px 16px rgba(29, 78, 216, 0.07);
+    position: fixed;
+}
+
 .logo {
     font-size: 26px;
     font-weight: 800;
     letter-spacing: -1px;
+    color: var(--text-white);
+}
+
+body.light-mode .logo {
+    color: var(--primary-blue);
 }
 
 .logo span {
@@ -48,13 +57,17 @@ nav {
 
 .menu-links a {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--nav-link-color);
     font-weight: 500;
     transition: 0.3s;
+    padding: 6px 10px;
+    border-radius: 8px;
 }
 
-.menu-links a:hover {
-    color: var(--text-white);
+.menu-links a:hover,
+.menu-links a.active {
+    color: var(--accent) !important;
+    background: var(--nav-active-bg) !important;
 }
 
 .btn-login-nav {
@@ -71,7 +84,9 @@ nav {
 }
 
 .btn-login-nav:hover {
-    background: #3484c9;
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
 }
 
 .hero {
@@ -92,11 +107,15 @@ nav {
     z-index: 1;
 }
 
+body.light-mode .hero-bg-image {
+    filter: brightness(1.08) saturate(0.9);
+}
+
 .hero-gradient-overlay {
     position: absolute;
     inset: 0;
     z-index: 2;
-    background: linear-gradient(110deg, #030d1a 0%, #030d1a 45%, rgba(3, 13, 26, 0.7) 60%, transparent 80%);
+    background: linear-gradient(110deg, var(--hero-overlay-1) 0%, var(--hero-overlay-1) 45%, var(--hero-overlay-2) 60%, transparent 80%);
 }
 
 .hero-gradient-bottom {
@@ -105,7 +124,7 @@ nav {
     left: 0;
     width: 100%;
     height: 150px;
-    background: linear-gradient(to top, #030d1a 0%, transparent 100%);
+    background: linear-gradient(to top, var(--hero-bottom) 0%, transparent 100%);
     z-index: 3;
 }
 
@@ -129,6 +148,12 @@ nav {
     line-height: 1.15;
     margin-bottom: 24px;
     letter-spacing: -1px;
+    color: var(--text-white);
+}
+
+body.light-mode .info-text h1 {
+    color: #0f172a;
+    text-shadow: 0 2px 16px rgba(255, 255, 255, 0.6);
 }
 
 .info-text p {
@@ -136,6 +161,10 @@ nav {
     color: #cbd5e1;
     margin-bottom: 40px;
     line-height: 1.6;
+}
+
+body.light-mode .info-text p {
+    color: #1e3a6e;
 }
 
 .btn-main {
@@ -151,12 +180,13 @@ nav {
     border: none;
     cursor: pointer;
     text-align: center;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
 }
 
 .btn-main:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(44, 116, 179, 0.4);
-    background: #3484c9;
+    box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45);
+    background: var(--accent-hover);
 }
 
 .modal-overlay {
@@ -165,7 +195,7 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(3, 13, 26, 0.6);
+    background: var(--modal-overlay-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     z-index: 2000;
@@ -183,14 +213,14 @@ nav {
 }
 
 .login-card {
-    background: rgba(20, 66, 114, 0.35);
+    background: var(--modal-card-bg);
     backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--modal-card-border);
     padding: 40px;
     border-radius: 24px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--modal-card-shadow);
     position: relative;
     transform: translateY(-20px);
     transition: transform 0.4s ease;
@@ -206,23 +236,24 @@ nav {
     top: 20px;
     right: 20px;
     font-size: 24px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--modal-close-color);
     cursor: pointer;
     transition: 0.2s;
 }
 
 .close-modal:hover {
-    color: #fff;
+    color: var(--modal-close-hover);
 }
 
 .login-card h2 {
     margin-bottom: 10px;
     font-size: 24px;
     font-weight: 800;
+    color: var(--text-primary);
 }
 
 .login-card p {
-    color: #94a3b8;
+    color: var(--modal-text-muted);
     font-size: 14px;
     margin-bottom: 25px;
 }
@@ -231,9 +262,9 @@ nav {
     width: 100%;
     padding: 14px 18px;
     margin-bottom: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
+    background: var(--glass-input-bg);
+    border: 1px solid var(--glass-input-border);
+    color: var(--glass-input-text);
     border-radius: 12px;
     font-family: inherit;
     font-size: 14px;
@@ -241,20 +272,14 @@ nav {
     transition: 0.3s;
 }
 
-.menu-links a.active,
-.menu-links a:hover {
-    color: #2C74B3 !important;
-    background: rgba(44, 116, 179, 0.12) !important;
-}
-
 .glass-input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--glass-input-placeholder);
 }
 
 .glass-input:focus {
     border-color: var(--accent);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 15px rgba(44, 116, 179, 0.3);
+    background: var(--glass-input-focus-bg);
+    box-shadow: var(--glass-input-focus-shadow);
 }
 
 .login-footer {
@@ -265,7 +290,7 @@ nav {
 }
 
 .login-footer a {
-    color: #cbd5e1;
+    color: var(--modal-link-color);
     text-decoration: none;
     transition: 0.2s;
 }
@@ -275,7 +300,7 @@ nav {
 }
 
 footer {
-    background-color: #030d1a;
+    background-color: var(--footer-bg);
     padding: 60px 5%;
     position: relative;
     z-index: 10;
@@ -285,14 +310,22 @@ footer {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--footer-border);
     padding-bottom: 40px;
     max-width: 1400px;
     margin: 0 auto;
 }
 
+.footer-col .logo {
+    color: #ffffff;
+}
+
+.footer-col .logo span {
+    color: #93c5fd;
+}
+
 .footer-col h3 {
-    color: var(--accent);
+    color: #93c5fd;
     margin-bottom: 20px;
     font-size: 16px;
     text-transform: uppercase;
@@ -300,7 +333,7 @@ footer {
 
 .footer-col a,
 .footer-col p {
-    color: #94a3b8;
+    color: var(--footer-text);
     text-decoration: none;
     display: block;
     margin-bottom: 10px;
@@ -309,12 +342,12 @@ footer {
 }
 
 .footer-col a:hover {
-    color: #fff;
+    color: var(--footer-link-hover);
 }
 
 @media (max-width: 900px) {
     .hero-gradient-overlay {
-        background: linear-gradient(to top, #030d1a 0%, #030d1a 60%, rgba(3, 13, 26, 0.5) 80%, transparent 100%);
+        background: linear-gradient(to top, var(--hero-overlay-1) 0%, var(--hero-overlay-1) 60%, var(--hero-overlay-2) 80%, transparent 100%);
     }
 
     .info-text {
