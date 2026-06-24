@@ -20,11 +20,11 @@ body {
 }
 
 .card {
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(6px);
     padding: 18px;
     border-radius: 16px;
     width: 220px;
-    box-shadow: var(--glass-shadow);
+    box-shadow: 0 8px 20px rgba(34,30,20,0.04);
     text-align: center;
     display: flex;
     flex-direction: column;

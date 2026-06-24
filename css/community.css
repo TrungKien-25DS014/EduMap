@@ -18,15 +18,32 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #CBD5E1;
+    background: var(--scrollbar-thumb);
     border-radius: 10px;
 }
 
 .logo {
     font-weight: 900;
     font-size: 24px;
-    color: var(--primary-blue);
     letter-spacing: 0.5px;
+}
+
+/* Ensure navbar layout matches other pages */
+.navbar {
+    height: 80px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px;
 }
 
 .menu-links {
@@ -36,18 +53,18 @@ body {
 
 .menu-links a {
     text-decoration: none;
-    color: var(--text-muted);
+    color: var(--nav-link-color);
     font-weight: 600;
     font-size: 15px;
-    padding: 10px 16px;
-    border-radius: 8px;
+    padding: 6px 12px;
+    border-radius: 12px;
     transition: all 0.3s ease;
 }
 
 .menu-links a:hover,
 .menu-links a.active {
-    color: var(--primary-blue);
-    background: rgba(10, 102, 194, 0.08);
+    color: var(--accent);
+    background: var(--nav-active-bg);
 }
 
 .btn-login {
@@ -77,11 +94,11 @@ body {
 }
 
 .glass-panel {
-    background: var(--panel-bg);
-    backdrop-filter: blur(16px);
-    border: 1px solid #FFFFFF;
-    border-radius: 16px;
-    box-shadow: var(--glass-shadow);
+    background: var(--panel-paper-bg, var(--glass-bg));
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    box-shadow: 0 8px 18px rgba(34,30,20,0.05);
     padding: 20px;
 }
 
@@ -100,14 +117,14 @@ body {
     justify-content: center;
     text-align: center;
     color: var(--text-muted);
-    border: 2px dashed #CBD5E1;
+    border: 2px dashed rgba(75,95,82,0.16);
     background: transparent;
 }
 
 .empty-state i {
     font-size: 32px;
     margin-bottom: 10px;
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .feed-center {
@@ -134,7 +151,7 @@ body {
     flex: 1;
     padding: 12px 16px;
     border-radius: 24px;
-    border: 1px solid #E5E7EB;
+    border: 1px solid rgba(34,50,40,0.05);
     background: var(--bg-body);
     resize: none;
     outline: none;
@@ -143,15 +160,15 @@ body {
 }
 
 .post-box textarea:focus {
-    border-color: var(--primary-blue);
-    background: #FFFFFF;
+    border-color: var(--accent);
+    background: var(--glass-bg);
 }
 
 .post-box-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #E5E7EB;
+    border-top: 1px solid rgba(34,50,40,0.05);
     padding-top: 12px;
 }
 
@@ -167,8 +184,8 @@ body {
 }
 
 .attach-tools button:hover {
-    background: #F3F4F6;
-    color: var(--primary-blue);
+    background: var(--glass-bg);
+    color: var(--accent);
 }
 
 .btn-submit {
@@ -191,7 +208,7 @@ body {
 }
 
 .post:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 40px rgba(34, 50, 40, 0.06);
 }
 
 .post-header {
@@ -521,22 +538,57 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    margin-top: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 14px;
-    color: #94a3b8;
+
+.menu-links,
+.nav-links {
+    text-decoration: none;
+    color: var(--nav-link-color);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
 }
 
-.stat-likes {
+.menu-links,
+.nav-links {
+    display: flex;
+    align-items: center; /* vertically center children */
+    gap: 10px;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.nav-links li {
     display: flex;
     align-items: center;
-    gap: 6px;
 }
 
-.like-icon-circle {
-    background: linear-gradient(135deg, #1877F2, #2851A3);
-    color: white;
+/* Normalize anchors whether they're direct children of the ul or inside li */
+.nav-links > a,
+.nav-links li a,
+.menu-links > a {
+    display: inline-flex;
+    align-items: center;
+    height: 100%; /* let the anchor fill the nav height for consistent centering */
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.menu-links a,
+.nav-links a {
+    display: inline-flex;
+    align-items: center;
+}
+
+.menu-links a:hover,
+.menu-links a.active,
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent);
+    background: var(--nav-active-bg);
+}
     width: 20px;
     height: 20px;
     border-radius: 50%;
