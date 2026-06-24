@@ -411,5 +411,45 @@ async function getTutorRatings(tutorId) {
         return null;
     }
 }
+/* ================= Supabase Realtime Presence (Đếm số người Online) ================= */
+document.addEventListener('DOMContentLoaded', async () => {
+    const onlineCountDisplay = document.getElementById('onlineCountDisplay');
+    const locationDisplay = document.getElementById('locationDisplay');
+    
+    // Tiện thể điền luôn vị trí mặc định cho phần hiển thị kế bên
+    if (locationDisplay) {
+        locationDisplay.textContent = 'Đà Nẵng';
+    }
 
-/* ================= end Supabase helpers ================= */
+    if (!onlineCountDisplay || !window.supabaseClient) return;
+
+    // Tạo một ID tạm cho khách nếu chưa đăng nhập để đếm cả khách vãng lai
+    let userId = 'guest-' + Math.floor(Math.random() * 1000000);
+    if (typeof UserInfo !== 'undefined') {
+        const id = await UserInfo.getUserID();
+        if (id) userId = id;
+    }
+
+    // Tạo một kênh (channel) chung để mọi người kết nối vào
+    const presenceChannel = window.supabaseClient.channel('edumap-online-users');
+
+    presenceChannel
+        // Lắng nghe sự kiện mỗi khi có người mới vào hoặc thoát ra
+        .on('presence', { event: 'sync' }, () => {
+            const state = presenceChannel.presenceState();
+            // state là một object chứa ID của tất cả những người đang kết nối
+            const onlineCount = Object.keys(state).length;
+            
+            // Cập nhật con số ra ngoài màn hình
+            onlineCountDisplay.textContent = onlineCount;
+        })
+        .subscribe(async (status) => {
+            if (status === 'SUBSCRIBED') {
+                // Khi vừa kết nối thành công, "báo cáo" sự có mặt của mình lên hệ thống
+                await presenceChannel.track({
+                    user_id: userId,
+                    online_at: new Date().toISOString(),
+                });
+            }
+        });
+});
