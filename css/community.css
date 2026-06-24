@@ -647,7 +647,7 @@ body {
     height: 36px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid var(--glass-border);
 }
 
 .comment-block {
@@ -657,18 +657,19 @@ body {
 }
 
 .comment-bubble {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 8px 14px;
-    border-radius: 18px;
+    background: var(--panel-paper-bg, var(--glass-card));
+    padding: 10px 14px;
+    border-radius: 14px;
     display: inline-block;
     width: fit-content;
+    border: 1px solid var(--glass-border);
 }
 
 .comment-author {
     display: block;
     font-weight: 700;
     font-size: 13px;
-    color: #e2e8f0;
+    color: var(--text-primary);
     margin-bottom: 2px;
     cursor: pointer;
 }
@@ -677,7 +678,8 @@ body {
 
 .comment-text {
     font-size: 14px;
-    color: #ffffff;
+    color: var(--text-primary);
+    font-weight: 500;
     line-height: 1.4;
     word-wrap: break-word;
 }
@@ -688,7 +690,7 @@ body {
     padding-left: 12px;
     margin-top: 4px;
     font-size: 12px;
-    color: #94a3b8;
+    color: var(--text-muted);
     font-weight: 600;
 }
 
@@ -708,9 +710,9 @@ body {
     position: relative;
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--glass-bg);
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid var(--glass-border);
     transition: background 0.3s ease;
 }
 
@@ -723,7 +725,7 @@ body {
     background: transparent !important;
     border: none !important;
     padding: 10px 14px;
-    color: white;
+    color: var(--text-primary);
     font-size: 14px;
     outline: none;
 }
@@ -732,7 +734,7 @@ body {
     display: flex;
     gap: 12px;
     padding-right: 14px;
-    color: #94a3b8;
+    color: var(--text-muted);
 }
 
 .input-actions i { cursor: pointer; transition: color 0.2s;}
