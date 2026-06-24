@@ -2,11 +2,124 @@ const DB = window.supabaseClient;
 
 let ME = null;
 let MY_LIKES = new Set();
-
+let currentChatUserId = null; // Lưu ID của người đang chat
+let searchTimeout;
 function esc(s) {
     return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
+function initSearchUser() {
+    const searchInput = document.getElementById('userSearchInput');
+    const hResults = document.getElementById('horizontalSearchResults');
 
+    if (!searchInput || !hResults) return;
+
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        const query = e.target.value.trim();
+        
+        if (!query) {
+            hResults.innerHTML = '<p style="color:#94a3b8; font-size:13px; text-align:center; width: 100%; margin-top: 20px;">Gõ tên để bắt đầu tìm kiếm</p>';
+            return;
+        }
+
+        searchTimeout = setTimeout(async () => {
+            // Chờ người dùng ngừng gõ 300ms rồi mới gọi API
+            hResults.innerHTML = '<p style="color:#94a3b8; font-size:13px; text-align:center; width: 100%; margin-top: 20px;"><i class="fa-solid fa-spinner fa-spin"></i> Đang tìm...</p>';
+
+            const { data, error } = await DB.from('accounts')
+                .select('id, full_name')
+                .ilike('full_name', `%${query}%`)
+                .neq('id', ME?.id || '00000000-0000-0000-0000-000000000000') // Bỏ qua chính mình
+                .limit(10);
+
+            if (error) {
+                hResults.innerHTML = '<p style="color:#ef4444; font-size:13px;">Lỗi tìm kiếm</p>';
+                return;
+            }
+
+            hResults.innerHTML = '';
+            if (data.length === 0) {
+                hResults.innerHTML = '<p style="color:#94a3b8; font-size:13px; text-align:center; width: 100%; margin-top: 20px;">Không tìm thấy ai</p>';
+                return;
+            }
+
+            data.forEach(user => {
+                const avatarUrl = av(user.full_name);
+                const lastName = user.full_name.split(' ').pop(); // Chỉ lấy tên cuối cho gọn
+                
+                const div = document.createElement('div');
+                div.className = 'h-user-item';
+                div.innerHTML = `
+                    <img src="${avatarUrl}" alt="${user.full_name}">
+                    <span>${esc(lastName)}</span>
+                `;
+                
+                // Khi click vào kết quả -> Mở chat
+                div.onclick = () => openChat(user.full_name, avatarUrl, user.id);
+                hResults.appendChild(div);
+            });
+        }, 300);
+    });
+}
+async function loadRecentContacts() {
+    const container = document.getElementById('recentContactsContainer');
+    if (!container) return;
+
+    if (!ME) {
+        container.innerHTML = '<p style="text-align:center; color:#94a3b8; font-size:13px; margin-top:20px;">Đăng nhập để xem liên hệ</p>';
+        return;
+    }
+
+    // 1. Lấy 100 tin nhắn gần nhất có sự tham gia của mình
+    const { data: messages, error } = await DB.from('messages')
+        .select('sender_id, receiver_id')
+        .or(`sender_id.eq.${ME.id},receiver_id.eq.${ME.id}`)
+        .order('created_at', { ascending: false })
+        .limit(100);
+
+    if (error || !messages.length) {
+        container.innerHTML = '<p style="text-align:center; color:#94a3b8; font-size:13px; margin-top:20px;">Chưa có cuộc trò chuyện nào</p>';
+        return;
+    }
+
+    // 2. Lọc ra danh sách ID duy nhất của đối phương
+    const recentUserIds = [...new Set(messages.map(m => m.sender_id === ME.id ? m.receiver_id : m.sender_id))];
+
+    // 3. Lấy thông tin chi tiết (tên) của những người đó từ bảng accounts
+    const { data: users, error: usersErr } = await DB.from('accounts')
+        .select('id, full_name')
+        .in('id', recentUserIds);
+
+    if (usersErr || !users.length) {
+        container.innerHTML = '<p style="text-align:center; color:#ef4444; font-size:13px; margin-top:20px;">Lỗi tải dữ liệu</p>';
+        return;
+    }
+
+    // 4. Render ra giao diện
+    container.innerHTML = '';
+    
+    // Sắp xếp lại danh sách users dựa theo thứ tự nhắn tin gần nhất (theo mảng recentUserIds)
+    const sortedUsers = recentUserIds.map(id => users.find(u => u.id === id)).filter(Boolean);
+
+    sortedUsers.forEach(user => {
+        const item = document.createElement('div');
+        item.className = 'chat-item';
+        // Truyền đủ 3 tham số vào openChat: tên, avatar, id người nhận
+        item.onclick = () => openChat(user.full_name, av(user.full_name), user.id);
+        
+        item.innerHTML = `
+            <div class="avatar-container">
+                <img src="${av(user.full_name)}" alt="Avatar">
+                <div class="online-dot"></div>
+            </div>
+            <div class="chat-item-info">
+                <h5>${esc(user.full_name)}</h5>
+                <p>Nhấn để tiếp tục chat</p>
+            </div>
+        `;
+        container.appendChild(item);
+    });
+}
 function ago(d) {
     const s = (Date.now() - new Date(d)) / 1000;
     if (s < 60) return 'Vừa xong';
@@ -327,24 +440,43 @@ function initDropdown() {
 }
 
 function initChat() {
-    const input   = document.querySelector('.chat-footer input');
+    const input = document.querySelector('.chat-footer input');
     const sendBtn = document.querySelector('.btn-send');
-    const body    = document.querySelector('.chat-body');
-    if (!input||!sendBtn||!body) return;
-    const send = () => {
+    const body = document.querySelector('.chat-body');
+    
+    if (!input || !sendBtn || !body) return;
+    
+    const send = async () => {
         const t = input.value.trim();
-        if (!t) return;
+        if (!t || !currentChatUserId || !ME) return;
+        
+        // 1. Hiển thị UI ngay lập tức cho mượt
         const m = document.createElement('div');
-        m.className='message sent'; m.innerHTML=`<p>${esc(t)}</p>`;
-        body.appendChild(m); input.value=''; body.scrollTop=body.scrollHeight;
-        setTimeout(()=>{
-            const r=document.createElement('div'); r.className='message received';
-            r.innerHTML=`<p>Bạn đợi chút mình đang bận!</p>`;
-            body.appendChild(r); body.scrollTop=body.scrollHeight;
-        },1500);
+        m.className = 'message sent'; 
+        m.innerHTML = `<p>${esc(t)}</p>`;
+        
+        // Xóa dòng "Chưa có tin nhắn" nếu có
+        const emptyMsg = body.querySelector('.empty-chat-msg');
+        if (emptyMsg) emptyMsg.remove();
+        
+        body.appendChild(m); 
+        input.value = ''; 
+        body.scrollTop = body.scrollHeight;
+
+        // 2. Đẩy data lên Supabase
+        const { error } = await DB.from('messages').insert({
+            sender_id: ME.id,
+            receiver_id: currentChatUserId,
+            content: t
+        });
+
+        if (error) {
+            toast('Gửi lỗi: ' + error.message, 'err');
+        }
     };
+
     sendBtn.onclick = send;
-    input.onkeypress = e => { if(e.key==='Enter'){e.preventDefault();send();} };
+    input.onkeypress = e => { if(e.key === 'Enter') { e.preventDefault(); send(); } };
 }
 
 function initStaticPosts() {
@@ -418,12 +550,48 @@ function initStaticPosts() {
     });
 }
 
-function openChat(name, src) {
+async function openChat(name, src, targetUserId) {
     document.getElementById('chat-name').innerText = name;
     document.getElementById('chat-avatar').src = src;
-    document.querySelector('.chat-body').innerHTML = '';
-    document.getElementById('contact-list').classList.replace('active-panel','hidden-panel');
-    document.getElementById('active-chat').classList.replace('hidden-panel','active-panel');
+    
+    const body = document.querySelector('.chat-body');
+    body.innerHTML = '<p style="text-align:center; color:#94a3b8; font-size:13px; margin-top: 20px;">Đang tải lịch sử trò chuyện...</p>';
+    
+    document.getElementById('contact-list').classList.replace('active-panel', 'hidden-panel');
+    document.getElementById('active-chat').classList.replace('hidden-panel', 'active-panel');
+
+    currentChatUserId = targetUserId; // Gán ID để biết đang nhắn với ai
+
+    if (!ME) {
+        body.innerHTML = '<p style="text-align:center; color:#ef4444; font-size:13px; margin-top: 20px;">Vui lòng đăng nhập để xem tin nhắn.</p>';
+        return;
+    }
+
+    // Gọi API lấy lịch sử tin nhắn giữa 2 người
+    const { data, error } = await DB.from('messages')
+        .select('*')
+        .or(`and(sender_id.eq.${ME.id},receiver_id.eq.${targetUserId}),and(sender_id.eq.${targetUserId},receiver_id.eq.${ME.id})`)
+        .order('created_at', { ascending: true });
+
+    body.innerHTML = '';
+    
+    if (error) {
+        body.innerHTML = '<p style="text-align:center; color:#ef4444; font-size:13px;">Lỗi tải dữ liệu.</p>';
+        return;
+    }
+
+    if (data.length === 0) {
+        body.innerHTML = '<p class="empty-chat-msg" style="text-align:center; color:#94a3b8; font-size:13px; margin-top: 20px;">Chưa có tin nhắn. Bắt đầu trò chuyện ngay!</p>';
+    } else {
+        data.forEach(msg => {
+            const isSent = msg.sender_id === ME.id;
+            const m = document.createElement('div');
+            m.className = `message ${isSent ? 'sent' : 'received'}`;
+            m.innerHTML = `<p>${esc(msg.content)}</p>`;
+            body.appendChild(m);
+        });
+        body.scrollTop = body.scrollHeight; // Cuộn xuống cuối
+    }
 }
 
 function closeChat() {
@@ -444,6 +612,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initDropdown();
     initChat();
     initStaticPosts();
+    initSearchUser();
 
     document.getElementById('submitPostBtn')?.addEventListener('click', handleSubmit);
     document.getElementById('postTextarea')?.addEventListener('keydown', e => {
@@ -453,7 +622,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (DB) {
         await initMe();
         await loadPosts();
-
+        await loadRecentContacts();
         DB.channel('comm_rt').on('postgres_changes',
             { event:'INSERT', schema:'public', table:'posts' },
             async payload => {
@@ -461,6 +630,29 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const el = await buildPost(payload.new);
                 document.getElementById('postBox').insertAdjacentElement('afterend', el);
                 toast(`Bài mới từ ${payload.new.full_name||'ai đó'}`);
+            }
+        ).subscribe();
+        DB.channel('chat_rt').on('postgres_changes',
+            { event: 'INSERT', schema: 'public', table: 'messages' },
+            payload => {
+                // Nếu mình là người nhận
+                if (ME && payload.new.receiver_id === ME.id) {
+                    // Nếu cửa sổ chat với người gửi đang mở
+                    if (currentChatUserId === payload.new.sender_id) {
+                        const body = document.querySelector('.chat-body');
+                        const emptyMsg = body.querySelector('.empty-chat-msg');
+                        if (emptyMsg) emptyMsg.remove();
+
+                        const m = document.createElement('div');
+                        m.className = 'message received';
+                        m.innerHTML = `<p>${esc(payload.new.content)}</p>`;
+                        body.appendChild(m);
+                        body.scrollTop = body.scrollHeight;
+                    } else {
+                        // Nếu cửa sổ chat chưa mở, quăng thông báo
+                        toast('Bạn có tin nhắn mới!', 'ok');
+                    }
+                }
             }
         ).subscribe();
     }

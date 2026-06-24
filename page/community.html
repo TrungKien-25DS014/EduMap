@@ -55,10 +55,18 @@
     <div class="community-layout">
         <!-- Sidebar trái -->
         <aside class="sidebar-left">
-            <div class="glass-panel empty-state">
-                <i class="fa-solid fa-code"></i>
-                <p>Khu vực tùy biến của bạn</p>
-                <span>(Menu, Group, Hashtag...)</span>
+            <div class="glass-panel" style="height: 100%; display: flex; flex-direction: column; padding: 20px;">
+                <div class="panel-header" style="padding: 0 0 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    
+                    <div class="search-input-container" style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 14px; display: flex; align-items: center;">
+                        <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; margin-right: 10px;"></i>
+                        <input type="text" id="userSearchInput" placeholder="Nhập tên người dùng..." style="background: transparent; border: none; color: white; width: 100%; outline: none; font-size: 14px;">
+                    </div>
+                </div>
+
+                <div id="horizontalSearchResults" class="horizontal-scroll-list">
+                    <p style="color:#94a3b8; font-size:13px; text-align:center; width: 100%; margin-top: 20px;">Gõ tên để bắt đầu tìm kiếm</p>
+                </div>
             </div>
         </aside>
 
@@ -214,26 +222,8 @@
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 </div>
                 <div class="contact-items">
-                    <div class="chat-item" onclick="openChat('Trần Thị B','https://i.pravatar.cc/150?img=5')">
-                        <div class="avatar-container">
-                            <img src="https://i.pravatar.cc/150?img=5" alt="Avatar">
-                            <div class="online-dot"></div>
-                        </div>
-                        <div class="chat-item-info"><h5>Trần Thị B</h5></div>
-                    </div>
-                    <div class="chat-item" onclick="openChat('Nguyễn Văn A','https://i.pravatar.cc/150?img=1')">
-                        <div class="avatar-container">
-                            <img src="https://i.pravatar.cc/150?img=1" alt="Avatar">
-                            <div class="offline-dot"></div>
-                        </div>
-                        <div class="chat-item-info"><h5>Nguyễn Văn A</h5></div>
-                    </div>
-                    <div class="chat-item" onclick="openChat('Lê Hoàng C','https://i.pravatar.cc/150?img=8')">
-                        <div class="avatar-container">
-                            <img src="https://i.pravatar.cc/150?img=8" alt="Avatar">
-                            <div class="online-dot"></div>
-                        </div>
-                        <div class="chat-item-info"><h5>Lê Hoàng C</h5></div>
+                    <div class="contact-items" id="recentContactsContainer">
+                        <p style="text-align:center; color:#94a3b8; font-size:13px; margin-top:20px;">Đang tải liên hệ...</p>
                     </div>
                 </div>
             </div>
