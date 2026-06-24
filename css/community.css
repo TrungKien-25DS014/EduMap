@@ -450,11 +450,28 @@ body {
 }
 
 .received {
-    background: #FFFFFF;
-    color: var(--text-main);
+    /* pale green bubble for incoming messages, dark readable text */
+    background: rgba(47,133,90,0.08); /* light accent wash */
+    color: var(--text-primary);
     align-self: flex-start;
     border-bottom-left-radius: 4px;
+    padding: 8px 12px;
+    border: 1px solid rgba(47,133,90,0.12);
 }
+
+/* Stronger, page-scoped override to beat rules from other CSS files */
+.community-layout .chat-body .received {
+    background: rgba(47,133,90,0.08) !important;
+    color: var(--text-primary) !important;
+    padding: 8px 12px !important;
+    border: 1px solid rgba(47,133,90,0.12) !important;
+}
+
+.community-layout .chat-body .message p {
+    color: inherit !important;
+}
+
+.message p { margin: 0; color: inherit; }
 
 .sent {
     background: var(--primary-blue);
@@ -485,6 +502,50 @@ body {
     border: none;
     background: var(--bg-body);
     outline: none;
+}
+
+/* Light-mode: ensure search and chat inputs are readable on warm background */
+body.light-mode .search-input-container input,
+body.light-mode .input-comment,
+body.light-mode .search-wrapper input {
+    color: var(--text-primary) !important;
+}
+
+body.light-mode .search-input-container input::placeholder,
+body.light-mode .input-comment::placeholder,
+body.light-mode .search-wrapper input::placeholder,
+body.light-mode .chat-footer input::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 1;
+}
+
+body.light-mode .chat-footer input {
+    color: var(--text-primary);
+    background: var(--panel-paper-bg);
+    border: 1px solid var(--glass-border);
+}
+
+/* Ensure post textarea and chat input display typed text and placeholders in light mode */
+body.light-mode .post-box textarea,
+body.light-mode .post-box .glass-input,
+body.light-mode .post-box [contenteditable],
+body.light-mode .chat-footer input,
+body.light-mode .input-comment {
+    color: var(--text-primary) !important;
+    background: transparent !important;
+}
+
+body.light-mode .post-box textarea::placeholder,
+body.light-mode .post-box .glass-input::placeholder,
+body.light-mode .chat-footer input::placeholder,
+body.light-mode .input-comment::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 1 !important;
+}
+
+/* If the post box uses a contenteditable element, ensure caret color is visible */
+body.light-mode .post-box [contenteditable] {
+    caret-color: var(--text-primary);
 }
 
 .btn-send {
