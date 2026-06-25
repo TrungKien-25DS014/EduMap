@@ -13,9 +13,37 @@ function initSearchUser() {
 
     if (!searchInput || !hResults) return;
 
+    // 1. Tạo danh sách Data Mock (Gia sư / Người dùng tĩnh)
+    const MOCK_USERS = [
+        { id: 'mock-1', full_name: 'Trần Thị B', avatar: 'https://i.pravatar.cc/150?img=5' },
+        { id: 'mock-2', full_name: 'Lê Hoàng C', avatar: 'https://i.pravatar.cc/150?img=12' },
+        { id: 'mock-3', full_name: 'Vũ Quốc Đạt', avatar: 'https://i.pravatar.cc/150?img=26' },
+        { id: 'mock-4', full_name: 'Nguyễn Lê Vy', avatar: 'https://i.pravatar.cc/150?img=32' },
+        { id: 'mock-5', full_name: 'Phạm Minh Tuấn', avatar: 'https://i.pravatar.cc/150?img=8' },
+        { id: 'mock-6', full_name: 'Nguyễn Văn An', avatar: 'https://i.pravatar.cc/150?img=11' },
+        { id: 'mock-7', full_name: 'Trần Đăng Khoa', avatar: 'https://i.pravatar.cc/150?img=14' },
+        { id: 'mock-8', full_name: 'Lê Thị Thu', avatar: 'https://i.pravatar.cc/150?img=20' },
+        { id: 'mock-9', full_name: 'Phạm Hoàng Hải', avatar: 'https://i.pravatar.cc/150?img=33' },
+        { id: 'mock-10', full_name: 'Hoàng Minh Khang', avatar: 'https://i.pravatar.cc/150?img=50' },
+        { id: 'mock-11', full_name: 'Bùi Thị Lan', avatar: 'https://i.pravatar.cc/150?img=44' },
+        { id: 'mock-12', full_name: 'Đặng Quốc Bảo', avatar: 'https://i.pravatar.cc/150?img=55' },
+        { id: 'mock-13', full_name: 'Đinh Hà My', avatar: 'https://i.pravatar.cc/150?img=49' },
+        { id: 'mock-14', full_name: 'Võ Thành Đạt', avatar: 'https://i.pravatar.cc/150?img=60' },
+        { id: 'mock-15', full_name: 'Hồ Phương Thảo', avatar: 'https://i.pravatar.cc/150?img=47' }
+    ];
+
+    // Hàm hỗ trợ loại bỏ dấu tiếng Việt để tìm kiếm mượt hơn (VD: gõ "tran" vẫn ra "Trần")
+    const removeTones = (str) => {
+        return str.normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .replace(/đ/g, 'd').replace(/Đ/g, 'D')
+                  .toLowerCase().trim();
+    };
+
     searchInput.addEventListener('input', (e) => {
         clearTimeout(searchTimeout);
         const query = e.target.value.trim();
+        const normalizedQuery = removeTones(query);
         
         if (!query) {
             hResults.innerHTML = '<p style="color:#94a3b8; font-size:13px; text-align:center; width: 100%; margin-top: 20px;">Gõ tên để bắt đầu tìm kiếm</p>';
@@ -23,42 +51,59 @@ function initSearchUser() {
         }
 
         searchTimeout = setTimeout(async () => {
-            // Chờ người dùng ngừng gõ 300ms rồi mới gọi API
+            // Hiển thị trạng thái đang tải
             hResults.innerHTML = '<p style="color:#94a3b8; font-size:13px; text-align:center; width: 100%; margin-top: 20px;"><i class="fa-solid fa-spinner fa-spin"></i> Đang tìm...</p>';
 
-            const { data, error } = await DB.from('accounts')
-                .select('id, full_name')
-                .ilike('full_name', `%${query}%`)
-                .neq('id', ME?.id || '00000000-0000-0000-0000-000000000000') // Bỏ qua chính mình
-                .limit(10);
+            // 2. Lọc dữ liệu từ mảng Mock
+            const mockResults = MOCK_USERS.filter(user => 
+                removeTones(user.full_name).includes(normalizedQuery)
+            );
 
-            if (error) {
-                hResults.innerHTML = '<p style="color:#ef4444; font-size:13px;">Lỗi tìm kiếm</p>';
-                return;
+            // 3. Lấy dữ liệu từ Database Supabase (giữ nguyên logic cũ)
+            let dbResults = [];
+            if (window.supabaseClient) {
+                const { data, error } = await DB.from('accounts')
+                    .select('id, full_name')
+                    .ilike('full_name', `%${query}%`)
+                    .neq('id', ME?.id || '00000000-0000-0000-0000-000000000000') // Bỏ qua chính mình
+                    .limit(10);
+
+                if (!error && data) {
+                    // Chuẩn hóa định dạng của dbResults để giống với mockResults
+                    dbResults = data.map(u => ({
+                        id: u.id,
+                        full_name: u.full_name,
+                        avatar: av(u.full_name) // Dùng hàm av() tạo avatar tự động
+                    }));
+                }
             }
 
-            hResults.innerHTML = '';
-            if (data.length === 0) {
+            // 4. Gộp 2 mảng (Mock + Database) lại với nhau
+            const combinedResults = [...mockResults, ...dbResults];
+
+            hResults.innerHTML = ''; // Xóa trạng thái loading
+
+            if (combinedResults.length === 0) {
                 hResults.innerHTML = '<p style="color:#94a3b8; font-size:13px; text-align:center; width: 100%; margin-top: 20px;">Không tìm thấy ai</p>';
                 return;
             }
 
-            data.forEach(user => {
-                const avatarUrl = av(user.full_name);
+            // 5. In kết quả ra màn hình (Giao diện cuộn ngang)
+            combinedResults.forEach(user => {
                 const lastName = user.full_name.split(' ').pop(); // Chỉ lấy tên cuối cho gọn
                 
                 const div = document.createElement('div');
                 div.className = 'h-user-item';
                 div.innerHTML = `
-                    <img src="${avatarUrl}" alt="${user.full_name}">
+                    <img src="${user.avatar}" alt="${user.full_name}">
                     <span>${esc(lastName)}</span>
                 `;
                 
                 // Khi click vào kết quả -> Mở chat
-                div.onclick = () => openChat(user.full_name, avatarUrl, user.id);
+                div.onclick = () => openChat(user.full_name, user.avatar, user.id);
                 hResults.appendChild(div);
             });
-        }, 300);
+        }, 300); // Chờ 300ms sau khi ngừng gõ
     });
 }
 async function loadRecentContacts() {
@@ -240,6 +285,22 @@ async function buildPost(p) {
             <button class="comment-btn"><i class="fa-regular fa-comment"></i> Bình luận</button>
             <button class="share-btn"><i class="fa-solid fa-share"></i> Chia sẻ</button>
         </div>`;
+        const triggerChat = () => {
+        if (!ME) {
+            toast('Vui lòng đăng nhập để nhắn tin!', 'warn');
+            return;
+        }
+        if (ME.id === p.user_id) {
+            toast('Bạn không thể tự nhắn tin cho chính mình!', 'warn');
+            return;
+        }
+        // Gọi hàm openChat với 3 tham số: tên, avatar, id người nhận
+        openChat(name, av(name), p.user_id);
+    };
+
+    // Gắn sự kiện click cho tên người dùng và avatar
+    div.querySelector('.user-trigger').onclick = triggerChat;
+    div.querySelector('.avatar').onclick = triggerChat;
 
     div.querySelector('.like-btn').onclick    = () => handleLike(div, p.id);
     div.querySelector('.comment-btn').onclick = () => toggleComments(div, p.id);
@@ -378,7 +439,10 @@ async function loadComments(section, postId) {
     dbg('loadComments', { postId, count: data?.length, error });
 
     list.innerHTML = '';
-    if (error) { list.innerHTML = '<p style="color:#ef4444;font-size:13px;text-align:center;padding:10px;">Lỗi: ' + error.message + '</p>'; return; }
+    if (error) { 
+        list.innerHTML = '<p style="color:#ef4444;font-size:13px;text-align:center;padding:10px;">Lỗi: ' + error.message + '</p>'; 
+        return; 
+    }
     if (!data || data.length === 0) {
         list.innerHTML = '<p style="color:#94a3b8;font-size:13px;text-align:center;padding:10px;">Chưa có bình luận.</p>';
         return;
@@ -388,11 +452,13 @@ async function loadComments(section, postId) {
         const isOwn = ME && ME.id === c.user_id;
         const item = document.createElement('div');
         item.className = 'comment-item';
+        
+        // Thêm style cursor:pointer cho avatar và author để người dùng biết có thể click
         item.innerHTML = `
-            <img src="${av(c.full_name)}" class="comment-avatar" alt="">
+            <img src="${av(c.full_name)}" class="comment-avatar" style="cursor:pointer;" alt="">
             <div class="comment-block">
                 <div class="comment-bubble">
-                    <span class="comment-author">${esc(c.full_name)}</span>
+                    <span class="comment-author" style="cursor:pointer;">${esc(c.full_name)}</span>
                     <span class="comment-text">${esc(c.content)}</span>
                 </div>
                 <div class="comment-actions-row">
@@ -400,11 +466,30 @@ async function loadComments(section, postId) {
                     ${isOwn ? `<span class="c-action _delCmt" style="color:#ef4444;cursor:pointer;">Xóa</span>` : ''}
                 </div>
             </div>`;
+
+        // --- BẮT ĐẦU PHẦN SỰ KIỆN CLICK MỞ CHAT ---
+        const triggerChatCmt = () => {
+            if (!ME) {
+                toast('Vui lòng đăng nhập để nhắn tin!', 'warn');
+                return;
+            }
+            if (ME.id === c.user_id) {
+                toast('Bạn không thể tự nhắn tin cho chính mình!', 'warn');
+                return;
+            }
+            openChat(c.full_name, av(c.full_name), c.user_id);
+        };
+
+        item.querySelector('.comment-author').onclick = triggerChatCmt;
+        item.querySelector('.comment-avatar').onclick = triggerChatCmt;
+
+        // Sự kiện xóa bình luận
         item.querySelector('._delCmt')?.addEventListener('click', async () => {
             const { error } = await DB.from('comments').delete().eq('id', c.id);
             if (!error) item.remove();
             else toast('Xóa thất bại: ' + error.message,'err');
         });
+
         list.appendChild(item);
     });
 }
