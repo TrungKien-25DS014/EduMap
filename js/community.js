@@ -210,6 +210,7 @@ async function buildPost(p) {
     const div = document.createElement('div');
     div.className = 'post glass-panel';
     div.dataset.db = p.id;
+    div.id = `post-${p.id}`;
 
     div.innerHTML = `
         <div class="post-header">
@@ -242,7 +243,7 @@ async function buildPost(p) {
 
     div.querySelector('.like-btn').onclick    = () => handleLike(div, p.id);
     div.querySelector('.comment-btn').onclick = () => toggleComments(div, p.id);
-    div.querySelector('.share-btn').onclick   = () => handleShare(div, p.id);
+    div.querySelector('.share-btn').onclick   = () => handleShare(div.id);
     div.querySelector('._del')?.addEventListener('click', () => handleDelete(div, p.id));
     return div;
 }
@@ -408,12 +409,30 @@ async function loadComments(section, postId) {
     });
 }
 
-async function handleShare(div, postId) {
-    const url = `${location.origin}${location.pathname}#${div.dataset.db||postId}`;
+async function handleShare(postId) {
+    const url = `${location.origin}${location.pathname}#${postId}`;
+    
     try {
-        if (navigator.share) await navigator.share({ title:'EduMap Community', url });
-        else { await navigator.clipboard.writeText(url); toast('Đã sao chép link!'); }
-    } catch(e) { if (e.name!=='AbortError') toast('Lỗi chia sẻ','err'); }
+        if (navigator.share) {
+            await navigator.share({ 
+                title: 'EduMap Community', 
+                text: 'Cùng xem bài viết này trên EduMap nhé!',
+                url: url 
+            });
+        } else {
+            await navigator.clipboard.writeText(url); 
+            toast('Đã sao chép link bài viết!', 'ok'); 
+        }
+    } catch(e) { 
+        if (e.name !== 'AbortError') {
+            try {
+                await navigator.clipboard.writeText(url);
+                toast('Đã sao chép link bài viết!', 'ok');
+            } catch (err) {
+                toast('Lỗi không thể chia sẻ', 'err'); 
+            }
+        } 
+    }
 }
 
 async function handleDelete(div, postId) {
@@ -540,13 +559,7 @@ function initStaticPosts() {
             inp.focus();
         });
 
-        post.querySelector('.share-btn')?.addEventListener('click', async () => {
-            const url = `${location.origin}${location.pathname}#${post.id}`;
-            try {
-                if (navigator.share) await navigator.share({title:'EduMap',url});
-                else { await navigator.clipboard.writeText(url); toast('Đã sao chép link!'); }
-            } catch(e) {}
-        });
+        post.querySelector('.share-btn')?.addEventListener('click', () => handleShare(post.id));
     });
 }
 
@@ -598,7 +611,24 @@ function closeChat() {
     document.getElementById('active-chat').classList.replace('active-panel','hidden-panel');
     document.getElementById('contact-list').classList.replace('hidden-panel','active-panel');
 }
-
+function scrollToSharedPost() {
+    if (location.hash) {
+        try {
+            const el = document.querySelector(location.hash);
+            if (!el) return;
+            
+            // Đợi UI render xong rồi scroll + sáng lên
+            setTimeout(() => {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                el.style.boxShadow = '0 0 0 3px rgba(44,116,179,.7)';
+                el.style.transition = 'box-shadow 0.3s ease';
+                setTimeout(() => el.style.boxShadow = '', 2500);
+            }, 300);
+        } catch (e) {
+            console.log('Không tìm thấy bài viết chia sẻ');
+        }
+    }
+}
 document.addEventListener('DOMContentLoaded', async () => {
     const style = document.createElement('style');
     style.textContent=`
@@ -623,6 +653,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await initMe();
         await loadPosts();
         await loadRecentContacts();
+        scrollToSharedPost();
         DB.channel('comm_rt').on('postgres_changes',
             { event:'INSERT', schema:'public', table:'posts' },
             async payload => {
@@ -655,15 +686,5 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
         ).subscribe();
-    }
-
-    if (location.hash) {
-        setTimeout(()=>{
-            const el = document.querySelector(location.hash);
-            if (!el) return;
-            el.scrollIntoView({behavior:'smooth',block:'center'});
-            el.style.boxShadow='0 0 0 3px rgba(44,116,179,.7)';
-            setTimeout(()=>el.style.boxShadow='',2500);
-        },600);
     }
 });
